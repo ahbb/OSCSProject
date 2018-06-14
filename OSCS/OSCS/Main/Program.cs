@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OSCS.WinForms.Login;
+using OSCS.WinForms.Registration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace OSCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Login()); //change to name of window you want to run
         }
     }
 }
