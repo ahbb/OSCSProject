@@ -69,6 +69,7 @@ namespace OSCS.WinForms.Fiddler
             //var respBody = Encoding.UTF8.GetString(session.ResponseBody);
 
             // replace the HTTP line to inject full URL
+            //printing traffic 
             string firstLine = sess.RequestMethod + " " + sess.fullUrl + " " + sess.oRequest.headers.HTTPVersion;
             int at = headers.IndexOf("\r\n");
             if (at < 0)
@@ -111,14 +112,16 @@ namespace OSCS.WinForms.Fiddler
             //CaptureConfiguration.CaptureDomain = txtCaptureDomain.Text;*/
 
             InstallCertificate();
+            FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.Startup(8888, true, true, true);
-            FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
         }
 
         void Stop()
         {
+            UninstallCertificate();
             FiddlerApplication.AfterSessionComplete -= FiddlerApplication_AfterSessionComplete;
+            FiddlerApplication.BeforeRequest -= FiddlerApplication_BeforeRequest;
 
             if (FiddlerApplication.IsStarted())
                 FiddlerApplication.Shutdown();
@@ -219,6 +222,11 @@ namespace OSCS.WinForms.Fiddler
             tbClear.Enabled = tbSave.Enabled;
 
             //CaptureConfiguration.IgnoreResources = tbIgnoreResources.Checked;
+        }
+
+        private void FiddlerCapture_Load(object sender, EventArgs e)
+        {
+            UpdateButtonStatus();
         }
     }
 }

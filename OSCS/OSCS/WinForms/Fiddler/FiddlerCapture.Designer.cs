@@ -37,9 +37,10 @@
             // 
             // tbCapture
             // 
-            this.tbCapture.Location = new System.Drawing.Point(66, 70);
+            this.tbCapture.Location = new System.Drawing.Point(50, 57);
+            this.tbCapture.Margin = new System.Windows.Forms.Padding(2);
             this.tbCapture.Name = "tbCapture";
-            this.tbCapture.Size = new System.Drawing.Size(75, 23);
+            this.tbCapture.Size = new System.Drawing.Size(65, 27);
             this.tbCapture.TabIndex = 0;
             this.tbCapture.Text = "Start";
             this.tbCapture.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@
             // 
             // tbStop
             // 
-            this.tbStop.Location = new System.Drawing.Point(180, 70);
+            this.tbStop.Location = new System.Drawing.Point(135, 57);
+            this.tbStop.Margin = new System.Windows.Forms.Padding(2);
             this.tbStop.Name = "tbStop";
-            this.tbStop.Size = new System.Drawing.Size(75, 23);
+            this.tbStop.Size = new System.Drawing.Size(65, 27);
             this.tbStop.TabIndex = 1;
             this.tbStop.Text = "Stop";
             this.tbStop.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // tbClear
             // 
-            this.tbClear.Location = new System.Drawing.Point(386, 70);
+            this.tbClear.Location = new System.Drawing.Point(290, 57);
+            this.tbClear.Margin = new System.Windows.Forms.Padding(2);
             this.tbClear.Name = "tbClear";
-            this.tbClear.Size = new System.Drawing.Size(75, 23);
+            this.tbClear.Size = new System.Drawing.Size(65, 27);
             this.tbClear.TabIndex = 2;
             this.tbClear.Text = "Clear";
             this.tbClear.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // tbSave
             // 
-            this.tbSave.Location = new System.Drawing.Point(284, 70);
+            this.tbSave.Location = new System.Drawing.Point(213, 57);
+            this.tbSave.Margin = new System.Windows.Forms.Padding(2);
             this.tbSave.Name = "tbSave";
-            this.tbSave.Size = new System.Drawing.Size(75, 23);
+            this.tbSave.Size = new System.Drawing.Size(65, 27);
             this.tbSave.TabIndex = 3;
             this.tbSave.Text = "Save";
             this.tbSave.UseVisualStyleBackColor = true;
@@ -77,27 +81,30 @@
             // 
             // txtCapture
             // 
-            this.txtCapture.Location = new System.Drawing.Point(109, 130);
+            this.txtCapture.Location = new System.Drawing.Point(-3, 106);
+            this.txtCapture.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapture.Multiline = true;
             this.txtCapture.Name = "txtCapture";
             this.txtCapture.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCapture.Size = new System.Drawing.Size(802, 387);
+            this.txtCapture.Size = new System.Drawing.Size(805, 352);
             this.txtCapture.TabIndex = 4;
             // 
             // FiddlerCapture
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.txtCapture);
             this.Controls.Add(this.tbSave);
             this.Controls.Add(this.tbClear);
             this.Controls.Add(this.tbStop);
             this.Controls.Add(this.tbCapture);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FiddlerCapture";
             this.Text = "FiddlerCapture";
+            this.Load += new System.EventHandler(this.FiddlerCapture_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
