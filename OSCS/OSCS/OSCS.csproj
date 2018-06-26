@@ -32,7 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,11 +52,36 @@
   <ItemGroup>
     <Compile Include="Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForms\Admin\AdminHomepage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Admin\AdminHomepage.Designer.cs">
+      <DependentUpon>AdminHomepage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Admin\UserLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Admin\UserLogs.Designer.cs">
+      <DependentUpon>UserLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Login\Homepage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Login\Homepage.Designer.cs">
+      <DependentUpon>Homepage.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="WinForms\Login\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Login\LoginInfo.cs" />
+    <Compile Include="WinForms\Login\LoginOTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Login\LoginOTP.Designer.cs">
+      <DependentUpon>LoginOTP.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\Registration\Registration.cs">
       <SubType>Form</SubType>
@@ -68,9 +98,25 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="WinForms\Admin\AdminHomepage.resx">
+      <DependentUpon>AdminHomepage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Admin\UserLogs.resx">
+      <DependentUpon>UserLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Login\Homepage.resx">
+      <DependentUpon>Homepage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Login\LoginOTP.resx">
+      <DependentUpon>LoginOTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Registration\Registration.resx">
+      <DependentUpon>Registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,9 +128,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Main\App.config" />
+    <None Include="Main\App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="MySql\" />
     <Folder Include="WinForms\Fiddler\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
