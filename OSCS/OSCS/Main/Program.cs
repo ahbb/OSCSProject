@@ -13,6 +13,9 @@ namespace OSCS
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [STAThread]
         static void Main()
         {
