@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -209,8 +211,23 @@ namespace OSCS.WinForms.Fiddler
             }
         }
 
+        //method uses WebClient.DownloadData to get bytes of file from the url
+        private byte[] GetFileBytes(string urlDownload)
+        {
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
+
+            using (WebClient client = new WebClient())
+            {
+                byte[] filebytes = client.DownloadData(urlDownload);
+                client.Dispose();
+                Debug.Print(Encoding.ASCII.GetString(filebytes));
+                return filebytes;
+            }
+        }
+
         private void FiddlerCapture_FormClosing(object sender, FormClosingEventArgs e)
         {
+            UninstallCertificate();
             Stop();
         }
 
