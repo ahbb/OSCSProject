@@ -37,9 +37,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtPhoneNo = new System.Windows.Forms.TextBox();
+            this.txtContactNo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.lbPassword = new System.Windows.Forms.Label();
+            this.lbContactNo = new System.Windows.Forms.Label();
+            this.lbCheck = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -93,6 +96,7 @@
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(397, 236);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(241, 30);
             this.txtPassword.TabIndex = 1;
             // 
@@ -111,6 +115,7 @@
             this.txtConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConfirmPassword.Location = new System.Drawing.Point(397, 284);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.PasswordChar = '●';
             this.txtConfirmPassword.Size = new System.Drawing.Size(241, 30);
             this.txtConfirmPassword.TabIndex = 1;
             // 
@@ -124,13 +129,13 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Phone Number";
             // 
-            // txtPhoneNo
+            // txtContactNo
             // 
-            this.txtPhoneNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNo.Location = new System.Drawing.Point(397, 331);
-            this.txtPhoneNo.Name = "txtPhoneNo";
-            this.txtPhoneNo.Size = new System.Drawing.Size(241, 30);
-            this.txtPhoneNo.TabIndex = 1;
+            this.txtContactNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContactNo.Location = new System.Drawing.Point(397, 331);
+            this.txtContactNo.Name = "txtContactNo";
+            this.txtContactNo.Size = new System.Drawing.Size(241, 30);
+            this.txtContactNo.TabIndex = 1;
             // 
             // label6
             // 
@@ -153,14 +158,47 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // btn
+            // lbPassword
+            // 
+            this.lbPassword.AutoSize = true;
+            this.lbPassword.ForeColor = System.Drawing.Color.Red;
+            this.lbPassword.Location = new System.Drawing.Point(645, 294);
+            this.lbPassword.Name = "lbPassword";
+            this.lbPassword.Size = new System.Drawing.Size(12, 17);
+            this.lbPassword.TabIndex = 4;
+            this.lbPassword.Text = " ";
+            // 
+            // lbContactNo
+            // 
+            this.lbContactNo.AutoSize = true;
+            this.lbContactNo.ForeColor = System.Drawing.Color.Red;
+            this.lbContactNo.Location = new System.Drawing.Point(645, 343);
+            this.lbContactNo.Name = "lbContactNo";
+            this.lbContactNo.Size = new System.Drawing.Size(12, 17);
+            this.lbContactNo.TabIndex = 5;
+            this.lbContactNo.Text = " ";
+            // 
+            // lbCheck
+            // 
+            this.lbCheck.AutoSize = true;
+            this.lbCheck.ForeColor = System.Drawing.Color.Red;
+            this.lbCheck.Location = new System.Drawing.Point(331, 392);
+            this.lbCheck.Name = "lbCheck";
+            this.lbCheck.Size = new System.Drawing.Size(12, 17);
+            this.lbCheck.TabIndex = 6;
+            this.lbCheck.Text = " ";
+            // 
+            // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 555);
+            this.Controls.Add(this.lbCheck);
+            this.Controls.Add(this.lbContactNo);
+            this.Controls.Add(this.lbPassword);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtPhoneNo);
+            this.Controls.Add(this.txtContactNo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.label4);
@@ -170,7 +208,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label1);
-            this.Name = "btn";
+            this.Name = "Registration";
             this.Text = "Registration";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -188,8 +226,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtConfirmPassword;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtPhoneNo;
+        private System.Windows.Forms.TextBox txtContactNo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.Label lbContactNo;
+        private System.Windows.Forms.Label lbCheck;
     }
 }
