@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fiddler;
+using MalwareScan.AMSI;
 
 namespace OSCS.WinForms.Fiddler
 {
@@ -113,7 +114,6 @@ namespace OSCS.WinForms.Fiddler
             //CaptureConfiguration.ProcessId = procId;
             //CaptureConfiguration.CaptureDomain = txtCaptureDomain.Text;*/
 
-            InstallCertificate();
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.Startup(8888, true, true, true);
@@ -121,7 +121,6 @@ namespace OSCS.WinForms.Fiddler
 
         void Stop()
         {
-            UninstallCertificate();
             FiddlerApplication.AfterSessionComplete -= FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.BeforeRequest -= FiddlerApplication_BeforeRequest;
 
@@ -156,9 +155,15 @@ namespace OSCS.WinForms.Fiddler
         private void ButtonHandler(object sender, EventArgs e)
         {
             if (sender == tbCapture)
+            {
+                InstallCertificate();
                 Start();
+            }
             else if (sender == tbStop)
+            {
+                UninstallCertificate();
                 Stop();
+            }
             else if (sender == tbSave)
             {
                 var diag = new SaveFileDialog()
@@ -167,7 +172,7 @@ namespace OSCS.WinForms.Fiddler
                     CheckPathExists = true,
                     DefaultExt = "txt",
                     Filter = "Text files (*.txt)|*.txt|All Files (*.*)|*.*",
-                    OverwritePrompt = false,
+                    OverwritePrompt = true,
                     Title = "Save Fiddler Capture File",
                     RestoreDirectory = true
                 };
@@ -203,11 +208,19 @@ namespace OSCS.WinForms.Fiddler
             //redirecting for discord attachments
             if (sess.fullUrl.Contains("attachment"))
             {
-                sess.utilCreateResponseAndBypassServer();
-                sess.oResponse.headers.SetStatus(307, "Redirect");
-                sess.oResponse["Cache-Control"] = "nocache";
-                sess.utilSetResponseBody("<html><body>Malicious file detected. Download blocked.</body></html>");
-                return;
+                //sess.utilCreateResponseAndBypassServer();
+                //sess.oResponse.headers.SetStatus(307, "Redirect");
+                //sess.oResponse["Cache-Control"] = "nocache";
+                //sess.utilSetResponseBody("<html><body>Malicious file detected. Download blocked.</body></html>");
+
+                //using AMSI, if no virus detected use nClam to scan
+                bool virusDetected = RunFileScan(sess.fullUrl);
+                if (virusDetected == true)
+                {
+                    sess.utilCreateResponseAndBypassServer();
+                    MessageBox.Show("Possibly malicious file detected! Download blocked!");
+                    return;
+                }
             }
         }
 
@@ -223,6 +236,27 @@ namespace OSCS.WinForms.Fiddler
                 Debug.Print(Encoding.ASCII.GetString(filebytes));
                 return filebytes;
             }
+        }
+
+        //method calls getFileBytes method to get bytes from the url. Then AMSI will be used to scan the bytes. If got virus, hasVirus returns true
+        private bool RunFileScan(string url) //sess.fullUrl
+        {
+            bool hasVirus = true;
+            Stop();
+            byte[] filebytes = GetFileBytes(url);
+            var scanner = new MalwareScanner();
+            var result = scanner.HasVirus(filebytes, url);
+            Start();
+            string virusDetected = result.ToString();
+            if (virusDetected == "True") 
+            {
+                hasVirus = true;
+            }
+            else
+            {
+                hasVirus = false;
+            }
+            return hasVirus;
         }
 
         private void FiddlerCapture_FormClosing(object sender, FormClosingEventArgs e)

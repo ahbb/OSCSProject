@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FiddlerCapture));
             this.tbCapture = new System.Windows.Forms.Button();
             this.tbStop = new System.Windows.Forms.Button();
             this.tbClear = new System.Windows.Forms.Button();
             this.tbSave = new System.Windows.Forms.Button();
             this.txtCapture = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbCapture
             // 
-            this.tbCapture.Location = new System.Drawing.Point(50, 57);
+            this.tbCapture.Location = new System.Drawing.Point(11, 106);
             this.tbCapture.Margin = new System.Windows.Forms.Padding(2);
             this.tbCapture.Name = "tbCapture";
             this.tbCapture.Size = new System.Drawing.Size(65, 27);
@@ -48,7 +51,7 @@
             // 
             // tbStop
             // 
-            this.tbStop.Location = new System.Drawing.Point(135, 57);
+            this.tbStop.Location = new System.Drawing.Point(91, 106);
             this.tbStop.Margin = new System.Windows.Forms.Padding(2);
             this.tbStop.Name = "tbStop";
             this.tbStop.Size = new System.Drawing.Size(65, 27);
@@ -59,7 +62,7 @@
             // 
             // tbClear
             // 
-            this.tbClear.Location = new System.Drawing.Point(290, 57);
+            this.tbClear.Location = new System.Drawing.Point(724, 106);
             this.tbClear.Margin = new System.Windows.Forms.Padding(2);
             this.tbClear.Name = "tbClear";
             this.tbClear.Size = new System.Drawing.Size(65, 27);
@@ -70,7 +73,7 @@
             // 
             // tbSave
             // 
-            this.tbSave.Location = new System.Drawing.Point(213, 57);
+            this.tbSave.Location = new System.Drawing.Point(648, 106);
             this.tbSave.Margin = new System.Windows.Forms.Padding(2);
             this.tbSave.Name = "tbSave";
             this.tbSave.Size = new System.Drawing.Size(65, 27);
@@ -81,13 +84,32 @@
             // 
             // txtCapture
             // 
-            this.txtCapture.Location = new System.Drawing.Point(-3, 106);
+            this.txtCapture.Location = new System.Drawing.Point(-3, 157);
             this.txtCapture.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapture.Multiline = true;
             this.txtCapture.Name = "txtCapture";
             this.txtCapture.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCapture.Size = new System.Drawing.Size(805, 352);
+            this.txtCapture.Size = new System.Drawing.Size(805, 301);
             this.txtCapture.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(78, 69);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(664, 35);
+            this.label1.TabIndex = 5;
+            this.label1.Text = resources.GetString("label1.Text");
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(298, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(143, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Traffic Capturing";
             // 
             // FiddlerCapture
             // 
@@ -95,6 +117,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCapture);
             this.Controls.Add(this.tbSave);
             this.Controls.Add(this.tbClear);
@@ -117,5 +141,7 @@
         private System.Windows.Forms.Button tbClear;
         private System.Windows.Forms.Button tbSave;
         private System.Windows.Forms.TextBox txtCapture;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
