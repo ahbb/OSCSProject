@@ -114,6 +114,11 @@ namespace OSCS.WinForms.Fiddler
             //CaptureConfiguration.ProcessId = procId;
             //CaptureConfiguration.CaptureDomain = txtCaptureDomain.Text;*/
 
+            Timer timer = new Timer();
+            timer.Interval = (20 * 1000); // 20 secs
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
+
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.Startup(8888, true, true, true);
@@ -126,6 +131,11 @@ namespace OSCS.WinForms.Fiddler
 
             if (FiddlerApplication.IsStarted())
                 FiddlerApplication.Shutdown();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            txtCapture.Text = "";
         }
 
         public static bool InstallCertificate()

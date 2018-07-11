@@ -89,10 +89,12 @@
             this.txtCapture.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCapture.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCapture.Location = new System.Drawing.Point(-3, 194);
             this.txtCapture.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapture.Multiline = true;
             this.txtCapture.Name = "txtCapture";
+            this.txtCapture.ReadOnly = true;
             this.txtCapture.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtCapture.Size = new System.Drawing.Size(805, 264);
             this.txtCapture.TabIndex = 4;
