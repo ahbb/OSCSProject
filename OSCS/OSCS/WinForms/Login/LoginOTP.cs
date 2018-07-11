@@ -20,9 +20,9 @@ namespace OSCS.WinForms.Login
     {
         int userID;
         static string OTPReturn;
-        private string hpnumber;
         private static double timeElapsed;
         static Stopwatch sw;
+        static Timer timer;
 
         MySql.Data.MySqlClient.MySqlConnection conn;
         MySql.Data.MySqlClient.MySqlDataReader reader;
@@ -41,9 +41,7 @@ namespace OSCS.WinForms.Login
             MyConnection.Open();
             MySqlDataReader reader;
 
-            RefreshButton.Visible = false;
             result.Visible = false;
-
             userID = LoginInfo.UserID;
 
             using (MySqlCommand HPCommand = new MySqlCommand("SELECT contactNo FROM user WHERE userID = @userID", MyConnection))
@@ -53,21 +51,56 @@ namespace OSCS.WinForms.Login
 
                 while (reader.HasRows && reader.Read())
                 {
-                    //string lastHPDigits;
-                    hpnumber = /*des.Decrypt*/(reader["contactNo"].ToString()); //Decryption of user's phone number
-                    //HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4))); //For the old label in webpage
+                    string lastHPDigits;
+                    lastHPDigits = /*des.Decrypt*/(reader["contactNo"].ToString()); //Decryption of user's phone number
+                    HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4))); //For the old label in webpage
                 }
                 reader.Close();
             }
             MyConnection.Close();
             MyConnection.Open();
 
+            timer = new Timer();
+            timer.Interval = 30000; // 120000; //time in milliseconds
+            timer.Tick += timer_Tick;
+            timer.Start();
+            RefreshButton.Enabled = false;
+
             sw = new Stopwatch();
             sw.Start();
 
             //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
             //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
-            OTPReturn = "11111";
+            //OTPReturn = "11111";
+            Random random = new Random();
+            OTPReturn = random.Next(1, 1000).ToString();
+            Console.Out.WriteLine(OTPReturn);
+        }
+
+        void timer_Tick(object sender, System.EventArgs e)
+        {
+            RefreshButton.Enabled = true;
+            timer.Stop();
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            result.Text = "";
+            timer = new Timer();
+            timer.Interval = 30000; // 120000; //time in milliseconds
+            timer.Tick += timer_Tick;
+            timer.Start();
+            RefreshButton.Enabled = false;
+
+            sw = new Stopwatch();
+            sw.Start();
+
+            //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
+            //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
+            //OTPReturn = "11111";
+            Random random = new Random();
+            OTPReturn = random.Next(1, 1000).ToString();
+            Console.Out.WriteLine(OTPReturn);
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -88,13 +121,12 @@ namespace OSCS.WinForms.Login
                 string userOTPInput = InputOTP.Text;
                 if (userOTPInput.Equals(OTPReturn))
                 {
-                    if (timeElapsed > 120 || timeElapsed <= 0)
+                    if (timeElapsed > 120 || timeElapsed <= 0) 
                     {
                         InputOTP.Text = string.Empty;
-                        result.Text = "Your One-Time-Password has expired or has been invalidated! You can request for another OTP to be sent to you by refreshing the page using the button below.";
+                        result.Text = "Your One-Time-Password has expired or has been invalidated! \nYou can request for another OTP to be sent to you via the Resend button below.";
                         result.ForeColor = System.Drawing.Color.Red;
                         result.Visible = true;
-                        RefreshButton.Visible = true;
                     }
                     else
                     {
@@ -211,11 +243,6 @@ namespace OSCS.WinForms.Login
             }
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            LoginOTP_Load(null, EventArgs.Empty);
-        }
-
         public static string OTPStr(string ID, string Password, string mobile, string msg)
         {
             string response = "";
@@ -262,6 +289,22 @@ namespace OSCS.WinForms.Login
             {
                 return "" + e;
             }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
+            this.Hide();
+            Login login = new Login();
+            login.ShowDialog();
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            //this.Hide();
+            //Registration registration = new Registration();
+            //registration.ShowDialog();
         }
     }
 }

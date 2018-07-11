@@ -11,8 +11,8 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using log4net;
-using OSCS.WinForms.Registration;
 using OSCS.WinForms.Admin;
+using OSCS.WinForms.Registration;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -21,12 +21,11 @@ namespace OSCS.WinForms.Login
     public partial class Login : Form
     {
         MySql.Data.MySqlClient.MySqlConnection conn;
-        MySql.Data.MySqlClient.MySqlCommand cmd;
         MySql.Data.MySqlClient.MySqlDataReader reader;
 
         public string Username { get; set; }
         public string Password { get; set; }
-        string salt, status, queryStr, activationCode;
+        string salt, status, activationCode;
         int userID;
         Boolean verify = false; //To verify password
 
@@ -36,15 +35,19 @@ namespace OSCS.WinForms.Login
         {
             InitializeComponent();
         }
-        
-        private void Login_Load(object sender, EventArgs e)
+
+        private void ForgetButton_Click(object sender, EventArgs e)
         {
-            RecoverPanel.Visible = false;
+            this.Hide();
+            ForgetPassword forgetPassword = new ForgetPassword();
+            forgetPassword.ShowDialog();
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void RegisterButton_Click(object sender, EventArgs e)
         {
-           //Redirect to un-logged-in homepage
+            //this.Hide();
+            //Registration registration = new Registration();
+            //registration.ShowDialog();
         }
 
         private void ToLoginOTPButton_Click(object sender, EventArgs e)
@@ -104,7 +107,6 @@ namespace OSCS.WinForms.Login
                             }
                         }
 
-
                         //Session to User Login OTP Page and Admin HomePage
                         if (reader.HasRows && status == "green" && verify == true)
                         {
@@ -114,10 +116,10 @@ namespace OSCS.WinForms.Login
                                 LoginInfo.UserID = userID;
                                 LoginInfo.UserName = Username;
                                 //log4net.GlobalContext.Properties["userID"] = userID;
-                                //log.Info("User successfully signed in.");
+                                //log.Info("Admin successfully signed in.");
                                 this.Hide();
-                                AdminHomepage AdminHomepage = new AdminHomepage();
-                                AdminHomepage.ShowDialog();
+                                UserLogs userLogs = new UserLogs();
+                                userLogs.ShowDialog();
                             }
 
                             else
@@ -159,9 +161,9 @@ namespace OSCS.WinForms.Login
                                         loginOTP.ShowDialog();
                                     }
 
-                                    else //If-else for the dt.Rows.Count==0)
+                                    else //If-else for the dt.Rows.Count==0) //Verify label formatting later
                                     {
-                                        loginWarning.Text = "You have not activated your account. Please check your email for the activation link.";
+                                        loginWarning.Text = "You have not activated your account. \nPlease check your email for the activation link.";
                                     }
                                     con.Close();
                                 }
@@ -169,10 +171,11 @@ namespace OSCS.WinForms.Login
                         }
                         
                         
-                        else if (status == "red" && verify == true)
+                        else if (reader.HasRows && status == "red" && verify == true)
                         {
-                            LoginPanel.Visible = false;
-                            RecoverPanel.Visible = true;
+                            //LoginPanel.Visible = false;
+                            //RecoverPanel.Visible = true;
+                            loginWarning.Text = "You have been locked out due to too many failed login attempts. \nPlease check your email to recover your account.";
                             username.Text = string.Empty;
                             password.Text = string.Empty;
                         }
@@ -205,10 +208,12 @@ namespace OSCS.WinForms.Login
                                         cmdd.Parameters.AddWithValue("@counter", counter);
                                         cmdd.ExecuteNonQuery();
 
+                                        log4net.GlobalContext.Properties["userID"] = logUserID;
+                                        log.Warn("An attempt was made to access the locked account.");
+
                                         username.Text = string.Empty;
                                         password.Text = string.Empty;
-                                        loginWarning.Text = "The account that you are trying to access has been locked. An email with relevant information has been sent to account owner.";
-                                        loginWarning.ForeColor = System.Drawing.Color.Red;
+                                        loginWarning.Text = "The account that you are trying to access has been locked. \nAn email with relevant information has been sent to account owner.";
 
                                         //checking whether email has been sent
                                         /*string selectQuery2 = "SELECT userID FROM resetpasswordrequests WHERE userID=@userID";
@@ -257,7 +262,7 @@ namespace OSCS.WinForms.Login
 
                                         username.Text = string.Empty;
                                         password.Text = string.Empty;
-                                        loginWarning.Text = "Invalid user or password! Please input the correct username or password.";
+                                        loginWarning.Text = "Invalid user or password! \nPlease input the correct username or password.";
                                         loginWarning.ForeColor = System.Drawing.Color.Red;
                                     }
                                 }
