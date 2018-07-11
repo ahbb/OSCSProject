@@ -1,6 +1,5 @@
 ﻿using OSCS.WinForms.Login;
 using OSCS.WinForms.Registration;
-using OSCS.WinForms.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace OSCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login()); //change to name of window you want to run
+            Application.Run(new Registration()); //change to name of window you want to run
         }
     }
 }
