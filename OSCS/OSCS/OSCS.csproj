@@ -64,12 +64,6 @@
     <Compile Include="WinForms\Admin\UserLogs.Designer.cs">
       <DependentUpon>UserLogs.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinForms\Login\ForgetPassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinForms\Login\ForgetPassword.Designer.cs">
-      <DependentUpon>ForgetPassword.cs</DependentUpon>
-    </Compile>
     <Compile Include="WinForms\Login\Homepage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,9 +103,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Admin\UserLogs.resx">
       <DependentUpon>UserLogs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinForms\Login\ForgetPassword.resx">
-      <DependentUpon>ForgetPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Login\Homepage.resx">
       <DependentUpon>Homepage.cs</DependentUpon>

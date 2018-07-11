@@ -17,6 +17,8 @@ namespace OSCS.WinForms.Admin
     {
         string CS = ConfigurationManager.ConnectionStrings["oscs"].ConnectionString;
         MySqlDataReader reader;
+        MySqlCommand cmd;
+        String queryStr;
         DataTable dt = new DataTable();
         //DataGridView dv = new DataGridView();
         BindingSource bs = new BindingSource();
@@ -24,11 +26,17 @@ namespace OSCS.WinForms.Admin
         public UserLogs()
         {
             InitializeComponent();
+            dv.Dock = DockStyle.Fill;
+            FlowLayoutPanel panel = new FlowLayoutPanel();
+            panel.Dock = DockStyle.Top;
+            panel.AutoSize = true;
+            this.Controls.AddRange(new Control[] { dv, panel });
+            this.Load += new System.EventHandler(UserLogs_Load);
         }
 
         private void UserLogs_Load(object sender, EventArgs e)
         {
-            //dv.DataSource = bs;
+            dv.DataSource = bs;
 
             using (MySqlConnection con = new MySqlConnection(CS))
             {
@@ -48,9 +56,7 @@ namespace OSCS.WinForms.Admin
                     dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
                     dataAdapter.Fill(dt);
                     bs.DataSource = dt;
-                    dv.DataSource = bs;
-                    dataAdapter.Update(dt);
-                    dv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    dv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
                 }
                 else
                 {
@@ -61,14 +67,9 @@ namespace OSCS.WinForms.Admin
             }
         }
 
-        protected void DataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-
-        }
-
         /*protected void GridView1_RowCreated(object sender, DataGridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataRowType.Header)
+            if (e.Row.RowType == DataControlRowType.Header)
             {
                 e.Row.Cells[0].Text = "Log ID";
                 e.Row.Cells[1].Text = "Log Date and Time";
