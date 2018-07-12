@@ -40,9 +40,12 @@
             this.txtContactNo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.lbPassword = new System.Windows.Forms.Label();
+            this.lbConfirmPassword = new System.Windows.Forms.Label();
             this.lbContactNo = new System.Windows.Forms.Label();
             this.lbCheck = new System.Windows.Forms.Label();
+            this.lbPassword = new System.Windows.Forms.Label();
+            this.lbUsername = new System.Windows.Forms.Label();
+            this.lbEmail = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -62,6 +65,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(241, 30);
             this.txtUsername.TabIndex = 1;
+            this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
             // label2
             // 
@@ -80,6 +84,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(241, 30);
             this.txtEmail.TabIndex = 1;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // label3
             // 
@@ -99,6 +104,7 @@
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(241, 30);
             this.txtPassword.TabIndex = 1;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // label4
             // 
@@ -118,6 +124,7 @@
             this.txtConfirmPassword.PasswordChar = '●';
             this.txtConfirmPassword.Size = new System.Drawing.Size(241, 30);
             this.txtConfirmPassword.TabIndex = 1;
+            this.txtConfirmPassword.TextChanged += new System.EventHandler(this.txtConfirmPassword_TextChanged);
             // 
             // label5
             // 
@@ -136,6 +143,7 @@
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Size = new System.Drawing.Size(241, 30);
             this.txtContactNo.TabIndex = 1;
+            this.txtContactNo.TextChanged += new System.EventHandler(this.txtContactNo_TextChanged);
             // 
             // label6
             // 
@@ -158,15 +166,15 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // lbPassword
+            // lbConfirmPassword
             // 
-            this.lbPassword.AutoSize = true;
-            this.lbPassword.ForeColor = System.Drawing.Color.Red;
-            this.lbPassword.Location = new System.Drawing.Point(645, 294);
-            this.lbPassword.Name = "lbPassword";
-            this.lbPassword.Size = new System.Drawing.Size(12, 17);
-            this.lbPassword.TabIndex = 4;
-            this.lbPassword.Text = " ";
+            this.lbConfirmPassword.AutoSize = true;
+            this.lbConfirmPassword.ForeColor = System.Drawing.Color.Red;
+            this.lbConfirmPassword.Location = new System.Drawing.Point(645, 291);
+            this.lbConfirmPassword.Name = "lbConfirmPassword";
+            this.lbConfirmPassword.Size = new System.Drawing.Size(12, 17);
+            this.lbConfirmPassword.TabIndex = 4;
+            this.lbConfirmPassword.Text = " ";
             // 
             // lbContactNo
             // 
@@ -188,14 +196,46 @@
             this.lbCheck.TabIndex = 6;
             this.lbCheck.Text = " ";
             // 
+            // lbPassword
+            // 
+            this.lbPassword.ForeColor = System.Drawing.Color.Red;
+            this.lbPassword.Location = new System.Drawing.Point(644, 227);
+            this.lbPassword.Name = "lbPassword";
+            this.lbPassword.Size = new System.Drawing.Size(284, 54);
+            this.lbPassword.TabIndex = 7;
+            this.lbPassword.Text = " ";
+            // 
+            // lbUsername
+            // 
+            this.lbUsername.AutoSize = true;
+            this.lbUsername.ForeColor = System.Drawing.Color.Red;
+            this.lbUsername.Location = new System.Drawing.Point(645, 152);
+            this.lbUsername.Name = "lbUsername";
+            this.lbUsername.Size = new System.Drawing.Size(12, 17);
+            this.lbUsername.TabIndex = 9;
+            this.lbUsername.Text = " ";
+            // 
+            // lbEmail
+            // 
+            this.lbEmail.AutoSize = true;
+            this.lbEmail.ForeColor = System.Drawing.Color.Red;
+            this.lbEmail.Location = new System.Drawing.Point(645, 200);
+            this.lbEmail.Name = "lbEmail";
+            this.lbEmail.Size = new System.Drawing.Size(12, 17);
+            this.lbEmail.TabIndex = 8;
+            this.lbEmail.Text = " ";
+            // 
             // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 555);
+            this.ClientSize = new System.Drawing.Size(941, 555);
+            this.Controls.Add(this.lbUsername);
+            this.Controls.Add(this.lbEmail);
+            this.Controls.Add(this.lbPassword);
             this.Controls.Add(this.lbCheck);
             this.Controls.Add(this.lbContactNo);
-            this.Controls.Add(this.lbPassword);
+            this.Controls.Add(this.lbConfirmPassword);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtContactNo);
@@ -229,8 +269,11 @@
         private System.Windows.Forms.TextBox txtContactNo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSubmit;
-        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.Label lbConfirmPassword;
         private System.Windows.Forms.Label lbContactNo;
         private System.Windows.Forms.Label lbCheck;
+        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.Label lbUsername;
+        private System.Windows.Forms.Label lbEmail;
     }
 }

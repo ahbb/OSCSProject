@@ -39,6 +39,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers.Crypto, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Web.Helpers.Crypto.3.2.3\lib\net40\System.Web.Helpers.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,6 +92,12 @@
     <Compile Include="WinForms\Login\LoginOTP.Designer.cs">
       <DependentUpon>LoginOTP.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\Registration\Activation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Registration\Activation.Designer.cs">
+      <DependentUpon>Activation.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\Registration\Registration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Login\LoginOTP.resx">
       <DependentUpon>LoginOTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Registration\Activation.resx">
+      <DependentUpon>Activation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Registration\Registration.resx">
       <DependentUpon>Registration.cs</DependentUpon>
