@@ -133,9 +133,10 @@ namespace OSCS.WinForms.Fiddler
                 FiddlerApplication.Shutdown();
         }
 
+        //refresh every 20 seconds
         private void timer_Tick(object sender, EventArgs e)
         {
-            txtCapture.Text = "";
+            //txtCapture.Text = "";
         }
 
         public static bool InstallCertificate()
