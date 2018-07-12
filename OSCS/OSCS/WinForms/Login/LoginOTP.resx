@@ -118,9 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OTPLabel.Text" xml:space="preserve">
-    <value>A 5 digit One-Time-Pin has been sent to your mobile phone.
-Please input the OTP in the field below to proceed with Login. The OTP has a expiry time of 120 seconds.
-To prevent brute-force attacks, failing your 3 total attempts will result in permanent lockout.
+    <value>A 5 digit One-Time-Pin has been sent to your mobile number ending with 
+Input the OTP below to proceed with Login. The OTP has a expiry time of 120 seconds.
+To prevent brute-force attacks, failing your 3 total Login attempts will result in permanent lockout.
+You can use the Resend button to request for a new OTP to be sent to you.
 </value>
   </data>
 </root>
