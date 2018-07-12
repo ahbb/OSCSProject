@@ -62,6 +62,9 @@ namespace OSCS.WinForms.Registration
                         con.Open();
                         cmd1.ExecuteNonQuery();
 
+                        cmd1 = new MySqlCommand("update user set activated = 'true' where userID ='" + uid + "'", con);
+                        cmd1.ExecuteNonQuery();
+
                         //retrieve user details
                         MySqlCommand cmd2 = new MySqlCommand("select username, email from user where userID ='" + uid + "'", con);
 

@@ -13,6 +13,7 @@ using MySql.Data.MySqlClient;
 using log4net;
 using OSCS.WinForms.Admin;
 using OSCS.WinForms.Registration;
+using System.Web.Helpers;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -101,7 +102,7 @@ namespace OSCS.WinForms.Login
                             salt = reader.GetString(reader.GetOrdinal("salt"));
                             status = reader.GetString(reader.GetOrdinal("status"));
 
-                            if (Password.Equals(password.Text)) //Temporary measure until encryption and hashing of details is done
+                            if (Crypto.VerifyHashedPassword(Password, password.Text + salt)) //verify hashed password
                             {
                                 verify = true;
                             }
