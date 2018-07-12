@@ -101,7 +101,7 @@ namespace OSCS.WinForms.Registration
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("oscsgrp32018@gmail.com", "Yuhui123");
+            smtp.Credentials = new System.Net.NetworkCredential("2018oscs@gmail.com", "Yuhui123");
 
             MailMessage msg = new MailMessage();
             msg.Subject = "Account Activated";
@@ -122,7 +122,7 @@ namespace OSCS.WinForms.Registration
             string toAddress = email; //recipient email
             msg.To.Add(toAddress);
 
-            string fromAddress = "\"Chat Safety \" <oscsgrp32018@gmail.com>";
+            string fromAddress = "\"Chat Safety \" <2018oscs@gmail.com>";
             msg.From = new MailAddress(fromAddress);
             msg.IsBodyHtml = true;
 

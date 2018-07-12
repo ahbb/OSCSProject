@@ -113,26 +113,6 @@ namespace OSCS.WinForms.Registration
                     cmd3.Parameters.AddWithValue("@userid", userid);
                     cmd3.Parameters.AddWithValue("@activationCode", activation_code);
                     cmd3.ExecuteNonQuery();
-
-                    //email activation link to user
-                    //string toemailaddress = dt.Rows[0][3].ToString();
-                    //string username = dt.Rows[0][1].ToString();
-                    //string emailbody = "Hi, " + username + ",<br/><br/>Thank you for registering with us.<br/>One more step... <br/> Enter the code below to finish registration.<br/>" + activationCode + "<br/>Thank you, <br/>Team Chat Safety.";
-
-                    //MailMessage passrecmail = new MailMessage("\"Chat Safety \" <oscsgrp3@gmail.com>", toemailaddress);
-                    //passrecmail.Body = emailbody;
-                    //passrecmail.IsBodyHtml = true;
-                    //passrecmail.Subject = "  Activation";
-
-                    //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 25);
-                    //smtp.Credentials = new NetworkCredential()
-                    //{
-                    //    UserName = "oscsgrp3@gmail.com",
-                    //    Password = "Yuhuil123"
-                    //};
-
-                    //smtp.EnableSsl = true;
-                    //smtp.Send(passrecmail);
                 }
             }
         }
@@ -145,7 +125,7 @@ namespace OSCS.WinForms.Registration
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("oscsgrp32018@gmail.com", "Yuhui123");
+            smtp.Credentials = new System.Net.NetworkCredential("2018oscs@gmail.com", "Yuhui123");
 
             MailMessage msg = new MailMessage();
             msg.Subject = "Hello " + Username  + "";
@@ -182,7 +162,7 @@ namespace OSCS.WinForms.Registration
             string toAddress = Email; //recipient email
             msg.To.Add(toAddress);
 
-            string fromAddress = "\"Chat Safety \" <oscsgrp32018@gmail.com>";
+            string fromAddress = "\"Chat Safety \" <2018oscs@gmail.com>";
             msg.From = new MailAddress(fromAddress);
             msg.IsBodyHtml = true;
 
