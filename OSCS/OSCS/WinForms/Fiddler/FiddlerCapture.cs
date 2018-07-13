@@ -13,6 +13,9 @@ using System.Windows.Forms;
 using Fiddler;
 using MalwareScan.AMSI;
 
+//insert code to scan attachments and links in FiddlerApplication_BeforeRequest method to manipulate response when user clicks on a hyperlink or attachment
+//click yes to install the certificate when prompted after start is clicked - so ssl traffic can be decrypted and shown. Will be asked to delete the certificate after clicking stop button, click yes 
+
 namespace OSCS.WinForms.Fiddler
 {
     public partial class FiddlerCapture : Form
@@ -214,25 +217,27 @@ namespace OSCS.WinForms.Fiddler
             UpdateButtonStatus();
         }
 
+        
+        //sess.fullUrl = whole url after GET/POST
+        //sess.oRequest.headers.toString() = the GET/POST paragraph 
         private void FiddlerApplication_BeforeRequest(Session sess)
         {
-            //redirecting for discord attachments
-            if (sess.fullUrl.Contains("attachment"))
+            //once user clicks an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment"
+            if (sess.fullUrl.Contains("attachment") && sess.oRequest.headers.ToString().Contains("GET"))
             {
-                //sess.utilCreateResponseAndBypassServer();
-                //sess.oResponse.headers.SetStatus(307, "Redirect");
-                //sess.oResponse["Cache-Control"] = "nocache";
-                //sess.utilSetResponseBody("<html><body>Malicious file detected. Download blocked.</body></html>");
-
-                //using AMSI, if no virus detected use nClam to scan
+                //using AMSI - if no virus detected, use nClam to scan
                 bool virusDetected = RunFileScan(sess.fullUrl);
                 if (virusDetected == true)
                 {
-                    sess.utilCreateResponseAndBypassServer();
-                    MessageBox.Show("Possibly malicious file detected! Download blocked!");
+                    sess.utilCreateResponseAndBypassServer(); //so server will be bypassed and download will not occur, the code below will run instead
+                    sess.oResponse.headers.SetStatus(307, "Redirect");
+                    sess.oResponse["Cache-Control"] = "nocache";
+                    sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
                     return;
                 }
             }
+
+
         }
 
         //method uses WebClient.DownloadData to get bytes of file from the url
@@ -250,7 +255,7 @@ namespace OSCS.WinForms.Fiddler
         }
 
         //method calls getFileBytes method to get bytes from the url. Then AMSI will be used to scan the bytes. If got virus, hasVirus returns true
-        private bool RunFileScan(string url) //sess.fullUrl
+        private bool RunFileScan(string url)
         {
             bool hasVirus = true;
             Stop();
