@@ -38,53 +38,63 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Header = new System.Windows.Forms.Panel();
             this.projectTitle = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.Header.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbCapture
             // 
+            this.tbCapture.BackColor = System.Drawing.Color.Honeydew;
+            this.tbCapture.Font = new System.Drawing.Font("Open Sans Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCapture.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tbCapture.Location = new System.Drawing.Point(11, 180);
             this.tbCapture.Margin = new System.Windows.Forms.Padding(2);
             this.tbCapture.Name = "tbCapture";
-            this.tbCapture.Size = new System.Drawing.Size(65, 27);
+            this.tbCapture.Size = new System.Drawing.Size(76, 38);
             this.tbCapture.TabIndex = 0;
             this.tbCapture.Text = "Start";
-            this.tbCapture.UseVisualStyleBackColor = true;
+            this.tbCapture.UseVisualStyleBackColor = false;
             this.tbCapture.Click += new System.EventHandler(this.ButtonHandler);
             // 
             // tbStop
             // 
+            this.tbStop.BackColor = System.Drawing.Color.Honeydew;
+            this.tbStop.Font = new System.Drawing.Font("Open Sans Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbStop.Location = new System.Drawing.Point(91, 180);
             this.tbStop.Margin = new System.Windows.Forms.Padding(2);
             this.tbStop.Name = "tbStop";
-            this.tbStop.Size = new System.Drawing.Size(65, 27);
+            this.tbStop.Size = new System.Drawing.Size(76, 38);
             this.tbStop.TabIndex = 1;
             this.tbStop.Text = "Stop";
-            this.tbStop.UseVisualStyleBackColor = true;
+            this.tbStop.UseVisualStyleBackColor = false;
             this.tbStop.Click += new System.EventHandler(this.ButtonHandler);
             // 
             // tbClear
             // 
             this.tbClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbClear.Location = new System.Drawing.Point(724, 180);
+            this.tbClear.BackColor = System.Drawing.Color.Honeydew;
+            this.tbClear.Font = new System.Drawing.Font("Open Sans Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbClear.Location = new System.Drawing.Point(713, 180);
             this.tbClear.Margin = new System.Windows.Forms.Padding(2);
             this.tbClear.Name = "tbClear";
-            this.tbClear.Size = new System.Drawing.Size(65, 27);
+            this.tbClear.Size = new System.Drawing.Size(76, 38);
             this.tbClear.TabIndex = 2;
             this.tbClear.Text = "Clear";
-            this.tbClear.UseVisualStyleBackColor = true;
+            this.tbClear.UseVisualStyleBackColor = false;
             this.tbClear.Click += new System.EventHandler(this.ButtonHandler);
             // 
             // tbSave
             // 
             this.tbSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSave.Location = new System.Drawing.Point(644, 180);
+            this.tbSave.BackColor = System.Drawing.Color.Honeydew;
+            this.tbSave.Font = new System.Drawing.Font("Open Sans Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSave.Location = new System.Drawing.Point(633, 180);
             this.tbSave.Margin = new System.Windows.Forms.Padding(2);
             this.tbSave.Name = "tbSave";
-            this.tbSave.Size = new System.Drawing.Size(65, 27);
+            this.tbSave.Size = new System.Drawing.Size(76, 38);
             this.tbSave.TabIndex = 3;
             this.tbSave.Text = "Save";
-            this.tbSave.UseVisualStyleBackColor = true;
+            this.tbSave.UseVisualStyleBackColor = false;
             this.tbSave.Click += new System.EventHandler(this.ButtonHandler);
             // 
             // txtCapture
@@ -93,13 +103,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCapture.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCapture.Location = new System.Drawing.Point(-3, 222);
+            this.txtCapture.Location = new System.Drawing.Point(-3, 266);
             this.txtCapture.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapture.Multiline = true;
             this.txtCapture.Name = "txtCapture";
             this.txtCapture.ReadOnly = true;
             this.txtCapture.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCapture.Size = new System.Drawing.Size(805, 236);
+            this.txtCapture.Size = new System.Drawing.Size(805, 250);
             this.txtCapture.TabIndex = 4;
             // 
             // label1
@@ -149,12 +159,23 @@
             this.projectTitle.TabIndex = 2;
             this.projectTitle.Text = "Online Chat Protection";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 236);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 18);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Traffic Output:";
+            // 
             // FiddlerCapture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ClientSize = new System.Drawing.Size(800, 508);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.Header);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -186,5 +207,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel Header;
         private System.Windows.Forms.Label projectTitle;
+        private System.Windows.Forms.Label label3;
     }
 }

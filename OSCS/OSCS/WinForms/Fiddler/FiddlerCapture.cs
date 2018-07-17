@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fiddler;
 using MalwareScan.AMSI;
+using nClam;
 
 //insert code to scan attachments and links in FiddlerApplication_BeforeRequest method to manipulate response when user clicks on a hyperlink or attachment
 //click yes to install the certificate when prompted after start is clicked - so ssl traffic can be decrypted and shown. Will be asked to delete the certificate after clicking stop button, click yes 
@@ -220,7 +221,7 @@ namespace OSCS.WinForms.Fiddler
         
         //sess.fullUrl = whole url after GET/POST
         //sess.oRequest.headers.toString() = the GET/POST paragraph 
-        private void FiddlerApplication_BeforeRequest(Session sess)
+        private async void FiddlerApplication_BeforeRequest(Session sess)
         {
             //once user clicks an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment"
             if (sess.fullUrl.Contains("attachment") && sess.oRequest.headers.ToString().Contains("GET"))
@@ -230,12 +231,52 @@ namespace OSCS.WinForms.Fiddler
                 if (virusDetected == true)
                 {
                     sess.utilCreateResponseAndBypassServer(); //so server will be bypassed and download will not occur, the code below will run instead
+
+                    MessageBox.Show("Possibly malicious file detected! Download blocked.");
                     sess.oResponse.headers.SetStatus(307, "Redirect");
                     sess.oResponse["Cache-Control"] = "nocache";
                     sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
                     return;
                 }
+
+                //using nClam
+                else if (virusDetected == false)
+                {
+                    try
+                    {
+                        Stop();
+                        byte[] filebytes = GetFileBytes(sess.fullUrl);
+                        var clam = new ClamClient("localhost", 3310);
+                        var scanResult = await clam.SendAndScanFileAsync(filebytes);
+                        Start();
+                        switch (scanResult.Result)
+                        {
+                            case ClamScanResults.Clean:
+                                Debug.Print("The file is clean!");
+                                break;
+
+                            case ClamScanResults.VirusDetected:
+                                sess.utilCreateResponseAndBypassServer();
+                                MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!");
+                                sess.oResponse.headers.SetStatus(307, "Redirect");
+                                sess.oResponse["Cache-Control"] = "nocache";
+                                sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
+                                break;
+
+                            case ClamScanResults.Error:
+                                Debug.Print("Error occured! Error: {0}", scanResult.RawResult);
+                                break;
+                        }
+                        return;
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Print(e.ToString()+"\nClamWin Services not running.");
+                    }
+
+                }
             }
+
 
 
         }
