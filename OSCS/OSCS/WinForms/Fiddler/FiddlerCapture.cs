@@ -221,7 +221,7 @@ namespace OSCS.WinForms.Fiddler
         
         //sess.fullUrl = whole url after GET/POST
         //sess.oRequest.headers.toString() = the GET/POST paragraph 
-        private async void FiddlerApplication_BeforeRequest(Session sess)
+        private void FiddlerApplication_BeforeRequest(Session sess)
         {
             //once user clicks an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment"
             if (sess.fullUrl.Contains("attachment") && sess.oRequest.headers.ToString().Contains("GET"))
@@ -245,29 +245,32 @@ namespace OSCS.WinForms.Fiddler
                     try
                     {
                         Stop();
+
                         byte[] filebytes = GetFileBytes(sess.fullUrl);
                         var clam = new ClamClient("localhost", 3310);
-                        var scanResult = await clam.SendAndScanFileAsync(filebytes);
+                        var clamTask = Task.Run (async () => await clam.SendAndScanFileAsync(filebytes));
+                        clamTask.Wait(); //to get the results of scan
+
                         Start();
-                        switch (scanResult.Result)
+
+                        var scanResult = clamTask.Result;
+                        if (scanResult.ToString().Contains("FOUND")) //virus found
                         {
-                            case ClamScanResults.Clean:
-                                Debug.Print("The file is clean!");
-                                break;
-
-                            case ClamScanResults.VirusDetected:
-                                sess.utilCreateResponseAndBypassServer();
-                                MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!");
-                                sess.oResponse.headers.SetStatus(307, "Redirect");
-                                sess.oResponse["Cache-Control"] = "nocache";
-                                sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
-                                break;
-
-                            case ClamScanResults.Error:
-                                Debug.Print("Error occured! Error: {0}", scanResult.RawResult);
-                                break;
+                            sess.utilCreateResponseAndBypassServer();
+                            MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!");
+                            sess.oResponse.headers.SetStatus(307, "Redirect");
+                            sess.oResponse["Cache-Control"] = "nocache";
+                            sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
                         }
-                        return;
+
+                        else if (scanResult.ToString().Contains("OK")) //no virus found
+                        {
+                            Debug.Print("File is clean!");
+                        }
+                        else
+                        {
+                            Debug.Print("Error!");
+                        }
                     }
                     catch (Exception e)
                     {
@@ -296,13 +299,13 @@ namespace OSCS.WinForms.Fiddler
         }
 
         //method calls getFileBytes method to get bytes from the url. Then AMSI will be used to scan the bytes. If got virus, hasVirus returns true
-        private bool RunFileScan(string url)
+        private bool RunFileScan(string fileurl)
         {
             bool hasVirus = true;
             Stop();
-            byte[] filebytes = GetFileBytes(url);
+            byte[] filebytes = GetFileBytes(fileurl);
             var scanner = new MalwareScanner();
-            var result = scanner.HasVirus(filebytes, url);
+            var result = scanner.HasVirus(filebytes, fileurl);
             Start();
             string virusDetected = result.ToString();
             if (virusDetected == "True") 
