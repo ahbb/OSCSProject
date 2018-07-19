@@ -223,8 +223,8 @@ namespace OSCS.WinForms.Fiddler
         //sess.oRequest.headers.toString() = the GET/POST paragraph 
         private void FiddlerApplication_BeforeRequest(Session sess)
         {
-            //once user clicks an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment"
-            if (sess.fullUrl.Contains("attachment") && sess.oRequest.headers.ToString().Contains("GET"))
+            //once user clicks on an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = clicked from external sources, not from browser.
+            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer") && Path.HasExtension(sess.fullUrl))
             {
                 //using AMSI - if no virus detected, use nClam to scan
                 bool virusDetected = RunFileScan(sess.fullUrl);
@@ -248,6 +248,8 @@ namespace OSCS.WinForms.Fiddler
 
                         byte[] filebytes = GetFileBytes(sess.fullUrl);
                         var clam = new ClamClient("localhost", 3310);
+
+                        //using Task.Run async to call await clam method so FiddlerApplication_BeforeRequest does not have to be async
                         var clamTask = Task.Run (async () => await clam.SendAndScanFileAsync(filebytes));
                         clamTask.Wait(); //to get the results of scan
 
