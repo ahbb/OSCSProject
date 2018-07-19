@@ -321,12 +321,6 @@ namespace OSCS.WinForms.Fiddler
             return hasVirus;
         }
 
-        private void FiddlerCapture_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            UninstallCertificate();
-            Stop();
-        }
-
         public void UpdateButtonStatus()
         {
             tbCapture.Enabled = !FiddlerApplication.IsStarted();
@@ -340,6 +334,12 @@ namespace OSCS.WinForms.Fiddler
         private void FiddlerCapture_Load(object sender, EventArgs e)
         {
             UpdateButtonStatus();
+        }
+
+        private void FiddlerCapture_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            UninstallCertificate();
+            Stop();
         }
     }
 }

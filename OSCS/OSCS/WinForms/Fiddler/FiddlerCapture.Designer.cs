@@ -204,6 +204,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FiddlerCapture";
             this.Text = "FiddlerCapture";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FiddlerCapture_FormClosed);
             this.Load += new System.EventHandler(this.FiddlerCapture_Load);
             this.Header.ResumeLayout(false);
             this.Header.PerformLayout();
