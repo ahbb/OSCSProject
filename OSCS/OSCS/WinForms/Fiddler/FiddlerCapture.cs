@@ -224,7 +224,7 @@ namespace OSCS.WinForms.Fiddler
         private void FiddlerApplication_BeforeRequest(Session sess)
         {
             //once user clicks on an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = clicked from external sources, not from browser.
-            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer") && Path.HasExtension(sess.fullUrl))
+            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer:") && Path.HasExtension(sess.fullUrl))
             {
                 //using AMSI - if no virus detected, use nClam to scan
                 bool virusDetected = RunFileScan(sess.fullUrl);
