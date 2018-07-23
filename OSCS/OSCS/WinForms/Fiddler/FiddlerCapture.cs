@@ -13,6 +13,10 @@ using System.Windows.Forms;
 using Fiddler;
 using MalwareScan.AMSI;
 using nClam;
+using VirusTotalNET;
+using VirusTotalNET.Objects;
+using VirusTotalNET.ResponseCodes;
+using VirusTotalNET.Results;
 
 //insert code to scan attachments and links in FiddlerApplication_BeforeRequest method to manipulate response when user clicks on a hyperlink or attachment
 //click yes to install the certificate when prompted after start is clicked - so ssl traffic can be decrypted and shown. Will be asked to delete the certificate after clicking stop button, click yes 
@@ -22,6 +26,8 @@ namespace OSCS.WinForms.Fiddler
     public partial class FiddlerCapture : Form
     {
         private const string Separator = "------------------------------------------------------------------";
+        //private static string ScanUrl = "http://www.o-ki.ru/api_v2/json/get/initialization";
+        private static string ScanUrl = "";
 
         public FiddlerCapture()
         {
@@ -282,7 +288,22 @@ namespace OSCS.WinForms.Fiddler
                 }
             }
 
-
+            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:")) 
+            {
+                try
+                {
+                    ScanUrl = sess.fullUrl;
+                    var urlTask = Task.Run(async () => await UrlCheck(sess));
+                    urlTask.Wait();
+                }
+                catch (Exception e)
+                {
+                    sess.utilCreateResponseAndBypassServer();
+                    sess.oResponse.headers.SetStatus(307, "Redirect");
+                    sess.oResponse["Cache-Control"] = "nocache";
+                    sess.utilSetResponseBody("<html><body>Limit exceeded</body></html>");
+                }
+            }
 
         }
 
@@ -340,6 +361,53 @@ namespace OSCS.WinForms.Fiddler
         {
             UninstallCertificate();
             Stop();
+        }
+
+        private static async Task UrlCheck(Session sess)
+        {
+            //only can scan 4 per minute (public)
+            VirusTotal virusTotal = new VirusTotal("29665c8e3e1da563a81a1a2c8d9200e5ad3cbd4297d81fdea1a7d21fa7fb1919");
+            int counter = 0;
+            //Use HTTPS instead of HTTP
+            virusTotal.UseTLS = true;
+
+            UrlReport urlReport = await virusTotal.GetUrlReportAsync(ScanUrl);
+            counter = urlReport.Positives;
+            //UrlScanResult urlResult = await virusTotal.ScanUrlAsync(ScanUrl);
+            //PrintScan(urlResult);
+            //counter = PrintScan(urlReport); 
+
+            //if 3 or more detects this link as true
+            if (counter >= 3)
+            {
+                sess.utilCreateResponseAndBypassServer();
+                MessageBox.Show("Possibly malicious link detected! Website blocked.");
+                sess.oResponse.headers.SetStatus(307, "Redirect");
+                sess.oResponse["Cache-Control"] = "nocache";
+                sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Website blocked.</body></html>");
+                return;
+            }
+        }
+
+        private static int PrintScan(UrlReport urlReport)
+        {
+            //Console.WriteLine("Scan ID: " + urlReport.ScanId);
+            //Console.WriteLine("Message: " + urlReport.VerboseMsg);
+            int counter = 0;
+
+            if (urlReport.ResponseCode == UrlReportResponseCode.Present)
+            {
+                foreach (KeyValuePair<string, UrlScanEngine> scan in urlReport.Scans)
+                {
+                    //Console.WriteLine("{0,-25} Detected: {1}", scan.Key, scan.Value.Detected);
+                    if (scan.Value.Detected == true)
+                    {
+                        counter++;
+                    }
+                }
+            }
+            return counter;
+            //Console.WriteLine();
         }
     }
 }
