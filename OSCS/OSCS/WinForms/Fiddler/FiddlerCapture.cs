@@ -229,7 +229,7 @@ namespace OSCS.WinForms.Fiddler
         //sess.oRequest.headers.toString() = the GET/POST paragraph 
         private void FiddlerApplication_BeforeRequest(Session sess)
         {
-            //once user clicks on an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = clicked from external sources, not from browser.
+            //once user clicks on an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = no redirection from site to site (eg. clicking on links after google search)
             if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer:") && Path.HasExtension(sess.fullUrl))
             {
                 //using AMSI - if no virus detected, use nClam to scan
@@ -288,7 +288,7 @@ namespace OSCS.WinForms.Fiddler
                 }
             }
 
-            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:")) 
+           else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:")) 
             {
                 try
                 {
@@ -301,7 +301,7 @@ namespace OSCS.WinForms.Fiddler
                     sess.utilCreateResponseAndBypassServer();
                     sess.oResponse.headers.SetStatus(307, "Redirect");
                     sess.oResponse["Cache-Control"] = "nocache";
-                    sess.utilSetResponseBody("<html><body>Limit exceeded</body></html>");
+                    sess.utilSetResponseBody("<html><body>Virus Total limit exceeded! Please try again later.</body></html>");
                 }
             }
 
@@ -363,6 +363,7 @@ namespace OSCS.WinForms.Fiddler
             Stop();
         }
 
+        //using virustotal to scan urls
         private static async Task UrlCheck(Session sess)
         {
             //only can scan 4 per minute (public)
@@ -384,7 +385,7 @@ namespace OSCS.WinForms.Fiddler
                 MessageBox.Show("Possibly malicious link detected! Website blocked.");
                 sess.oResponse.headers.SetStatus(307, "Redirect");
                 sess.oResponse["Cache-Control"] = "nocache";
-                sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Website blocked.</body></html>");
+                sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
                 return;
             }
         }
