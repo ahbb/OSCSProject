@@ -195,7 +195,9 @@ namespace OSCS.WinForms.Login
                                 MySqlCommand cmd2 = new MySqlCommand(selectQuery2, con);
                                 cmd2.Parameters.AddWithValue("@userID", userID);
                                 reader = cmd2.ExecuteReader();
-                                if (!reader.Read() && !reader.HasRows) //email not sent yet
+
+                                //email not sent yet
+                                if (!reader.Read() && !reader.HasRows) 
                                 {
                                     String resetCode = Guid.NewGuid().ToString();
                                     string insertQuery = "INSERT INTO resetpasswordrequests (ID,userID,resetRequestDateTime) VALUES (@ID,@userID,@resetRequestDateTime)";
@@ -210,7 +212,7 @@ namespace OSCS.WinForms.Login
                                     String ToEmailAddress = email;
                                     String ToUserName = Username;
                                     String EmailBody = "Hi, " + ToUserName + ",<br/><br/>Your account has been locked automatically due to multiple incorrect attempts when inputting your password.<br/>Click the link below to activate your account.<br/><a>https://aspj-ezgo.com:44331/Website/Profile/UnlockAccount.aspx?resetCode=" + resetCode + "<a/><br/>Thank you, <br/>Team OCP.";
-                                    MailMessage PassRecMail = new MailMessage("\"EzGo \" <ezgo2018@gmail.com>", ToEmailAddress);
+                                    MailMessage PassRecMail = new MailMessage("\"OCP \" <2018oscs@gmail.com>", ToEmailAddress);
                                     PassRecMail.Body = EmailBody;
                                     PassRecMail.IsBodyHtml = true;
                                     PassRecMail.Subject = "Unlock Account";
@@ -218,8 +220,8 @@ namespace OSCS.WinForms.Login
                                     SmtpClient SMTP = new SmtpClient("smtp.gmail.com", 25);
                                     SMTP.Credentials = new NetworkCredential()
                                     {
-                                        UserName = "ezgo2018@gmail.com",
-                                        Password = "Cutegirl123"
+                                        UserName = "2018oscs@gmail.com",
+                                        Password = "Yuhui123"
                                     };
 
                                     SMTP.EnableSsl = true;
@@ -293,7 +295,7 @@ namespace OSCS.WinForms.Login
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            LoginInfo.UserID = 0;
+            LoginInfo.UserID = -1;
             LoginInfo.UserName = "";
             this.Hide();
             Login login = new Login();
@@ -302,9 +304,9 @@ namespace OSCS.WinForms.Login
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //Registration registration = new Registration();
-            //registration.ShowDialog();
+            this.Hide();
+            Registration.Registration registration = new Registration.Registration();
+            registration.ShowDialog();
         }
     }
 }

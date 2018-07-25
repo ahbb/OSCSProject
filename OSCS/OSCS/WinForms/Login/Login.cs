@@ -14,6 +14,8 @@ using log4net;
 using OSCS.WinForms.Admin;
 using OSCS.WinForms.Registration;
 using System.Web.Helpers;
+using System.Net.Mail;
+using System.Net;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -26,8 +28,8 @@ namespace OSCS.WinForms.Login
 
         public string Username { get; set; }
         public string Password { get; set; }
-        string salt, status, activationCode;
-        int userID;
+        string salt, status, activationCode, email, activated;
+        int userID, counter;
         Boolean verify = false; //To verify password
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -46,9 +48,9 @@ namespace OSCS.WinForms.Login
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            //this.Hide();
-            //Registration registration = new Registration();
-            //registration.ShowDialog();
+            this.Hide();
+            Registration.Registration registration = new Registration.Registration();
+            registration.ShowDialog();
         }
 
         private void ToLoginOTPButton_Click(object sender, EventArgs e)
@@ -99,8 +101,11 @@ namespace OSCS.WinForms.Login
                             userID = reader.GetInt32(reader.GetOrdinal("userID"));
                             Username = /*des.Decrypt*/(reader.GetString(reader.GetOrdinal("username")));
                             Password = reader.GetString(reader.GetOrdinal("password"));
+                            email = /*des.Decrypt2*/(reader.GetString(reader.GetOrdinal("email")));
                             salt = reader.GetString(reader.GetOrdinal("salt"));
                             status = reader.GetString(reader.GetOrdinal("status"));
+                            counter = reader.GetInt32(reader.GetOrdinal("counter"));
+                            activated = reader.GetString(reader.GetOrdinal("activated"));
 
                             if (Crypto.VerifyHashedPassword(Password, password.Text + salt)) //verify hashed password
                             {
@@ -108,10 +113,10 @@ namespace OSCS.WinForms.Login
                             }
                         }
 
-                        //Session to User Login OTP Page and Admin HomePage
-                        if (reader.HasRows && status == "green" && verify == true)
+                        //Session to User Login OTP Page and Admin Logs
+                        if (reader.HasRows && status == "green" && verify == true && counter < 3)
                         {
-                            if (username.Text == "OCPAdmin")
+                            if (username.Text == "OCPAdmin") //Have to manually set all data (activated = true) for Admin in first row of user table
                             {
                                 conn.Close();
                                 LoginInfo.UserID = userID;
@@ -119,6 +124,7 @@ namespace OSCS.WinForms.Login
                                 //log4net.GlobalContext.Properties["userID"] = userID;
                                 //log.Info("Admin successfully signed in.");
                                 this.Hide();
+                                //To Admin Logs
                                 UserLogs userLogs = new UserLogs();
                                 userLogs.ShowDialog();
                             }
@@ -144,25 +150,15 @@ namespace OSCS.WinForms.Login
                                         LoginInfo.UserID = userID;
                                         LoginInfo.UserName = Username;
 
-                                        /*string selectQuery = "SELECT userID from user WHERE username=@username";
-                                        MySqlCommand cmd = new MySqlCommand(selectQuery, con);
-                                        cmd.Parameters.AddWithValue("@username", /*des.Encrypt(username.Text));
-                                        reader = cmd.ExecuteReader();
-                                        while (reader.HasRows && reader.Read())
-                                        {
-                                            int logUserID = reader.GetInt32(reader.GetOrdinal("userID"));*/
-                                            log4net.GlobalContext.Properties["userID"] = userID;
-                                            log.Info("User successfully entered username and password.");/*
-                                        }
-                                        reader.Close();
-                                        cmd.ExecuteNonQuery();*/
+                                        log4net.GlobalContext.Properties["userID"] = userID;
+                                        log.Info("User successfully entered username and password.");
                                         conn.Close();
                                         this.Hide();
                                         LoginOTP loginOTP = new LoginOTP();
                                         loginOTP.ShowDialog();
                                     }
 
-                                    else //If-else for the dt.Rows.Count==0) //Verify label formatting later
+                                    else // If activation code for specific user still exists in activation table
                                     {
                                         loginWarning.Text = "You have not activated your account. \nPlease check your email for the activation link.";
                                     }
@@ -171,99 +167,116 @@ namespace OSCS.WinForms.Login
                             }
                         }
                         
-                        
                         else if (reader.HasRows && status == "red" && verify == true)
                         {
-                            //LoginPanel.Visible = false;
-                            //RecoverPanel.Visible = true;
-                            loginWarning.Text = "You have been locked out due to too many failed login attempts. \nPlease check your email to recover your account.";
-                            username.Text = string.Empty;
-                            password.Text = string.Empty;
+                            if (activated == "false")
+                            {
+
+                            }
+                            else if (activated == "true")
+                            {
+                                loginWarning.Text = "You have been locked out due to too many failed login attempts. \nPlease check your email to recover your account.";
+                                username.Text = string.Empty;
+                                password.Text = string.Empty;
+                            }
+
                         }
 
                         else
                         {
-                            //Invalid username/Password
+                            //Invalid Username/Password
                             using (MySqlConnection conn = new MySqlConnection(cs))
                             {
                                 conn.Close();
                                 conn.Open();
-                                string selectQuery = "SELECT userID, counter FROM user WHERE username=@username";
+                                string selectQuery = "SELECT userID, counter, activated FROM user WHERE username=@username";
                                 MySqlCommand cmd = new MySqlCommand(selectQuery, conn);
                                 cmd.Parameters.AddWithValue("@username", /*des.Encrypt3*/(username.Text));
                                 reader = cmd.ExecuteReader();
                                 if (reader.HasRows && reader.Read())
                                 {
-                                    int logUserID = reader.GetInt32(reader.GetOrdinal("userID"));
-                                    log4net.GlobalContext.Properties["userID"] = logUserID;
-                                    log.Error("Authentication failed - User entered wrong password.");
-                                    int counter = reader.GetInt32(reader.GetOrdinal("counter"));
-                                    reader.Close();
-                                    counter += 1;
-                                    if (counter >= 3)
+                                    if (activated == "true")
                                     {
-                                        string query = "UPDATE user SET status=@status,counter=@counter WHERE userID=@userID";
-                                        MySqlCommand cmdd = new MySqlCommand(query, conn);
-                                        cmdd.Parameters.AddWithValue("@status", "red");
-                                        cmdd.Parameters.AddWithValue("@userID", logUserID);
-                                        cmdd.Parameters.AddWithValue("@counter", counter);
-                                        cmdd.ExecuteNonQuery();
-
+                                        int logUserID = reader.GetInt32(reader.GetOrdinal("userID"));
                                         log4net.GlobalContext.Properties["userID"] = logUserID;
-                                        log.Warn("An attempt was made to access the locked account.");
-
-                                        username.Text = string.Empty;
-                                        password.Text = string.Empty;
-                                        loginWarning.Text = "The account that you are trying to access has been locked. \nAn email with relevant information has been sent to account owner.";
-
-                                        //checking whether email has been sent
-                                        /*string selectQuery2 = "SELECT userID FROM resetpasswordrequests WHERE userID=@userID";
-                                        MySqlCommand cmd2 = new MySqlCommand(selectQuery2, con);
-                                        cmd2.Parameters.AddWithValue("@userID", id);
-                                        reader = cmd2.ExecuteReader();
-                                        if (!reader.Read() && !reader.HasRows) //email not sent yet
+                                        log.Error("Authentication failed - User entered wrong password.");
+                                        int counter = reader.GetInt32(reader.GetOrdinal("counter"));
+                                        reader.Close();
+                                        counter += 1;
+                                        if (counter >= 3)
                                         {
-                                            String resetCode = Guid.NewGuid().ToString();
-                                            string insertQuery = "INSERT INTO resetpasswordrequests (ID,userID,resetRequestDateTime) VALUES (@ID,@userID,@resetRequestDateTime)";
-                                            MySqlCommand cmd3 = new MySqlCommand(insertQuery, con);
-                                            cmd3.Parameters.AddWithValue("@ID", resetCode);
-                                            cmd3.Parameters.AddWithValue("@userID", id);
-                                            cmd3.Parameters.AddWithValue("@resetRequestDateTime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
-                                            reader.Close();
-                                            cmd3.ExecuteNonQuery();
+                                            string query = "UPDATE user SET status=@status,counter=@counter WHERE userID=@userID";
+                                            MySqlCommand cmdd = new MySqlCommand(query, conn);
+                                            cmdd.Parameters.AddWithValue("@status", "red");
+                                            cmdd.Parameters.AddWithValue("@userID", logUserID);
+                                            cmdd.Parameters.AddWithValue("@counter", counter);
+                                            cmdd.ExecuteNonQuery();
 
-                                            //SEND RESET LINK TO EMAIL
-                                            String ToEmailAddress = email;
-                                            String ToUserName = Username;
-                                            String EmailBody = "Hi, " + ToUserName + ",<br/><br/>Your account has been locked automatically due to multiple incorrect attempts when inputting your password.<br/>Click the link below to activate your account.<br/><a>https://aspj-ezgo.com:44331/Website/Profile/UnlockAccount.aspx?resetCode=" + resetCode + "<a/><br/>Thank you, <br/>Team OCP.";
-                                            MailMessage PassRecMail = new MailMessage("\"EzGo \" <ezgo2018@gmail.com>", ToEmailAddress);
-                                            PassRecMail.Body = EmailBody;
-                                            PassRecMail.IsBodyHtml = true;
-                                            PassRecMail.Subject = "Unlock Account";
+                                            log4net.GlobalContext.Properties["userID"] = logUserID;
+                                            log.Warn("An unsuccessful attempt was made to access the locked account.");
 
-                                            SmtpClient SMTP = new SmtpClient("smtp.gmail.com", 25);
-                                            SMTP.Credentials = new NetworkCredential()
+                                            username.Text = string.Empty;
+                                            password.Text = string.Empty;
+                                            loginWarning.Text = "The account that you are trying to access has been locked. \nAn email with relevant information has been sent to account owner.";
+
+                                            //checking whether email has been sent
+                                            /*string selectQuery2 = "SELECT userID FROM resetpasswordrequests WHERE userID=@userID";
+                                            MySqlCommand cmd2 = new MySqlCommand(selectQuery2, conn);
+                                            cmd2.Parameters.AddWithValue("@userID", userID);
+                                            reader = cmd2.ExecuteReader();
+
+                                            //email not sent yet
+                                            if (!reader.Read() && !reader.HasRows) 
                                             {
-                                                UserName = "ezgo2018@gmail.com",
-                                                Password = "Cutegirl123"
-                                            };
+                                                String resetCode = Guid.NewGuid().ToString();
+                                                string insertQuery = "INSERT INTO resetpasswordrequests (ID,userID,resetRequestDateTime) VALUES (@ID,@userID,@resetRequestDateTime)";
+                                                MySqlCommand cmd3 = new MySqlCommand(insertQuery, conn);
+                                                cmd3.Parameters.AddWithValue("@ID", resetCode);
+                                                cmd3.Parameters.AddWithValue("@userID", userID);
+                                                cmd3.Parameters.AddWithValue("@resetRequestDateTime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                                                reader.Close();
+                                                cmd3.ExecuteNonQuery();
 
-                                            SMTP.EnableSsl = true;
-                                            SMTP.Send(PassRecMail);
-                                        }*/
-                                    } //if counter >= 3 end
+                                                //SEND RESET LINK TO EMAIL
+                                                String ToEmailAddress = email;
+                                                String ToUserName = Username;
+                                                String EmailBody = "Hi, " + ToUserName + ",<br/><br/>Your account has been locked automatically due to multiple incorrect attempts when inputting your password.<br/>Click the link below to activate your account.<br/><a>https://aspj-ezgo.com:44331/Website/Profile/UnlockAccount.aspx?resetCode=" + resetCode + "<a/><br/>Thank you, <br/>Team OCP.";
+                                                MailMessage PassRecMail = new MailMessage("\"OCP \" <2018oscs@gmail.com>", ToEmailAddress);
+                                                PassRecMail.Body = EmailBody;
+                                                PassRecMail.IsBodyHtml = true;
+                                                PassRecMail.Subject = "Unlock Account";
 
-                                    else
+                                                SmtpClient SMTP = new SmtpClient("smtp.gmail.com", 25);
+                                                SMTP.Credentials = new NetworkCredential()
+                                                {
+                                                    UserName = "2018oscs@gmail.com",
+                                                    Password = "Yuhui123"
+                                                };
+
+                                                SMTP.EnableSsl = true;
+                                                SMTP.Send(PassRecMail);
+                                            }*/
+                                        } //if counter >= 3 end
+
+                                        else
+                                        {
+                                            string query = "UPDATE user SET counter=@counter where userID=@userID";
+                                            MySqlCommand cmdd = new MySqlCommand(query, conn);
+                                            cmdd.Parameters.AddWithValue("@counter", counter);
+                                            cmdd.Parameters.AddWithValue("@userID", logUserID);
+                                            cmdd.ExecuteNonQuery();
+
+                                            username.Text = string.Empty;
+                                            password.Text = string.Empty;
+                                            loginWarning.Text = "Invalid user or password! \nPlease input the correct username or password.";
+                                            loginWarning.ForeColor = System.Drawing.Color.Red;
+                                        }
+                                    }
+                                    else if (activated == "false")
                                     {
-                                        string query = "UPDATE user SET counter=@counter where userID=@userID";
-                                        MySqlCommand cmdd = new MySqlCommand(query, conn);
-                                        cmdd.Parameters.AddWithValue("@counter", counter);
-                                        cmdd.Parameters.AddWithValue("@userID", logUserID);
-                                        cmdd.ExecuteNonQuery();
-
                                         username.Text = string.Empty;
                                         password.Text = string.Empty;
-                                        loginWarning.Text = "Invalid user or password! \nPlease input the correct username or password.";
+                                        loginWarning.Text = "This account has not been activated yet. \nAn activation link has been sent to the email associated with account.";
                                         loginWarning.ForeColor = System.Drawing.Color.Red;
                                     }
                                 }
@@ -271,7 +284,7 @@ namespace OSCS.WinForms.Login
                                 {
                                     username.Text = string.Empty;
                                     password.Text = string.Empty;
-                                    loginWarning.Text = "Invalid user! Please input a valid username.";
+                                    loginWarning.Text = "Invalid user or password! \nPlease input the correct username or password.";
                                     loginWarning.ForeColor = System.Drawing.Color.Red;
                                 }
                                 conn.Close();
@@ -286,13 +299,6 @@ namespace OSCS.WinForms.Login
                     Console.WriteLine("Error processing user input");
                 }
             }
-        }
-
-        private void ToRecoverOTPButton_Click(object sender, EventArgs e)
-        {
-            LoginOTP loginOTP = new LoginOTP();
-            this.Hide();
-            loginOTP.ShowDialog();
         }
     }
 }
