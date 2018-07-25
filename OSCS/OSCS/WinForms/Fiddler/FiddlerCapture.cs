@@ -136,8 +136,8 @@ namespace OSCS.WinForms.Fiddler
 
         void Stop()
         {
-            FiddlerApplication.AfterSessionComplete -= FiddlerApplication_AfterSessionComplete;
             FiddlerApplication.BeforeRequest -= FiddlerApplication_BeforeRequest;
+            FiddlerApplication.AfterSessionComplete -= FiddlerApplication_AfterSessionComplete;
 
             if (FiddlerApplication.IsStarted())
                 FiddlerApplication.Shutdown();
@@ -230,7 +230,8 @@ namespace OSCS.WinForms.Fiddler
         private void FiddlerApplication_BeforeRequest(Session sess)
         {
             //once user clicks on an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = no redirection from site to site (eg. clicking on links after google search)
-            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer:") && Path.HasExtension(sess.fullUrl))
+
+            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer:") && Path.HasExtension(sess.fullUrl) && !sess.oRequest.headers.ToString().ToUpper().Contains("POST"))
             {
                 //using AMSI - if no virus detected, use nClam to scan
                 bool virusDetected = RunFileScan(sess.fullUrl);
@@ -282,13 +283,18 @@ namespace OSCS.WinForms.Fiddler
                     }
                     catch (Exception e)
                     {
+                        sess.utilCreateResponseAndBypassServer();
+                        sess.oResponse.headers.SetStatus(307, "Redirect");
+                        sess.oResponse["Cache-Control"] = "nocache";
+                        sess.utilSetResponseBody("<html><body>Sorry, the ClamWin Services are not running on your computer so we are not able to confirm whether the file you are trying to download is malicious or not.</body></html>");
                         Debug.Print(e.ToString()+"\nClamWin Services not running.");
                     }
 
                 }
             }
-
-           else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:")) 
+            
+            //when user clicks on a hyperlink
+           else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:") && !sess.oRequest.headers.ToString().ToUpper().Contains("POST")) 
             {
                 try
                 {
@@ -363,6 +369,7 @@ namespace OSCS.WinForms.Fiddler
             Stop();
         }
 
+
         //using virustotal to scan urls
         private static async Task UrlCheck(Session sess)
         {
@@ -373,22 +380,42 @@ namespace OSCS.WinForms.Fiddler
             virusTotal.UseTLS = true;
 
             UrlReport urlReport = await virusTotal.GetUrlReportAsync(ScanUrl);
-            counter = urlReport.Positives;
-            //UrlScanResult urlResult = await virusTotal.ScanUrlAsync(ScanUrl);
-            //PrintScan(urlResult);
-            //counter = PrintScan(urlReport); 
+            Debug.Print(ScanUrl);
 
-            //if 3 or more detects this link as true
-            if (counter >= 3)
+            if (urlReport.ResponseCode == UrlReportResponseCode.Present)
             {
+                counter = urlReport.Positives; //number of anti-virus vendors that detected this link as malicious
+
+                //UrlScanResult urlResult = await virusTotal.ScanUrlAsync(ScanUrl);
+                //PrintScan(urlResult);
+                //counter = PrintScan(urlReport); 
+
+                //if 3 or more detects this link as malicious
+                if (counter >= 3)
+                {
+                    sess.utilCreateResponseAndBypassServer();
+                    MessageBox.Show("Possibly malicious link detected! Website blocked.");
+                    sess.oResponse.headers.SetStatus(307, "Redirect");
+                    sess.oResponse["Cache-Control"] = "nocache";
+                    sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
+                    return;
+                }
+            }
+
+            //url report not present
+            else
+            {
+                UrlScanResult urlResult = await virusTotal.ScanUrlAsync(ScanUrl);
+
                 sess.utilCreateResponseAndBypassServer();
-                MessageBox.Show("Possibly malicious link detected! Website blocked.");
                 sess.oResponse.headers.SetStatus(307, "Redirect");
                 sess.oResponse["Cache-Control"] = "nocache";
-                sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
+                sess.utilSetResponseBody("<html><body>We have sent the link to Virus Total. Please try again later.</body></html>");
+                Debug.Print("No url report found.");
                 return;
             }
         }
+
 
         private static int PrintScan(UrlReport urlReport)
         {
