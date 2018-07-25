@@ -86,6 +86,7 @@
     <Compile Include="WinForms\Login\LoginOTP.Designer.cs">
       <DependentUpon>LoginOTP.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\Registration\tDes.cs" />
     <Compile Include="WinForms\Registration\Activation.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -19,6 +19,7 @@ namespace OSCS.WinForms.Registration
         MySqlCommand cmd;
         MySqlDataReader reader;
         DataTable dt = new DataTable();
+        tDes des = new tDes();
         int uid;
         string username, email, query;
 
@@ -38,6 +39,14 @@ namespace OSCS.WinForms.Registration
             {
                 lbActivation.Text = "";
             }
+        }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            //redirect to login page
+            Login.Login login = new Login.Login();
+            login.Show();
+            this.Hide();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -77,7 +86,7 @@ namespace OSCS.WinForms.Registration
                         }
 
                         //send email
-                        sendMsg(username, email);
+                        sendMsg(username, des.Decrypt(email));
                     }
 
                     //show user activation success

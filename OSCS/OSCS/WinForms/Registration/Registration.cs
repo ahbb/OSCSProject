@@ -24,6 +24,7 @@ namespace OSCS.WinForms.Registration
         MySqlDataReader reader;
         string query;
         string activation_code = Guid.NewGuid().ToString(); 
+        tDes des = new tDes();
 
         public Registration()
         {
@@ -32,19 +33,7 @@ namespace OSCS.WinForms.Registration
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-           //for emailing user
-            string username = txtUsername.Text.ToString();
-            string email = txtEmail.Text.ToString();
-
-            //captcha (assumed verified)
             registerUser();
-            //send email after registration
-            sendMsg(username, email, activation_code);
-
-            //redirect to activation page
-            Activation activate = new Activation();
-            activate.Show();
-            this.Hide();
         }
 
         private void registerUser()
@@ -84,11 +73,11 @@ namespace OSCS.WinForms.Registration
                 cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                 cmd.Parameters.AddWithValue("@password", hashedPassword);
-                cmd.Parameters.AddWithValue("@email", txtEmail.Text);
-                cmd.Parameters.AddWithValue("@contact", txtContactNo.Text);
+                cmd.Parameters.AddWithValue("@email", des.Encrypt(txtEmail.Text));
+                cmd.Parameters.AddWithValue("@contact", des.Encrypt2(txtContactNo.Text));
                 cmd.Parameters.AddWithValue("@salt", salt);
                 cmd.ExecuteReader();
-                MessageBox.Show("Registration is successful");
+                //MessageBox.Show("Registration is successful");
 
                 conn.Close();
             }
@@ -98,7 +87,7 @@ namespace OSCS.WinForms.Registration
             {
                 MySqlCommand cmd2 = new MySqlCommand("select * from user where email = @email", con);
                 con.Open();
-                cmd2.Parameters.AddWithValue("@email", txtEmail.Text);
+                cmd2.Parameters.AddWithValue("@email", des.Encrypt(txtEmail.Text));
                 MySqlDataAdapter sda = new MySqlDataAdapter(cmd2);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
@@ -113,6 +102,18 @@ namespace OSCS.WinForms.Registration
                     cmd3.Parameters.AddWithValue("@userid", userid);
                     cmd3.Parameters.AddWithValue("@activationCode", activation_code);
                     cmd3.ExecuteNonQuery();
+                    
+                    //for emailing user
+                    string username = txtUsername.Text.ToString();
+                    string email = txtEmail.Text.ToString();
+
+                    //send email after registration
+                    sendMsg(username, email, activation_code);
+
+                    //redirect to activation page
+                    Activation activate = new Activation();
+                    activate.Show();
+                    this.Hide();
                 }
             }
         }
@@ -144,7 +145,7 @@ namespace OSCS.WinForms.Registration
             msg.Body += "</tr>";
 
             msg.Body += "<tr>";
-            msg.Body += "<td>Please check your email for your activation link to start using your account!</td>";
+            msg.Body += "<td>Please enter your activation link to start using your account!\n</td>";
             msg.Body += "</tr>";
 
             msg.Body += "<tr>";
@@ -293,7 +294,7 @@ namespace OSCS.WinForms.Registration
                 query = "";
                 query = "select * from user where email=@email";
                 cmd = new MySqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                cmd.Parameters.AddWithValue("@email", des.Encrypt(txtEmail.Text));
                 reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)
@@ -321,6 +322,21 @@ namespace OSCS.WinForms.Registration
             }
             return true;
         }
-        
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            //redirect to login page
+            Login.Login login = new Login.Login();
+            login.Show();
+            this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //redirect to activation page
+            Activation activation = new Activation();
+            activation.Show();
+            this.Hide();
+        }
     }
 }
