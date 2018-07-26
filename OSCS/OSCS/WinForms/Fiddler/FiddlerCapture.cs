@@ -237,13 +237,16 @@ namespace OSCS.WinForms.Fiddler
                 bool virusDetected = RunFileScan(sess.fullUrl);
                 if (virusDetected == true)
                 {
-                    sess.utilCreateResponseAndBypassServer(); //so server will be bypassed and download will not occur, the code below will run instead
+                    DialogResult dialogResult = MessageBox.Show("Possibly malicious file detected!\nDownload blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
 
-                    MessageBox.Show("Possibly malicious file detected! Download blocked.");
+                    //change to MessageBoxButtons.YesNo to display yes and no buttons. use if (dialogResult==DialogResult.Yes) for when user clicks yes, and if (dialogResult == DialogResult.No) for when user clicks no. 
+                    //If checking for what user clicked, ensure that sess.utilCreateResponseandBypassServer(); is only in if (dialogResult==DialogResult.Yes) so return can be carried out in if (dialogResult == DialogResult.No)
+
+                    sess.utilCreateResponseAndBypassServer(); //so server will be bypassed and download will not occur, the code below will run instead
                     sess.oResponse.headers.SetStatus(307, "Redirect");
-                    sess.oResponse["Cache-Control"] = "nocache";
-                    sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
-                    return;
+                        sess.oResponse["Cache-Control"] = "nocache";
+                        sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
+                        return;
                 }
 
                 //using nClam
@@ -265,11 +268,13 @@ namespace OSCS.WinForms.Fiddler
                         var scanResult = clamTask.Result;
                         if (scanResult.ToString().Contains("FOUND")) //virus found
                         {
+                           DialogResult dialogResult2 = MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+
                             sess.utilCreateResponseAndBypassServer();
-                            MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!");
                             sess.oResponse.headers.SetStatus(307, "Redirect");
-                            sess.oResponse["Cache-Control"] = "nocache";
-                            sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
+                                sess.oResponse["Cache-Control"] = "nocache";
+                                sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
+                            
                         }
 
                         else if (scanResult.ToString().Contains("OK")) //no virus found

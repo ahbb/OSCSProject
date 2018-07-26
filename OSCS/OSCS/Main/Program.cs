@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OSCS.WinForms.Fiddler;
+using OSCS.WinForms.FileVirusChecker;
 
 namespace OSCS
 {
