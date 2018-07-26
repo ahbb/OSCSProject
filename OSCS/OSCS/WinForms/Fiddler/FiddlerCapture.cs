@@ -293,8 +293,8 @@ namespace OSCS.WinForms.Fiddler
                 }
             }
             
-            //when user clicks on a hyperlink
-           else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:") && !sess.oRequest.headers.ToString().ToUpper().Contains("POST")) 
+            //when user clicks on a hyperlink Proxy-Connection: Origin:
+           else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:") && !sess.oRequest.headers.ToString().ToUpper().Contains("POST") && sess.oRequest.headers.ToString().Contains("Accept-Encoding:") && sess.oRequest.headers.ToString().Contains("Accept:") && sess.oRequest.headers.ToString().Contains("Accept-Language:")) 
             {
                 try
                 {
