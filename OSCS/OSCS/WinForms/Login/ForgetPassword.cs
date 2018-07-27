@@ -9,75 +9,97 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OSCS.WinForms.Registration;
 using MySql.Data.MySqlClient;
 
 namespace OSCS.WinForms.Login
 {
     public partial class ForgetPassword : Form
     {
+        MySql.Data.MySqlClient.MySqlConnection conn;
+        MySql.Data.MySqlClient.MySqlDataReader reader;
+        tDes des = new tDes();
+        int userID;
+
         public ForgetPassword()
         {
             InitializeComponent();
         }
 
-        private void ForgetPassword_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void ConfirmFPButton_Click(object sender, EventArgs e)
         {
             String CS = System.Configuration.ConfigurationManager.ConnectionStrings["oscs"].ToString();
+            conn = new MySql.Data.MySqlClient.MySqlConnection(CS);
             using (MySqlConnection con = new MySqlConnection(CS))
             {
                 if (string.IsNullOrWhiteSpace(email.Text))
                 {
-                    FPWarning.Text = "Please input your email!";
+                    FPWarning.Text = "Please input your email in the field below!";
                     FPWarning.ForeColor = System.Drawing.Color.Red;
                 }
 
                 else
                 {
                     //Check if email exists in database
-                    MySqlCommand cmd = new MySqlCommand("select * from oscs.user where email=@email", con);
-                    cmd.Parameters.AddWithValue("@email", /*des.Encrypt2*/(email.Text));
+                    MySqlCommand cmd = new MySqlCommand("select * from oscs.user where email = @email", con);
+                    cmd.Parameters.AddWithValue("@email", des.Encrypt(email.Text));
                     con.Open();
-                    MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
+                    reader = cmd.ExecuteReader();
 
-                    if (dt.Rows.Count != 0)
+                    if (reader.HasRows && reader.Read())
                     {
-                        //Inser request to database
-                        String myGUID = Guid.NewGuid().ToString();
-                        int userID = Convert.ToInt32(dt.Rows[0][0]);
-                        MySqlCommand cmd1 = new MySqlCommand("insert into oscs.resetpasswordrequests values(@guid, @userid, @datetime)", con);
-                        cmd1.Parameters.AddWithValue("@guid", myGUID);
-                        cmd1.Parameters.AddWithValue("@userid", userID);
-                        cmd1.Parameters.AddWithValue("@datetime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
-                        cmd1.ExecuteNonQuery();
+                        reader.Close();
 
-                        //Send reset link to email
-                        /*String ToEmailAddress = /*des.Decrypt2(dt.Rows[0][5].ToString());
-                        String Firstname = dt.Rows[0][1].ToString();
-                        String EmailBody = "Hi, " + Firstname + ",<br/><br/> We have received your forget password request.<br/>Click the link below to continue.<br/><a>https://aspj-ezgo.com:44331/WebSite/Profile/RecoverPassword.aspx?userID=" + myGUID + "<a/><br/>Thank you, <br/>Team EzGo.";
-                        MailMessage PassRecMail = new MailMessage("\"EzGo \" <ezgo2018@gmail.com>", ToEmailAddress);
-                        PassRecMail.Body = EmailBody;
-                        PassRecMail.IsBodyHtml = true;
-                        PassRecMail.Subject = "Reset Password";
+                        //checking whether reset password email has been sent
+                        string selectQuery = "SELECT userID FROM oscs.resetpasswordrequests WHERE userID=@userID";
+                        MySqlCommand cmd2 = new MySqlCommand(selectQuery, con);
+                        cmd2.Parameters.AddWithValue("@userID", userID);
+                        reader = cmd2.ExecuteReader();
 
-                        SmtpClient SMTP = new SmtpClient("smtp.gmail.com", 25);
-                        SMTP.Credentials = new NetworkCredential()
+                        //if email not sent yet
+                        if (!reader.Read() && !reader.HasRows)
                         {
-                            UserName = "ezgo2018@gmail.com",
-                            Password = "Cutegirl123"
-                        };
+                            //Insert request to database
+                            String myGUID = Guid.NewGuid().ToString();
+                            int userID = Convert.ToInt32(reader.GetOrdinal("userID")); //(dt.Rows[0][0]);
+                            reader.Close();
 
-                        SMTP.EnableSsl = true;
-                        SMTP.Send(PassRecMail);*/
+                            MySqlCommand cmd1 = new MySqlCommand("INSERT into oscs.resetpasswordrequests (ID,userID) VALUES (@ID, @userID)", conn);
+                            conn.Open();
+                            cmd1.Parameters.AddWithValue("@ID", myGUID);
+                            cmd1.Parameters.AddWithValue("@userID", userID);
+                            //cmd1.Parameters.AddWithValue("@datetime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                            cmd1.ExecuteNonQuery();
 
-                        FPWarning.Text = "Please check your email to reset your password.";
-                        FPWarning.ForeColor = Color.Green;
+                            //Send reset link to email
+                            String ToEmailAddress = des.Decrypt(reader.GetString(reader.GetOrdinal("email"))); //(dt.Rows[0][3].ToString());
+                            String ToUserName = (reader.GetString(reader.GetOrdinal("username")));
+                            String EmailBody = "Hi, " + ToUserName + ",<br/><br/> In order to set a new password, please use the following reset code: <br/>" + myGUID + "<br/> at the Unlock Account page.<br/>Thank you, <br/>Team Chat Safety.";
+                            MailMessage PassRecMail = new MailMessage("\"Chat Security \" <2018oscs@gmail.com>", ToEmailAddress);
+                            PassRecMail.Body = EmailBody;
+                            PassRecMail.IsBodyHtml = true;
+                            PassRecMail.Subject = "Reset Password";
+
+                            SmtpClient SMTP = new SmtpClient("smtp.gmail.com", 25);
+                            SMTP.Credentials = new NetworkCredential()
+                            {
+                                UserName = "2018oscs@gmail.com",
+                                Password = "Yuhui123"
+                            };
+
+                            SMTP.EnableSsl = true;
+                            SMTP.Send(PassRecMail);
+
+                            FPWarning.Text = "Please check your email to reset your password.";
+                            FPWarning.ForeColor = Color.Green;
+                            conn.Close();
+                        }
+                        else
+                        {
+                            FPWarning.Text = "A request to reset password has already been sent.";
+                            FPWarning.ForeColor = Color.Green;
+                        }
+                        conn.Close();
                     }
 
                     else
@@ -85,8 +107,23 @@ namespace OSCS.WinForms.Login
                         FPWarning.Text = "This email does not exist in our database!";
                         FPWarning.ForeColor = Color.Red;
                     }
+                    con.Close();
                 }
             }
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Registration.Registration registration = new Registration.Registration();
+            registration.ShowDialog();
+        }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Hide();
         }
     }
 }

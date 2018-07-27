@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.Header = new System.Windows.Forms.Panel();
+            this.LoginButton = new System.Windows.Forms.Button();
+            this.RegisterButton = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.FPLabel = new System.Windows.Forms.Label();
             this.email = new System.Windows.Forms.TextBox();
             this.ConfirmFPButton = new System.Windows.Forms.Button();
             this.FPWarning = new System.Windows.Forms.Label();
-            this.RegisterButton = new System.Windows.Forms.Button();
             this.Header.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,12 +46,47 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Header.Controls.Add(this.LoginButton);
             this.Header.Controls.Add(this.RegisterButton);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(887, 73);
             this.Header.TabIndex = 17;
+            // 
+            // LoginButton
+            // 
+            this.LoginButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LoginButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.LoginButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
+            this.LoginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginButton.ForeColor = System.Drawing.Color.White;
+            this.LoginButton.Location = new System.Drawing.Point(758, 16);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(126, 41);
+            this.LoginButton.TabIndex = 12;
+            this.LoginButton.Text = "Login";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
+            // 
+            // RegisterButton
+            // 
+            this.RegisterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RegisterButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.RegisterButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
+            this.RegisterButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterButton.ForeColor = System.Drawing.Color.White;
+            this.RegisterButton.Location = new System.Drawing.Point(627, 16);
+            this.RegisterButton.Name = "RegisterButton";
+            this.RegisterButton.Size = new System.Drawing.Size(126, 41);
+            this.RegisterButton.TabIndex = 11;
+            this.RegisterButton.Text = "Register";
+            this.RegisterButton.UseVisualStyleBackColor = true;
+            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // projectTitle
             // 
@@ -71,7 +107,7 @@
             this.TitleLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.Location = new System.Drawing.Point(298, 132);
+            this.TitleLabel.Location = new System.Drawing.Point(298, 131);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(258, 32);
             this.TitleLabel.TabIndex = 18;
@@ -81,22 +117,22 @@
             // 
             this.FPLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.FPLabel.AutoSize = true;
-            this.FPLabel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FPLabel.Location = new System.Drawing.Point(72, 185);
+            this.FPLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FPLabel.Location = new System.Drawing.Point(161, 183);
             this.FPLabel.Name = "FPLabel";
-            this.FPLabel.Size = new System.Drawing.Size(712, 60);
+            this.FPLabel.Size = new System.Drawing.Size(535, 96);
             this.FPLabel.TabIndex = 19;
-            this.FPLabel.Text = "Forgotten your password? Fear not. \r\nInput your email address used for our App an" +
-    "d we will send you a link to reset your password.\r\n\r\n";
+            this.FPLabel.Text = "Forgotten your password? Fear not. \r\nInput your email address used for our Applic" +
+    "ation below.\r\nThereafter, we will send you a code to reset your password.\r\n\r\n";
             this.FPLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // email
             // 
             this.email.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.email.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.email.Location = new System.Drawing.Point(333, 330);
+            this.email.Location = new System.Drawing.Point(304, 330);
             this.email.Name = "email";
-            this.email.Size = new System.Drawing.Size(187, 27);
+            this.email.Size = new System.Drawing.Size(252, 27);
             this.email.TabIndex = 20;
             // 
             // ConfirmFPButton
@@ -106,8 +142,8 @@
             this.ConfirmFPButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.ConfirmFPButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.ConfirmFPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ConfirmFPButton.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConfirmFPButton.Location = new System.Drawing.Point(377, 394);
+            this.ConfirmFPButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConfirmFPButton.Location = new System.Drawing.Point(378, 392);
             this.ConfirmFPButton.Name = "ConfirmFPButton";
             this.ConfirmFPButton.Size = new System.Drawing.Size(106, 51);
             this.ConfirmFPButton.TabIndex = 21;
@@ -121,26 +157,10 @@
             this.FPWarning.AutoSize = true;
             this.FPWarning.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FPWarning.ForeColor = System.Drawing.Color.DarkRed;
-            this.FPWarning.Location = new System.Drawing.Point(276, 279);
+            this.FPWarning.Location = new System.Drawing.Point(249, 279);
             this.FPWarning.Name = "FPWarning";
             this.FPWarning.Size = new System.Drawing.Size(0, 24);
             this.FPWarning.TabIndex = 22;
-            // 
-            // RegisterButton
-            // 
-            this.RegisterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RegisterButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.RegisterButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
-            this.RegisterButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
-            this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RegisterButton.ForeColor = System.Drawing.Color.White;
-            this.RegisterButton.Location = new System.Drawing.Point(758, 16);
-            this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(126, 41);
-            this.RegisterButton.TabIndex = 11;
-            this.RegisterButton.Text = "Register";
-            this.RegisterButton.UseVisualStyleBackColor = true;
             // 
             // ForgetPassword
             // 
@@ -159,7 +179,6 @@
             this.Name = "ForgetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online Chat Protection";
-            this.Load += new System.EventHandler(this.ForgetPassword_Load);
             this.Header.ResumeLayout(false);
             this.Header.PerformLayout();
             this.ResumeLayout(false);
@@ -177,5 +196,6 @@
         private System.Windows.Forms.Button ConfirmFPButton;
         private System.Windows.Forms.Label FPWarning;
         private System.Windows.Forms.Button RegisterButton;
+        private System.Windows.Forms.Button LoginButton;
     }
 }

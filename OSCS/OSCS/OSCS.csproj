@@ -86,6 +86,12 @@
     <Compile Include="WinForms\Login\LoginOTP.Designer.cs">
       <DependentUpon>LoginOTP.cs</DependentUpon>
     </Compile>
+    <Compile Include="WinForms\Login\UnlockAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Login\UnlockAccount.Designer.cs">
+      <DependentUpon>UnlockAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinForms\Registration\tDes.cs" />
     <Compile Include="WinForms\Registration\Activation.cs">
       <SubType>Form</SubType>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Login\LoginOTP.resx">
       <DependentUpon>LoginOTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Login\UnlockAccount.resx">
+      <DependentUpon>UnlockAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Registration\Activation.resx">
       <DependentUpon>Activation.cs</DependentUpon>

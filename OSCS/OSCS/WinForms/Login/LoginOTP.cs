@@ -11,8 +11,10 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OSCS.WinForms.Registration;
 using MySql.Data.MySqlClient;
 using log4net;
+using System.Net.Mail;
 
 namespace OSCS.WinForms.Login
 {
@@ -23,7 +25,8 @@ namespace OSCS.WinForms.Login
         private static double timeElapsed;
         static Stopwatch sw;
         static Timer timer;
-
+        string Username, email;
+        tDes tDes = new tDes();
         MySql.Data.MySqlClient.MySqlConnection conn;
         MySql.Data.MySqlClient.MySqlDataReader reader;
 
@@ -44,7 +47,7 @@ namespace OSCS.WinForms.Login
             result.Visible = false;
             userID = LoginInfo.UserID;
 
-            using (MySqlCommand HPCommand = new MySqlCommand("SELECT contactNo FROM user WHERE userID = @userID", MyConnection))
+            using (MySqlCommand HPCommand = new MySqlCommand("SELECT contactNo, email, username FROM user WHERE userID = @userID", MyConnection))
             {
                 HPCommand.Parameters.AddWithValue("@userID", userID);
                 reader = HPCommand.ExecuteReader();
@@ -52,7 +55,9 @@ namespace OSCS.WinForms.Login
                 while (reader.HasRows && reader.Read())
                 {
                     string lastHPDigits;
-                    lastHPDigits = /*des.Decrypt*/(reader["contactNo"].ToString()); //Decryption of user's phone number
+                    lastHPDigits = tDes.Decrypt2(reader["contactNo"].ToString()); //Decryption of user's phone number
+                    Username = reader["username"].ToString();
+                    email = tDes.Decrypt(reader["email"].ToString());
                     HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4))); //For the old label in webpage
                 }
                 reader.Close();
@@ -186,33 +191,35 @@ namespace OSCS.WinForms.Login
                                 cmdd.Parameters.AddWithValue("@counter", counter);
                                 cmdd.ExecuteNonQuery();
 
-                                result.Text = "Your One-Time-Password is incorrect! The account that you are trying to access has been locked. An email with relevant information has been sent to account owner.";
+                                result.Text = "Your One-Time-Password is incorrect! \nThe account that you are trying to access has been locked. \nAn email with relevant information has been sent to the account owner.";
                                 result.ForeColor = System.Drawing.Color.Red;
                                 result.Visible = true;
+                                LoginButton.Enabled = false;
+                                RefreshButton.Enabled = false;
 
                                 //checking whether email has been sent
-                                /*string selectQuery2 = "SELECT userID FROM resetpasswordrequests WHERE userID=@userID";
-                                MySqlCommand cmd2 = new MySqlCommand(selectQuery2, con);
+                                string selectQuery2 = "SELECT userID FROM resetpasswordrequests WHERE userID=@userID";
+                                MySqlCommand cmd2 = new MySqlCommand(selectQuery2, conn);
                                 cmd2.Parameters.AddWithValue("@userID", userID);
                                 reader = cmd2.ExecuteReader();
 
                                 //email not sent yet
-                                if (!reader.Read() && !reader.HasRows) 
+                                if (!reader.Read() && !reader.HasRows)
                                 {
                                     String resetCode = Guid.NewGuid().ToString();
-                                    string insertQuery = "INSERT INTO resetpasswordrequests (ID,userID,resetRequestDateTime) VALUES (@ID,@userID,@resetRequestDateTime)";
-                                    MySqlCommand cmd3 = new MySqlCommand(insertQuery, con);
+                                    string insertQuery = "INSERT INTO resetpasswordrequests (ID,userID) VALUES (@ID,@userID)";
+                                    MySqlCommand cmd3 = new MySqlCommand(insertQuery, conn);
                                     cmd3.Parameters.AddWithValue("@ID", resetCode);
                                     cmd3.Parameters.AddWithValue("@userID", userID);
-                                    cmd3.Parameters.AddWithValue("@resetRequestDateTime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                                    //cmd3.Parameters.AddWithValue("@resetRequestDateTime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
                                     reader.Close();
                                     cmd3.ExecuteNonQuery();
 
                                     //SEND RESET LINK TO EMAIL
                                     String ToEmailAddress = email;
                                     String ToUserName = Username;
-                                    String EmailBody = "Hi, " + ToUserName + ",<br/><br/>Your account has been locked automatically due to multiple incorrect attempts when inputting your password.<br/>Click the link below to activate your account.<br/><a>https://aspj-ezgo.com:44331/Website/Profile/UnlockAccount.aspx?resetCode=" + resetCode + "<a/><br/>Thank you, <br/>Team OCP.";
-                                    MailMessage PassRecMail = new MailMessage("\"OCP \" <2018oscs@gmail.com>", ToEmailAddress);
+                                    String EmailBody = "Hi " + ToUserName + ",<br/><br/>Your account has been locked automatically due to multiple incorrect attempts during password input.<br/><br/>If this was not performed by you, someone else may be trying to gain access to your account.<br/><br/>Please use the following Reset Code: " + resetCode + " to gain back access.<br/><br/>Thank you, <br/>Team Chat Safety.";
+                                    MailMessage PassRecMail = new MailMessage("\"Chat Security \" <2018oscs@gmail.com>", ToEmailAddress);
                                     PassRecMail.Body = EmailBody;
                                     PassRecMail.IsBodyHtml = true;
                                     PassRecMail.Subject = "Unlock Account";
@@ -226,7 +233,7 @@ namespace OSCS.WinForms.Login
 
                                     SMTP.EnableSsl = true;
                                     SMTP.Send(PassRecMail);
-                                }*/
+                                }
                             } //if counter >= 3 end
 
                             else
@@ -300,6 +307,13 @@ namespace OSCS.WinForms.Login
             this.Hide();
             Login login = new Login();
             login.ShowDialog();
+        }
+
+        private void UnlockAccountButton_Click(object sender, EventArgs e)
+        {
+            UnlockAccount unlockAccount = new UnlockAccount();
+            this.Hide();
+            unlockAccount.ShowDialog();
         }
 
         private void RegisterButton_Click(object sender, EventArgs e)

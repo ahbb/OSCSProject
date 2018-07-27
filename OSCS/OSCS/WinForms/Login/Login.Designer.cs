@@ -40,6 +40,7 @@
             this.passwordWarning = new System.Windows.Forms.Label();
             this.loginWarning = new System.Windows.Forms.Label();
             this.Header = new System.Windows.Forms.Panel();
+            this.UnlockAccountButton = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.LoginPanel.SuspendLayout();
@@ -50,10 +51,10 @@
             // 
             this.usernameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.usernameLabel.AutoSize = true;
-            this.usernameLabel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLabel.Location = new System.Drawing.Point(288, 204);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(91, 20);
+            this.usernameLabel.Size = new System.Drawing.Size(108, 24);
             this.usernameLabel.TabIndex = 0;
             this.usernameLabel.Text = "Username:";
             // 
@@ -63,9 +64,10 @@
             this.ToLoginOTPButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.ToLoginOTPButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.ToLoginOTPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ToLoginOTPButton.Location = new System.Drawing.Point(249, 12);
+            this.ToLoginOTPButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToLoginOTPButton.Location = new System.Drawing.Point(297, 12);
             this.ToLoginOTPButton.Name = "ToLoginOTPButton";
-            this.ToLoginOTPButton.Size = new System.Drawing.Size(106, 51);
+            this.ToLoginOTPButton.Size = new System.Drawing.Size(106, 48);
             this.ToLoginOTPButton.TabIndex = 1;
             this.ToLoginOTPButton.Text = "Login";
             this.ToLoginOTPButton.UseVisualStyleBackColor = true;
@@ -75,18 +77,18 @@
             // 
             this.username.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.username.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.username.Location = new System.Drawing.Point(396, 201);
+            this.username.Location = new System.Drawing.Point(402, 204);
             this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(142, 27);
+            this.username.Size = new System.Drawing.Size(176, 27);
             this.username.TabIndex = 2;
             // 
             // password
             // 
             this.password.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.password.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.Location = new System.Drawing.Point(396, 262);
+            this.password.Location = new System.Drawing.Point(402, 262);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(142, 27);
+            this.password.Size = new System.Drawing.Size(176, 27);
             this.password.TabIndex = 3;
             this.password.UseSystemPasswordChar = true;
             // 
@@ -94,10 +96,10 @@
             // 
             this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.Location = new System.Drawing.Point(288, 265);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(86, 20);
+            this.passwordLabel.Size = new System.Drawing.Size(101, 24);
             this.passwordLabel.TabIndex = 4;
             this.passwordLabel.Text = "Password:";
             // 
@@ -106,9 +108,10 @@
             this.ForgetButton.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
             this.ForgetButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.ForgetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ForgetButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForgetButton.Location = new System.Drawing.Point(16, 12);
             this.ForgetButton.Name = "ForgetButton";
-            this.ForgetButton.Size = new System.Drawing.Size(217, 51);
+            this.ForgetButton.Size = new System.Drawing.Size(253, 48);
             this.ForgetButton.TabIndex = 8;
             this.ForgetButton.Text = "Forget your Password?";
             this.ForgetButton.UseVisualStyleBackColor = true;
@@ -130,29 +133,29 @@
             this.LoginPanel.Controls.Add(this.ForgetButton);
             this.LoginPanel.Controls.Add(this.ToLoginOTPButton);
             this.LoginPanel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginPanel.Location = new System.Drawing.Point(245, 376);
+            this.LoginPanel.Location = new System.Drawing.Point(222, 376);
             this.LoginPanel.Name = "LoginPanel";
-            this.LoginPanel.Size = new System.Drawing.Size(375, 79);
+            this.LoginPanel.Size = new System.Drawing.Size(417, 70);
             this.LoginPanel.TabIndex = 12;
             // 
             // usernameWarning
             // 
             this.usernameWarning.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.usernameWarning.AutoSize = true;
-            this.usernameWarning.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameWarning.Location = new System.Drawing.Point(565, 207);
+            this.usernameWarning.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameWarning.Location = new System.Drawing.Point(598, 207);
             this.usernameWarning.Name = "usernameWarning";
-            this.usernameWarning.Size = new System.Drawing.Size(0, 20);
+            this.usernameWarning.Size = new System.Drawing.Size(0, 24);
             this.usernameWarning.TabIndex = 13;
             // 
             // passwordWarning
             // 
             this.passwordWarning.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordWarning.AutoSize = true;
-            this.passwordWarning.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordWarning.Location = new System.Drawing.Point(565, 265);
+            this.passwordWarning.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordWarning.Location = new System.Drawing.Point(598, 265);
             this.passwordWarning.Name = "passwordWarning";
-            this.passwordWarning.Size = new System.Drawing.Size(0, 20);
+            this.passwordWarning.Size = new System.Drawing.Size(0, 24);
             this.passwordWarning.TabIndex = 14;
             // 
             // loginWarning
@@ -160,11 +163,11 @@
             this.loginWarning.AutoSize = true;
             this.loginWarning.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginWarning.ForeColor = System.Drawing.Color.DarkRed;
-            this.loginWarning.Location = new System.Drawing.Point(193, 320);
+            this.loginWarning.Location = new System.Drawing.Point(202, 326);
             this.loginWarning.Name = "loginWarning";
             this.loginWarning.Size = new System.Drawing.Size(0, 24);
             this.loginWarning.TabIndex = 15;
-            this.loginWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.loginWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Header
             // 
@@ -172,12 +175,30 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Header.Controls.Add(this.UnlockAccountButton);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Controls.Add(this.RegisterButton);
             this.Header.Location = new System.Drawing.Point(0, 0);
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(887, 73);
             this.Header.TabIndex = 16;
+            // 
+            // UnlockAccountButton
+            // 
+            this.UnlockAccountButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.UnlockAccountButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.UnlockAccountButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
+            this.UnlockAccountButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.UnlockAccountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UnlockAccountButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UnlockAccountButton.ForeColor = System.Drawing.Color.White;
+            this.UnlockAccountButton.Location = new System.Drawing.Point(579, 16);
+            this.UnlockAccountButton.Name = "UnlockAccountButton";
+            this.UnlockAccountButton.Size = new System.Drawing.Size(189, 41);
+            this.UnlockAccountButton.TabIndex = 10;
+            this.UnlockAccountButton.Text = "Unlock Account";
+            this.UnlockAccountButton.UseVisualStyleBackColor = true;
+            this.UnlockAccountButton.Click += new System.EventHandler(this.UnlockAccountButton_Click);
             // 
             // projectTitle
             // 
@@ -257,5 +278,6 @@
         private System.Windows.Forms.Panel Header;
         private System.Windows.Forms.Label projectTitle;
         private System.Windows.Forms.Button RegisterButton;
+        private System.Windows.Forms.Button UnlockAccountButton;
     }
 }

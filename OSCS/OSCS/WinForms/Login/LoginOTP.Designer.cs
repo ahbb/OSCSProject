@@ -35,6 +35,7 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
             this.Header = new System.Windows.Forms.Panel();
+            this.UnlockAccountButton = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.OTPLabel = new System.Windows.Forms.Label();
@@ -48,7 +49,7 @@
             this.TitleLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.Location = new System.Drawing.Point(356, 140);
+            this.TitleLabel.Location = new System.Drawing.Point(356, 100);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(166, 32);
             this.TitleLabel.TabIndex = 0;
@@ -61,10 +62,10 @@
             this.LoginButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.LoginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoginButton.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.Location = new System.Drawing.Point(513, 404);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(101, 44);
+            this.LoginButton.Size = new System.Drawing.Size(105, 52);
             this.LoginButton.TabIndex = 15;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -85,10 +86,10 @@
             this.RefreshButton.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
             this.RefreshButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.RefreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RefreshButton.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RefreshButton.Location = new System.Drawing.Point(378, 404);
+            this.RefreshButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RefreshButton.Location = new System.Drawing.Point(375, 404);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(101, 44);
+            this.RefreshButton.Size = new System.Drawing.Size(105, 52);
             this.RefreshButton.TabIndex = 17;
             this.RefreshButton.Text = "Resend";
             this.RefreshButton.UseVisualStyleBackColor = true;
@@ -100,10 +101,10 @@
             this.CancelButton.FlatAppearance.BorderColor = System.Drawing.Color.Blue;
             this.CancelButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.CancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelButton.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CancelButton.Location = new System.Drawing.Point(238, 404);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(101, 44);
+            this.CancelButton.Size = new System.Drawing.Size(105, 52);
             this.CancelButton.TabIndex = 18;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -115,12 +116,30 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Header.Controls.Add(this.UnlockAccountButton);
             this.Header.Controls.Add(this.RegisterButton);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(887, 73);
             this.Header.TabIndex = 19;
+            // 
+            // UnlockAccountButton
+            // 
+            this.UnlockAccountButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.UnlockAccountButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.UnlockAccountButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
+            this.UnlockAccountButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.UnlockAccountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UnlockAccountButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UnlockAccountButton.ForeColor = System.Drawing.Color.White;
+            this.UnlockAccountButton.Location = new System.Drawing.Point(579, 16);
+            this.UnlockAccountButton.Name = "UnlockAccountButton";
+            this.UnlockAccountButton.Size = new System.Drawing.Size(189, 41);
+            this.UnlockAccountButton.TabIndex = 11;
+            this.UnlockAccountButton.Text = "Unlock Account";
+            this.UnlockAccountButton.UseVisualStyleBackColor = true;
+            this.UnlockAccountButton.Click += new System.EventHandler(this.UnlockAccountButton_Click);
             // 
             // RegisterButton
             // 
@@ -158,7 +177,7 @@
             this.OTPLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.OTPLabel.AutoSize = true;
             this.OTPLabel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OTPLabel.Location = new System.Drawing.Point(29, 183);
+            this.OTPLabel.Location = new System.Drawing.Point(33, 153);
             this.OTPLabel.Name = "OTPLabel";
             this.OTPLabel.Size = new System.Drawing.Size(753, 80);
             this.OTPLabel.TabIndex = 13;
@@ -170,7 +189,7 @@
             this.result.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.result.AutoSize = true;
             this.result.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.result.Location = new System.Drawing.Point(51, 279);
+            this.result.Location = new System.Drawing.Point(43, 255);
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(0, 20);
             this.result.TabIndex = 16;
@@ -180,7 +199,7 @@
             this.HPNum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.HPNum.AutoSize = true;
             this.HPNum.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HPNum.Location = new System.Drawing.Point(643, 183);
+            this.HPNum.Location = new System.Drawing.Point(648, 153);
             this.HPNum.Name = "HPNum";
             this.HPNum.Size = new System.Drawing.Size(0, 20);
             this.HPNum.TabIndex = 20;
@@ -227,5 +246,6 @@
         private System.Windows.Forms.Label result;
         private System.Windows.Forms.Label HPNum;
         private System.Windows.Forms.Button RegisterButton;
+        private System.Windows.Forms.Button UnlockAccountButton;
     }
 }
