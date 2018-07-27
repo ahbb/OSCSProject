@@ -240,7 +240,7 @@ namespace OSCS.WinForms.Fiddler
                     DialogResult dialogResult = MessageBox.Show("Possibly malicious file detected!\nDownload blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
 
                     //change to MessageBoxButtons.YesNo to display yes and no buttons. use if (dialogResult==DialogResult.Yes) for when user clicks yes, and if (dialogResult == DialogResult.No) for when user clicks no. 
-                    //If checking for what user clicked, ensure that sess.utilCreateResponseandBypassServer(); is only in if (dialogResult==DialogResult.Yes) so return can be carried out in if (dialogResult == DialogResult.No)
+                    //If checking for what user clicked, ensure that sess.utilCreateResponseandBypassServer(); is only in if (dialogResult==DialogResult.No) (user choose not to download/access) so return can be carried out in if (dialogResult == DialogResult.Yes)
 
                     sess.utilCreateResponseAndBypassServer(); //so server will be bypassed and download will not occur, the code below will run instead
                     sess.oResponse.headers.SetStatus(307, "Redirect");

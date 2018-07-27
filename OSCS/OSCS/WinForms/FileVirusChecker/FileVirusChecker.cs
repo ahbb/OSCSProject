@@ -13,6 +13,7 @@ using VirusTotalNET.Objects;
 using VirusTotalNET.ResponseCodes;
 using VirusTotalNET.Results;
 using VirusTotalNET.Exceptions;
+using System.Diagnostics;
 
 namespace OSCS.WinForms.FileVirusChecker
 {
@@ -48,12 +49,13 @@ namespace OSCS.WinForms.FileVirusChecker
 
             bool hasFileBeenScannedBefore = fileReport.ResponseCode == FileReportResponseCode.Present;
 
-            if (hasFileBeenScannedBefore == false)
+            if (hasFileBeenScannedBefore == true) //file report present, so report can be retrieved
+
             {
                 int counter = fileReport.Positives; //Number of anti-virus vendors that had detected this file to be malicious
 
-                ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
-                counter = PrintScan(fileReport); 
+                //ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
+                //counter = PrintScan(fileReport); 
 
                 //if there are 3 or more hits by anti-virus vendors  
                 if (counter >= 3)
@@ -66,11 +68,33 @@ namespace OSCS.WinForms.FileVirusChecker
                     result.Text = "The file is safe. No viruses were detected.";
                     result.ForeColor = System.Drawing.Color.Green;
                 }
+
+                //displaying results in grid view
+                foreach (KeyValuePair<string, ScanEngine> scan in fileReport.Scans)
+                {
+                    dataGridView1.Rows.Add(scan.Key, scan.Value.Detected);
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (Convert.ToString(row.Cells[1].Value) == "True")
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Red;
+                            row.DefaultCellStyle.ForeColor = Color.White;
+                        }
+                        else
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Green;
+                            row.DefaultCellStyle.ForeColor = Color.Yellow;
+                        }
+
+                    }
+                }
+
             }
 
             else
             {
-                result.Text = "There was an error in retrieving VirusTotal report result.";
+                ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
+                result.Text = "There are no reports retrieved for the file you have just uploaded. We have sent the file to virus total for a scan.";
             }
         }
 
