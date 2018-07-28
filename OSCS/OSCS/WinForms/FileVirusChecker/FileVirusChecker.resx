@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>Malicious files may exist in ZIP files that are downloaded from applications such as Discord. 
-ClamAV used in our Fiddler traffic capturing is unable to detect and scan for viruses in such malicious files.
-Thus, ZIP files that contain these malicious files will not be blocked from being downloaded.
+    <value>Malicious files may exist in encrypted or password-protected downloaded ZIP files.
+ClamAV used in our Fiddler traffic capturing is unable to detect through such ZIP files and scan for viruses in these malicious files.
+Thus, such ZIP files that contain these malicious files cannot be blocked from being downloaded.
 
 Using VirusTotal, this checker acts as a second layer of protection where you will be able to test individual files separately for viruses after ZIP file extraction.
 </value>
