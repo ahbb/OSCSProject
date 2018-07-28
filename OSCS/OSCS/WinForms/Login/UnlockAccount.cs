@@ -12,6 +12,7 @@ using System.Web.Helpers;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using OSCS.WinForms.Registration;
+using log4net;
 
 namespace OSCS.WinForms.Login
 {
@@ -21,10 +22,11 @@ namespace OSCS.WinForms.Login
         MySql.Data.MySqlClient.MySqlDataReader reader;
 
         DataTable dt = new DataTable();
-        string username, uid;
-        static string  email;
+        string username, uid, email;
         int userID;
         tDes des = new tDes();
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public UnlockAccount()
         {
@@ -123,6 +125,10 @@ namespace OSCS.WinForms.Login
                         reader.Close();
                     }
                 }
+
+                log4net.GlobalContext.Properties["userID"] = userID;
+                log.Info("User successfully unlocked account and has reset their password.");
+
                 //send email to notify them 
                 sendMsg(username, email);
 

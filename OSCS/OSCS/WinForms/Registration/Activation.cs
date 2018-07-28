@@ -23,6 +23,8 @@ namespace OSCS.WinForms.Registration
         int uid;
         string username, email, query;
 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public Activation()
         {
             InitializeComponent();
@@ -57,7 +59,7 @@ namespace OSCS.WinForms.Registration
                 conn.Open();
                 query = "";
                 query = "select * from activation where activation_code = @activation_code";
-                    cmd = new MySqlCommand(query, conn);
+                cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@activation_code", txtActivation.Text);
                 MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                 sda.Fill(dt);
@@ -88,6 +90,9 @@ namespace OSCS.WinForms.Registration
                         //send email
                         sendMsg(username, des.Decrypt(email));
                     }
+
+                    log4net.GlobalContext.Properties["userID"] = uid;
+                    log.Info("User successfully activated their account.");
 
                     //show user activation success
                     lbActivation.Text = "Activation success";

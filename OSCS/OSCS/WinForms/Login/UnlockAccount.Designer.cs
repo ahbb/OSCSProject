@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.Header = new System.Windows.Forms.Panel();
+            this.RegisterButton = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.resetPanel = new System.Windows.Forms.Panel();
             this.passwordPanel = new System.Windows.Forms.Panel();
             this.check = new System.Windows.Forms.Label();
-            this.RegisterButton = new System.Windows.Forms.Button();
             this.Header.SuspendLayout();
             this.resetPanel.SuspendLayout();
             this.passwordPanel.SuspendLayout();
@@ -65,6 +65,23 @@
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(887, 73);
             this.Header.TabIndex = 19;
+            // 
+            // RegisterButton
+            // 
+            this.RegisterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.RegisterButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.RegisterButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
+            this.RegisterButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegisterButton.ForeColor = System.Drawing.Color.White;
+            this.RegisterButton.Location = new System.Drawing.Point(626, 16);
+            this.RegisterButton.Name = "RegisterButton";
+            this.RegisterButton.Size = new System.Drawing.Size(126, 41);
+            this.RegisterButton.TabIndex = 12;
+            this.RegisterButton.Text = "Register";
+            this.RegisterButton.UseVisualStyleBackColor = true;
+            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // projectTitle
             // 
@@ -102,11 +119,11 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(304, 90);
+            this.label6.Location = new System.Drawing.Point(161, 86);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(243, 32);
+            this.label6.Size = new System.Drawing.Size(539, 32);
             this.label6.TabIndex = 20;
-            this.label6.Text = "Unlock Account";
+            this.label6.Text = "Unlock Account and Reset Password";
             // 
             // label1
             // 
@@ -269,23 +286,6 @@
             this.check.Name = "check";
             this.check.Size = new System.Drawing.Size(0, 24);
             this.check.TabIndex = 34;
-            // 
-            // RegisterButton
-            // 
-            this.RegisterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.RegisterButton.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
-            this.RegisterButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
-            this.RegisterButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
-            this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RegisterButton.ForeColor = System.Drawing.Color.White;
-            this.RegisterButton.Location = new System.Drawing.Point(626, 16);
-            this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(126, 41);
-            this.RegisterButton.TabIndex = 12;
-            this.RegisterButton.Text = "Register";
-            this.RegisterButton.UseVisualStyleBackColor = true;
-            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // UnlockAccount
             // 

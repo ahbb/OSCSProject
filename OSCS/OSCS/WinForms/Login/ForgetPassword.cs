@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OSCS.WinForms.Registration;
 using MySql.Data.MySqlClient;
+using log4net;
 
 namespace OSCS.WinForms.Login
 {
@@ -20,6 +21,9 @@ namespace OSCS.WinForms.Login
         MySql.Data.MySqlClient.MySqlDataReader reader;
         tDes des = new tDes();
         int userID;
+        string username, emailAddress;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ForgetPassword()
         {
@@ -48,6 +52,9 @@ namespace OSCS.WinForms.Login
 
                     if (reader.HasRows && reader.Read())
                     {
+                        userID = Convert.ToInt32(reader["userID"].ToString());
+                        emailAddress = des.Decrypt(reader.GetString(reader.GetOrdinal("email")));
+                        username = reader.GetString(reader.GetOrdinal("username"));
                         reader.Close();
 
                         //checking whether reset password email has been sent
@@ -61,7 +68,6 @@ namespace OSCS.WinForms.Login
                         {
                             //Insert request to database
                             String myGUID = Guid.NewGuid().ToString();
-                            int userID = Convert.ToInt32(reader.GetOrdinal("userID")); //(dt.Rows[0][0]);
                             reader.Close();
 
                             MySqlCommand cmd1 = new MySqlCommand("INSERT into oscs.resetpasswordrequests (ID,userID) VALUES (@ID, @userID)", conn);
@@ -72,9 +78,9 @@ namespace OSCS.WinForms.Login
                             cmd1.ExecuteNonQuery();
 
                             //Send reset link to email
-                            String ToEmailAddress = des.Decrypt(reader.GetString(reader.GetOrdinal("email"))); //(dt.Rows[0][3].ToString());
-                            String ToUserName = (reader.GetString(reader.GetOrdinal("username")));
-                            String EmailBody = "Hi, " + ToUserName + ",<br/><br/> In order to set a new password, please use the following reset code: <br/>" + myGUID + "<br/> at the Unlock Account page.<br/>Thank you, <br/>Team Chat Safety.";
+                            String ToEmailAddress = emailAddress; //(dt.Rows[0][3].ToString());
+                            String ToUserName = username;
+                            String EmailBody = "Hi " + ToUserName + ",<br/><br/> In order to set a new password, please use the following reset code: <br/>" + myGUID + "<br/> at the Unlock Account page.<br/>Thank you, <br/>Team Chat Safety.";
                             MailMessage PassRecMail = new MailMessage("\"Chat Security \" <2018oscs@gmail.com>", ToEmailAddress);
                             PassRecMail.Body = EmailBody;
                             PassRecMail.IsBodyHtml = true;
@@ -92,7 +98,12 @@ namespace OSCS.WinForms.Login
 
                             FPWarning.Text = "Please check your email to reset your password.";
                             FPWarning.ForeColor = Color.Green;
+
+                            log4net.GlobalContext.Properties["userID"] = userID;
+                            log.Info("User forgot their password and successfully requested for a reset.");
+
                             conn.Close();
+
                         }
                         else
                         {

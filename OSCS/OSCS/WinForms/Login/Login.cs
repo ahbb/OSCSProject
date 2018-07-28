@@ -31,21 +31,20 @@ namespace OSCS.WinForms.Login
         string salt, status, email, activated;
         int userID, counter;
         Boolean verify = false; //To verify password
-
         tDes des = new tDes();
-
-        private void UnlockAccountButton_Click(object sender, EventArgs e)
-        {
-            UnlockAccount unlockAccount = new UnlockAccount();
-            this.Hide();
-            unlockAccount.ShowDialog();
-        }
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void UnlockAccountButton_Click(object sender, EventArgs e)
+        {
+            UnlockAccount unlockAccount = new UnlockAccount();
+            this.Hide();
+            unlockAccount.ShowDialog();
         }
 
         private void ForgetButton_Click(object sender, EventArgs e)
