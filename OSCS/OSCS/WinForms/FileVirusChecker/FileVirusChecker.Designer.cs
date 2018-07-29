@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileVirusChecker));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Header = new System.Windows.Forms.Panel();
+            this.logoutBtn = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,12 +57,30 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Header.Controls.Add(this.logoutBtn);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(1095, 90);
+            this.Header.Size = new System.Drawing.Size(821, 73);
             this.Header.TabIndex = 17;
+            // 
+            // logoutBtn
+            // 
+            this.logoutBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.logoutBtn.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
+            this.logoutBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MidnightBlue;
+            this.logoutBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MidnightBlue;
+            this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logoutBtn.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logoutBtn.ForeColor = System.Drawing.Color.White;
+            this.logoutBtn.Location = new System.Drawing.Point(706, 17);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.logoutBtn.Name = "logoutBtn";
+            this.logoutBtn.Size = new System.Drawing.Size(94, 33);
+            this.logoutBtn.TabIndex = 10;
+            this.logoutBtn.Text = "Log Out";
+            this.logoutBtn.UseVisualStyleBackColor = true;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // projectTitle
             // 
@@ -69,12 +88,11 @@
             this.projectTitle.AutoSize = true;
             this.projectTitle.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.projectTitle.Location = new System.Drawing.Point(16, 27);
-            this.projectTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.projectTitle.MaximumSize = new System.Drawing.Size(333, 37);
-            this.projectTitle.MinimumSize = new System.Drawing.Size(333, 37);
+            this.projectTitle.Location = new System.Drawing.Point(12, 22);
+            this.projectTitle.MaximumSize = new System.Drawing.Size(250, 30);
+            this.projectTitle.MinimumSize = new System.Drawing.Size(250, 30);
             this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(333, 37);
+            this.projectTitle.Size = new System.Drawing.Size(250, 30);
             this.projectTitle.TabIndex = 2;
             this.projectTitle.Text = "Online Chat Protection";
             // 
@@ -83,10 +101,9 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(427, 112);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(320, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(190, 25);
+            this.label2.Size = new System.Drawing.Size(155, 20);
             this.label2.TabIndex = 18;
             this.label2.Text = "File Virus Checker";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -95,10 +112,9 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 137);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(27, 111);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1005, 170);
+            this.label1.Size = new System.Drawing.Size(754, 138);
             this.label1.TabIndex = 19;
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -108,10 +124,10 @@
             this.chooseFile.BackColor = System.Drawing.Color.Honeydew;
             this.chooseFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chooseFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.chooseFile.Location = new System.Drawing.Point(101, 309);
-            this.chooseFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chooseFile.Location = new System.Drawing.Point(76, 251);
+            this.chooseFile.Margin = new System.Windows.Forms.Padding(2);
             this.chooseFile.Name = "chooseFile";
-            this.chooseFile.Size = new System.Drawing.Size(135, 57);
+            this.chooseFile.Size = new System.Drawing.Size(101, 46);
             this.chooseFile.TabIndex = 20;
             this.chooseFile.Text = "Choose a File";
             this.chooseFile.UseVisualStyleBackColor = false;
@@ -119,23 +135,23 @@
             // 
             // fileName
             // 
-            this.fileName.AutoSize = true;
             this.fileName.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileName.Location = new System.Drawing.Point(97, 406);
+            this.fileName.Location = new System.Drawing.Point(73, 313);
+            this.fileName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.fileName.Name = "fileName";
-            this.fileName.Size = new System.Drawing.Size(0, 20);
+            this.fileName.Size = new System.Drawing.Size(402, 57);
             this.fileName.TabIndex = 21;
-            this.fileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.fileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // scanFile
             // 
             this.scanFile.BackColor = System.Drawing.Color.Honeydew;
             this.scanFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scanFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.scanFile.Location = new System.Drawing.Point(101, 470);
-            this.scanFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.scanFile.Location = new System.Drawing.Point(76, 382);
+            this.scanFile.Margin = new System.Windows.Forms.Padding(2);
             this.scanFile.Name = "scanFile";
-            this.scanFile.Size = new System.Drawing.Size(135, 57);
+            this.scanFile.Size = new System.Drawing.Size(101, 46);
             this.scanFile.TabIndex = 22;
             this.scanFile.Text = "Scan File";
             this.scanFile.UseVisualStyleBackColor = false;
@@ -144,11 +160,12 @@
             // result
             // 
             this.result.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.result.Location = new System.Drawing.Point(97, 545);
+            this.result.Location = new System.Drawing.Point(73, 443);
+            this.result.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(389, 97);
+            this.result.Size = new System.Drawing.Size(402, 79);
             this.result.TabIndex = 23;
-            this.result.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.result.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // openFileDialog
             // 
@@ -159,10 +176,9 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(807, 287);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(605, 233);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 23);
+            this.label3.Size = new System.Drawing.Size(104, 18);
             this.label3.TabIndex = 25;
             this.label3.Text = "Scan Results";
             // 
@@ -173,29 +189,28 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
-            this.dataGridView1.Location = new System.Drawing.Point(680, 321);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(510, 261);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle43.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle43;
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridView1.Size = new System.Drawing.Size(387, 318);
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle44;
+            this.dataGridView1.Size = new System.Drawing.Size(290, 258);
             this.dataGridView1.TabIndex = 26;
             // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle41;
             this.Column1.HeaderText = "Antivirus Vendor";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -203,8 +218,8 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle42;
             this.Column2.HeaderText = "Detected";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -212,10 +227,11 @@
             // 
             // FileVirusChecker
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(1083, 654);
+            this.ClientSize = new System.Drawing.Size(812, 531);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.result);
@@ -225,7 +241,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Header);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "FileVirusChecker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FileVirusChecker";
@@ -252,5 +269,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button logoutBtn;
     }
 }

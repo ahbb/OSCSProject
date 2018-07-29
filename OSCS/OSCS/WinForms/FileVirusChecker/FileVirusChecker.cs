@@ -14,6 +14,7 @@ using VirusTotalNET.ResponseCodes;
 using VirusTotalNET.Results;
 using VirusTotalNET.Exceptions;
 using System.Diagnostics;
+using OSCS.WinForms.Login;
 
 namespace OSCS.WinForms.FileVirusChecker
 {
@@ -28,6 +29,9 @@ namespace OSCS.WinForms.FileVirusChecker
 
         private void chooseFile_Click(object sender, EventArgs e)
         {
+            dataGridView1.Rows.Clear();
+            scanFile.Enabled = true;
+
             DialogResult dialogResult = openFileDialog.ShowDialog();
 
             if(dialogResult == DialogResult.OK)
@@ -35,6 +39,12 @@ namespace OSCS.WinForms.FileVirusChecker
                 fileName.Text = openFileDialog.FileName;
                 ScanFile = File.ReadAllBytes(openFileDialog.FileName);
                 //ScanFile = Encoding.ASCII.GetBytes(@"X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*");
+            }
+
+            else
+            {
+                ScanFile = null;
+                fileName.Text = "";
             }
         }
 
@@ -99,6 +109,7 @@ namespace OSCS.WinForms.FileVirusChecker
                     ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
                     result.Text = "There are no reports retrieved for the file that you have just uploaded. We have sent the file to Virus Total for a scan.";
                 }
+
             }
             else
             {
@@ -129,13 +140,23 @@ namespace OSCS.WinForms.FileVirusChecker
             try
             {
                 await FileCheck();
+                scanFile.Enabled = false;
             }
+
             catch (Exception)
             {
                 result.Text = "You have reached a maximum of 4 scans in a minute! Please wait before proceeding with next scan.";
                 result.ForeColor = System.Drawing.Color.Red;
                 //throw new RateLimitException("You have reached the 4 requests pr. min. limit of VirusTotal");
             }
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            //Login.LoginInfo.userID = 0;
+            //this.Hide();
+            //Login.Login login = new Login.Login();
+            //login.ShowDialog();
         }
     }
 }
