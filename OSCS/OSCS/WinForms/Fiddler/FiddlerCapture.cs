@@ -26,7 +26,7 @@ namespace OSCS.WinForms.Fiddler
     public partial class FiddlerCapture : Form
     {
         private const string Separator = "------------------------------------------------------------------";
-        //private static string ScanUrl = "http://www.o-ki.ru/api_v2/json/get/initialization";
+        //private static string ScanUrl = "http://www.sanagustinturismo.co/Facebook/"; 1 true
         private static string ScanUrl = "";
 
         public FiddlerCapture()
@@ -298,7 +298,7 @@ namespace OSCS.WinForms.Fiddler
                 }
             }
             
-            //when user clicks on a hyperlink Proxy-Connection: Origin:
+            //when user clicks on a hyperlink
            else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:") && !sess.oRequest.headers.ToString().ToUpper().Contains("POST") && sess.oRequest.headers.ToString().Contains("Accept-Encoding:") && sess.oRequest.headers.ToString().Contains("Accept:") && sess.oRequest.headers.ToString().Contains("Accept-Language:")) 
             {
                 try
@@ -398,12 +398,26 @@ namespace OSCS.WinForms.Fiddler
                 //if 3 or more detects this link as malicious
                 if (counter >= 3)
                 {
+                    DialogResult dialogResult = MessageBox.Show("Possibly malicious link detected!\nWebsite blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+
                     sess.utilCreateResponseAndBypassServer();
-                    MessageBox.Show("Possibly malicious link detected! Website blocked.");
                     sess.oResponse.headers.SetStatus(307, "Redirect");
                     sess.oResponse["Cache-Control"] = "nocache";
                     sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
                     return;
+                }
+                else if (counter == 1 | counter == 2)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Possibly malicious link detected!\nWould you like to proceed to the page?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification);
+
+                    if (dialogResult == DialogResult.No)
+                    {
+                        sess.utilCreateResponseAndBypassServer();
+                        sess.oResponse.headers.SetStatus(307, "Redirect");
+                        sess.oResponse["Cache-Control"] = "nocache";
+                        sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
+                        return;
+                    }
                 }
             }
 
@@ -411,13 +425,17 @@ namespace OSCS.WinForms.Fiddler
             else
             {
                 UrlScanResult urlResult = await virusTotal.ScanUrlAsync(ScanUrl);
+                DialogResult dialogResult = MessageBox.Show("Link not scanned before! \nWould you like to proceed to the page?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2, MessageBoxOptions.ServiceNotification);
 
-                sess.utilCreateResponseAndBypassServer();
-                sess.oResponse.headers.SetStatus(307, "Redirect");
-                sess.oResponse["Cache-Control"] = "nocache";
-                sess.utilSetResponseBody("<html><body>We have sent the link to Virus Total. Please try again later.</body></html>");
-                Debug.Print("No url report found.");
-                return;
+                if(dialogResult == DialogResult.No)
+                {
+                    sess.utilCreateResponseAndBypassServer();
+                    sess.oResponse.headers.SetStatus(307, "Redirect");
+                    sess.oResponse["Cache-Control"] = "nocache";
+                    sess.utilSetResponseBody("<html><body>We have sent the link to Virus Total. Please try again later.</body></html>");
+                    Debug.Print("No url report found.");
+                    return;
+                }
             }
         }
 
