@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Web.Helpers;
 using System.Net.Mail;
 using System.Net;
+using OSCS.WinForms.Login;
 
 namespace OSCS.WinForms.Registration
 {
@@ -111,9 +112,9 @@ namespace OSCS.WinForms.Registration
                     sendMsg(username, email, activation_code);
 
                     //redirect to activation page
-                    Activation activate = new Activation();
-                    activate.Show();
                     this.Hide();
+                    Activation activate = new Activation();
+                    activate.ShowDialog();
                 }
             }
         }
@@ -326,17 +327,17 @@ namespace OSCS.WinForms.Registration
         private void LoginButton_Click(object sender, EventArgs e)
         {
             //redirect to login page
-            Login.Login login = new Login.Login();
-            login.Show();
             this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //redirect to activation page
-            Activation activation = new Activation();
-            activation.Show();
             this.Hide();
+            Activation activation = new Activation();
+            activation.ShowDialog();
         }
     }
 }

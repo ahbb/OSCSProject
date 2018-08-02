@@ -46,9 +46,9 @@ namespace OSCS.WinForms.Registration
         private void LoginButton_Click(object sender, EventArgs e)
         {
             //redirect to login page
-            Login.Login login = new Login.Login();
-            login.Show();
             this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -100,9 +100,9 @@ namespace OSCS.WinForms.Registration
                     lbActivation.Text = "Activation success";
                     btnSubmit.Visible = false;
                     //redirect to login page
-                    Login.Login login = new Login.Login();
-                    login.Show();
                     this.Hide();
+                    Login.Login login = new Login.Login();
+                    login.ShowDialog();
                 }
                 else
                 {

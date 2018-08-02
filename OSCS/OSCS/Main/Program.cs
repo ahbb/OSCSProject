@@ -24,7 +24,7 @@ namespace OSCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Activation()); //change to name of window you want to run
+            Application.Run(new Login()); //change to name of window you want to run
         }
     }
 }
