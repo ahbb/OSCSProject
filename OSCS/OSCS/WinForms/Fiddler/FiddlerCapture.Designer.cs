@@ -37,11 +37,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Header = new System.Windows.Forms.Panel();
+            this.Logo = new System.Windows.Forms.Button();
             this.logoutBtn = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.Logo = new System.Windows.Forms.Button();
             this.Header.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,10 +54,10 @@
             this.tbCapture.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbCapture.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCapture.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.tbCapture.Location = new System.Drawing.Point(15, 222);
-            this.tbCapture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbCapture.Location = new System.Drawing.Point(11, 180);
+            this.tbCapture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbCapture.Name = "tbCapture";
-            this.tbCapture.Size = new System.Drawing.Size(101, 47);
+            this.tbCapture.Size = new System.Drawing.Size(76, 38);
             this.tbCapture.TabIndex = 0;
             this.tbCapture.Text = "Start";
             this.tbCapture.UseVisualStyleBackColor = false;
@@ -71,10 +71,10 @@
             this.tbStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.tbStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbStop.Location = new System.Drawing.Point(121, 222);
-            this.tbStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbStop.Location = new System.Drawing.Point(91, 180);
+            this.tbStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbStop.Name = "tbStop";
-            this.tbStop.Size = new System.Drawing.Size(101, 47);
+            this.tbStop.Size = new System.Drawing.Size(76, 38);
             this.tbStop.TabIndex = 1;
             this.tbStop.Text = "Stop";
             this.tbStop.UseVisualStyleBackColor = false;
@@ -89,10 +89,10 @@
             this.tbClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.tbClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbClear.Location = new System.Drawing.Point(951, 222);
-            this.tbClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbClear.Location = new System.Drawing.Point(713, 180);
+            this.tbClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbClear.Name = "tbClear";
-            this.tbClear.Size = new System.Drawing.Size(101, 47);
+            this.tbClear.Size = new System.Drawing.Size(76, 38);
             this.tbClear.TabIndex = 2;
             this.tbClear.Text = "Clear";
             this.tbClear.UseVisualStyleBackColor = false;
@@ -107,10 +107,10 @@
             this.tbSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.tbSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSave.Location = new System.Drawing.Point(844, 222);
-            this.tbSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbSave.Location = new System.Drawing.Point(633, 180);
+            this.tbSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbSave.Name = "tbSave";
-            this.tbSave.Size = new System.Drawing.Size(101, 47);
+            this.tbSave.Size = new System.Drawing.Size(76, 38);
             this.tbSave.TabIndex = 3;
             this.tbSave.Text = "Save";
             this.tbSave.UseVisualStyleBackColor = false;
@@ -122,23 +122,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCapture.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCapture.Location = new System.Drawing.Point(-4, 327);
-            this.txtCapture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtCapture.Location = new System.Drawing.Point(-3, 266);
+            this.txtCapture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtCapture.Multiline = true;
             this.txtCapture.Name = "txtCapture";
             this.txtCapture.ReadOnly = true;
             this.txtCapture.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCapture.Size = new System.Drawing.Size(1072, 307);
+            this.txtCapture.Size = new System.Drawing.Size(805, 250);
             this.txtCapture.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(87, 149);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(65, 121);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(923, 70);
+            this.label1.Size = new System.Drawing.Size(692, 57);
             this.label1.TabIndex = 5;
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,10 +147,9 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(428, 110);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(321, 89);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(173, 25);
+            this.label2.Size = new System.Drawing.Size(143, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Traffic Capturing";
             // 
@@ -165,10 +163,23 @@
             this.Header.Controls.Add(this.logoutBtn);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(1068, 90);
+            this.Header.Size = new System.Drawing.Size(801, 73);
             this.Header.TabIndex = 16;
+            // 
+            // Logo
+            // 
+            this.Logo.FlatAppearance.BorderSize = 0;
+            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
+            this.Logo.Location = new System.Drawing.Point(368, 8);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(65, 57);
+            this.Logo.TabIndex = 22;
+            this.Logo.UseVisualStyleBackColor = true;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // logoutBtn
             // 
@@ -179,10 +190,10 @@
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
-            this.logoutBtn.Location = new System.Drawing.Point(927, 21);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.logoutBtn.Location = new System.Drawing.Point(695, 17);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(125, 41);
+            this.logoutBtn.Size = new System.Drawing.Size(94, 33);
             this.logoutBtn.TabIndex = 11;
             this.logoutBtn.Text = "Log Out";
             this.logoutBtn.UseVisualStyleBackColor = true;
@@ -194,12 +205,11 @@
             this.projectTitle.AutoSize = true;
             this.projectTitle.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.projectTitle.Location = new System.Drawing.Point(16, 27);
-            this.projectTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.projectTitle.MaximumSize = new System.Drawing.Size(333, 37);
-            this.projectTitle.MinimumSize = new System.Drawing.Size(333, 37);
+            this.projectTitle.Location = new System.Drawing.Point(12, 22);
+            this.projectTitle.MaximumSize = new System.Drawing.Size(250, 30);
+            this.projectTitle.MinimumSize = new System.Drawing.Size(250, 30);
             this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(333, 37);
+            this.projectTitle.Size = new System.Drawing.Size(250, 30);
             this.projectTitle.TabIndex = 2;
             this.projectTitle.Text = "Online Chat Protection";
             // 
@@ -207,10 +217,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(11, 303);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(8, 246);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 24);
+            this.label3.Size = new System.Drawing.Size(101, 18);
             this.label3.TabIndex = 17;
             this.label3.Text = "Traffic Output:";
             // 
@@ -218,36 +227,22 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(229, 222);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(172, 180);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(608, 57);
+            this.label4.Size = new System.Drawing.Size(456, 46);
             this.label4.TabIndex = 18;
             this.label4.Text = "Click yes when prompted to install the certificate so that you will be protected " +
     "when using Discord. When you choose to stop capturing traffic, click yes to unin" +
     "stall the certificate.\r\n";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Logo
-            // 
-            this.Logo.FlatAppearance.BorderSize = 0;
-            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
-            this.Logo.Location = new System.Drawing.Point(491, 10);
-            this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(87, 70);
-            this.Logo.TabIndex = 22;
-            this.Logo.UseVisualStyleBackColor = true;
-            this.Logo.Click += new System.EventHandler(this.Logo_Click);
-            // 
             // FiddlerCapture
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(1067, 625);
+            this.ClientSize = new System.Drawing.Size(800, 508);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Header);
@@ -259,7 +254,8 @@
             this.Controls.Add(this.tbStop);
             this.Controls.Add(this.tbCapture);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "FiddlerCapture";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

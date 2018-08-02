@@ -47,7 +47,7 @@ namespace OSCS.WinForms.Registration
             {
                 lbPassword.ForeColor = Color.Red;
             }
-            else if (lbContactNo.Text.Length != 0 && txtContactNo.Text.Length !=0)
+            else if (lbContactNo.Text.Length != 0 && txtContactNo.Text.Length != 0)
             {
                 lbContactNo.ForeColor = Color.Red;
             }
@@ -59,7 +59,7 @@ namespace OSCS.WinForms.Registration
             {
                 lbUsername.ForeColor = Color.Red;
             }
-            
+
             else
             {
                 lbCheck.Text = "";
@@ -81,40 +81,42 @@ namespace OSCS.WinForms.Registration
                 //MessageBox.Show("Registration is successful");
 
                 conn.Close();
-            }
 
-            string cs = "Data Source=localhost;Initial Catalog=oscs;Integrated Security=True; User ID=root;Password=root; SslMode=none";
-            using (MySqlConnection con = new MySqlConnection(cs))
-            {
-                MySqlCommand cmd2 = new MySqlCommand("select * from user where email = @email", con);
-                con.Open();
-                cmd2.Parameters.AddWithValue("@email", des.Encrypt(txtEmail.Text));
-                MySqlDataAdapter sda = new MySqlDataAdapter(cmd2);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
 
-                //check if user have activated account
-                if(dt.Rows.Count != 0)
+                //string cs = "Data Source=localhost;Initial Catalog=oscs;Integrated Security=True; User ID=root;Password=root; SslMode=none";
+                string cs = System.Configuration.ConfigurationManager.ConnectionStrings["oscs"].ToString();
+                using (MySqlConnection con = new MySqlConnection(cs))
                 {
-                    //insert activation entry into database
-                    String activationCode = Guid.NewGuid().ToString();
-                    int userid = Convert.ToInt32(dt.Rows[0][0]);
-                    MySqlCommand cmd3 = new MySqlCommand("insert into activation values(@userid, @activationCode)", con);
-                    cmd3.Parameters.AddWithValue("@userid", userid);
-                    cmd3.Parameters.AddWithValue("@activationCode", activation_code);
-                    cmd3.ExecuteNonQuery();
-                    
-                    //for emailing user
-                    string username = txtUsername.Text.ToString();
-                    string email = txtEmail.Text.ToString();
+                    MySqlCommand cmd2 = new MySqlCommand("select * from user where email = @email", con);
+                    con.Open();
+                    cmd2.Parameters.AddWithValue("@email", des.Encrypt(txtEmail.Text));
+                    MySqlDataAdapter sda = new MySqlDataAdapter(cmd2);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
 
-                    //send email after registration
-                    sendMsg(username, email, activation_code);
+                    //check if user have activated account
+                    if (dt.Rows.Count != 0)
+                    {
+                        //insert activation entry into database
+                        String activationCode = Guid.NewGuid().ToString();
+                        int userid = Convert.ToInt32(dt.Rows[0][0]);
+                        MySqlCommand cmd3 = new MySqlCommand("insert into activation values(@userid, @activationCode)", con);
+                        cmd3.Parameters.AddWithValue("@userid", userid);
+                        cmd3.Parameters.AddWithValue("@activationCode", activation_code);
+                        cmd3.ExecuteNonQuery();
 
-                    //redirect to activation page
-                    this.Hide();
-                    Activation activate = new Activation();
-                    activate.ShowDialog();
+                        //for emailing user
+                        string username = txtUsername.Text.ToString();
+                        string email = txtEmail.Text.ToString();
+
+                        //send email after registration
+                        sendMsg(username, email, activation_code);
+
+                        //redirect to activation page
+                        this.Hide();
+                        Activation activate = new Activation();
+                        activate.ShowDialog();
+                    }
                 }
             }
         }

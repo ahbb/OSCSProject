@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Activation));
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtActivation = new System.Windows.Forms.TextBox();
@@ -66,7 +67,7 @@
             // 
             this.txtActivation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtActivation.Location = new System.Drawing.Point(234, 228);
-            this.txtActivation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtActivation.Margin = new System.Windows.Forms.Padding(2);
             this.txtActivation.Name = "txtActivation";
             this.txtActivation.Size = new System.Drawing.Size(182, 26);
             this.txtActivation.TabIndex = 5;
@@ -92,7 +93,7 @@
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Georgia", 12F);
             this.btnSubmit.Location = new System.Drawing.Point(268, 303);
-            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(88, 41);
             this.btnSubmit.TabIndex = 7;
@@ -110,7 +111,7 @@
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Controls.Add(this.LoginButton);
             this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Header.Margin = new System.Windows.Forms.Padding(2);
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(665, 62);
             this.Header.TabIndex = 18;
@@ -122,7 +123,7 @@
             this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Logo.Image = global::OSCS.Properties.Resources.Shield;
             this.Logo.Location = new System.Drawing.Point(300, 2);
-            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(65, 57);
             this.Logo.TabIndex = 25;
@@ -154,7 +155,7 @@
             this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
             this.LoginButton.Location = new System.Drawing.Point(568, 15);
-            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(94, 33);
             this.LoginButton.TabIndex = 9;
@@ -175,7 +176,8 @@
             this.Controls.Add(this.txtActivation);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Activation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

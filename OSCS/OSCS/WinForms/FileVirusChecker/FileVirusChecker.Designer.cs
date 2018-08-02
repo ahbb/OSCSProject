@@ -74,7 +74,7 @@
             this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Logo.Image = global::OSCS.Properties.Resources.Shield;
             this.Logo.Location = new System.Drawing.Point(378, 8);
-            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(65, 57);
             this.Logo.TabIndex = 22;
@@ -91,7 +91,7 @@
             this.logoutBtn.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
             this.logoutBtn.Location = new System.Drawing.Point(706, 17);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(94, 33);
             this.logoutBtn.TabIndex = 10;
@@ -142,7 +142,7 @@
             this.chooseFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chooseFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.chooseFile.Location = new System.Drawing.Point(76, 251);
-            this.chooseFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chooseFile.Margin = new System.Windows.Forms.Padding(2);
             this.chooseFile.Name = "chooseFile";
             this.chooseFile.Size = new System.Drawing.Size(101, 46);
             this.chooseFile.TabIndex = 20;
@@ -166,7 +166,7 @@
             this.scanFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scanFile.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.scanFile.Location = new System.Drawing.Point(76, 382);
-            this.scanFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.scanFile.Margin = new System.Windows.Forms.Padding(2);
             this.scanFile.Name = "scanFile";
             this.scanFile.Size = new System.Drawing.Size(101, 46);
             this.scanFile.TabIndex = 22;
@@ -267,7 +267,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Header);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FileVirusChecker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

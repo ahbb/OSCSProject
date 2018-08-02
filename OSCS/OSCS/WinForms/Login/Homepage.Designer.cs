@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Homepage));
             this.TitleLabel = new System.Windows.Forms.Label();
             this.Header = new System.Windows.Forms.Panel();
             this.logoutBtn = new System.Windows.Forms.Button();
@@ -155,6 +156,7 @@
             this.Controls.Add(this.Header);
             this.Controls.Add(this.TitleLabel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Homepage";
