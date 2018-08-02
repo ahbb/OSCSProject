@@ -28,36 +28,46 @@ namespace OSCS.WinForms.Admin
 
         private void UserLogs_Load(object sender, EventArgs e)
         {
-            //dv.DataSource = bs;
-
-            using (MySqlConnection con = new MySqlConnection(CS))
+            if (Login.LoginInfo.UserID != 1)
             {
-                con.Open();
-                string selectQuery = "SELECT COUNT(*) FROM logs WHERE userID NOT IN('1')";
-                MySqlCommand cmd = new MySqlCommand(selectQuery, con);
-                int rowsCount = Convert.ToInt32(cmd.ExecuteScalar());
+                this.Hide();
+                Login.Login login = new Login.Login();
+                login.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                //dv.DataSource = bs;
 
-                if (rowsCount > 0)
+                using (MySqlConnection con = new MySqlConnection(CS))
                 {
-                    string selectQuery2 = "SELECT logID,logDateTime,logMessage,logLevel,logException,userID FROM logs WHERE userID NOT IN ('1')";
-                    MySqlCommand cmd2 = new MySqlCommand(selectQuery2, con);
-                    reader = cmd2.ExecuteReader();
-                    reader.Close();
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd2);
+                    con.Open();
+                    string selectQuery = "SELECT COUNT(*) FROM logs WHERE userID NOT IN('1')";
+                    MySqlCommand cmd = new MySqlCommand(selectQuery, con);
+                    int rowsCount = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                    dataAdapter.Fill(dt);
-                    bs.DataSource = dt;
-                    dv.DataSource = bs;
-                    dataAdapter.Update(dt);
-                    dv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    if (rowsCount > 0)
+                    {
+                        string selectQuery2 = "SELECT logID,logDateTime,logMessage,logLevel,logException,userID FROM logs WHERE userID NOT IN ('1')";
+                        MySqlCommand cmd2 = new MySqlCommand(selectQuery2, con);
+                        reader = cmd2.ExecuteReader();
+                        reader.Close();
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd2);
+
+                        dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                        dataAdapter.Fill(dt);
+                        bs.DataSource = dt;
+                        dv.DataSource = bs;
+                        dataAdapter.Update(dt);
+                        dv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                    }
+                    else
+                    {
+                        dv.Visible = false;
+                        noLogs.Visible = true;
+                    }
+                    con.Close();
                 }
-                else
-                {
-                    dv.Visible = false;
-                    noLogs.Visible = true;
-                }
-                con.Close();
             }
         }
 

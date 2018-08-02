@@ -39,47 +39,58 @@ namespace OSCS.WinForms.Login
 
         private void LoginOTP_Load(object sender, EventArgs e)
         {
-            string cs = ConfigurationManager.ConnectionStrings["oscs"].ConnectionString;
-            MySqlConnection MyConnection = new MySqlConnection(cs);
-            MyConnection.Open();
-            MySqlDataReader reader;
-
-            result.Visible = false;
-            userID = LoginInfo.UserID;
-
-            using (MySqlCommand HPCommand = new MySqlCommand("SELECT contactNo, email, username FROM user WHERE userID = @userID", MyConnection))
+            if (LoginInfo.UserID == 0)
             {
-                HPCommand.Parameters.AddWithValue("@userID", userID);
-                reader = HPCommand.ExecuteReader();
-
-                while (reader.HasRows && reader.Read())
-                {
-                    string lastHPDigits;
-                    lastHPDigits = tDes.Decrypt2(reader["contactNo"].ToString()); //Decryption of user's phone number
-                    Username = reader["username"].ToString();
-                    email = tDes.Decrypt(reader["email"].ToString());
-                    HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4))); 
-                }
-                reader.Close();
+                this.Hide();
+                Login login = new Login();
+                login.ShowDialog();
+                this.Close();
             }
-            MyConnection.Close();
-            MyConnection.Open();
+            else
+            {
 
-            timer = new Timer();
-            timer.Interval = 30000; // 120000; //time in milliseconds
-            timer.Tick += timer_Tick;
-            timer.Start();
-            RefreshButton.Enabled = false;
+                string cs = ConfigurationManager.ConnectionStrings["oscs"].ConnectionString;
+                MySqlConnection MyConnection = new MySqlConnection(cs);
+                MyConnection.Open();
+                MySqlDataReader reader;
 
-            sw = new Stopwatch();
-            sw.Start();
+                result.Visible = false;
+                userID = LoginInfo.UserID;
 
-            //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
-            //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
-            //OTPReturn = "11111";
-            Random random = new Random();
-            OTPReturn = random.Next(1, 1000).ToString();
-            Console.Out.WriteLine(OTPReturn);
+                using (MySqlCommand HPCommand = new MySqlCommand("SELECT contactNo, email, username FROM user WHERE userID = @userID", MyConnection))
+                {
+                    HPCommand.Parameters.AddWithValue("@userID", userID);
+                    reader = HPCommand.ExecuteReader();
+
+                    while (reader.HasRows && reader.Read())
+                    {
+                        string lastHPDigits;
+                        lastHPDigits = tDes.Decrypt2(reader["contactNo"].ToString()); //Decryption of user's phone number
+                        Username = reader["username"].ToString();
+                        email = tDes.Decrypt(reader["email"].ToString());
+                        HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4)));
+                    }
+                    reader.Close();
+                }
+                MyConnection.Close();
+                MyConnection.Open();
+
+                timer = new Timer();
+                timer.Interval = 30000; // 120000; //time in milliseconds
+                timer.Tick += timer_Tick;
+                timer.Start();
+                RefreshButton.Enabled = false;
+
+                sw = new Stopwatch();
+                sw.Start();
+
+                //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
+                //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
+                //OTPReturn = "11111";
+                Random random = new Random();
+                OTPReturn = random.Next(1, 1000).ToString();
+                Console.Out.WriteLine(OTPReturn);
+            }
         }
 
         void timer_Tick(object sender, System.EventArgs e)
