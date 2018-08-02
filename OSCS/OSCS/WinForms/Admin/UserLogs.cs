@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using OSCS.WinForms.Login;
 
 namespace OSCS.WinForms.Admin
 {
@@ -17,9 +18,6 @@ namespace OSCS.WinForms.Admin
     {
         string CS = ConfigurationManager.ConnectionStrings["oscs"].ConnectionString;
         MySqlDataReader reader;
-        DataTable dt = new DataTable();
-        //DataGridView dv = new DataGridView();
-        BindingSource bs = new BindingSource();
 
         public UserLogs()
         {
@@ -37,8 +35,6 @@ namespace OSCS.WinForms.Admin
             }
             else
             {
-                //dv.DataSource = bs;
-
                 using (MySqlConnection con = new MySqlConnection(CS))
                 {
                     con.Open();
@@ -48,18 +44,40 @@ namespace OSCS.WinForms.Admin
 
                     if (rowsCount > 0)
                     {
-                        string selectQuery2 = "SELECT logID,logDateTime,logMessage,logLevel,logException,userID FROM logs WHERE userID NOT IN ('1')";
+                        string selectQuery2 = "SELECT logID,logDateTime,logLevel,logSource,logMessage,logException,userID FROM logs WHERE userID NOT IN ('1')";
                         MySqlCommand cmd2 = new MySqlCommand(selectQuery2, con);
                         reader = cmd2.ExecuteReader();
-                        reader.Close();
-                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd2);
+                        while (reader.HasRows && reader.Read())
+                        {
+                            string logID = reader["logID"].ToString();
+                            string logDateTime = reader["logDateTime"].ToString();
+                            string logLevel = reader["logLevel"].ToString();
+                            string logSource = reader["logSource"].ToString();
+                            string logMessage = reader["logMessage"].ToString();
+                            string logException = reader["logException"].ToString();
+                            string UserID = reader["userID"].ToString();
 
-                        dt.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                        dataAdapter.Fill(dt);
-                        bs.DataSource = dt;
-                        dv.DataSource = bs;
-                        dataAdapter.Update(dt);
-                        dv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                            dv.Rows.Add(logID, logDateTime, logLevel, logSource, logMessage, logException, UserID);
+                            foreach (DataGridViewRow row in dv.Rows)
+                            {
+                                if (Convert.ToString(row.Cells[2].Value) == "WARN")
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.Red;
+                                    row.DefaultCellStyle.ForeColor = Color.White;
+                                }
+                                else if (Convert.ToString(row.Cells[2].Value) == "INFO")
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.Green;
+                                    row.DefaultCellStyle.ForeColor = Color.Yellow;
+                                }
+                                else if (Convert.ToString(row.Cells[2].Value) == "ERROR")
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.LightGray;
+                                    row.DefaultCellStyle.ForeColor = Color.Black;
+                                }
+                            }
+                        }
+                        reader.Close();
                     }
                     else
                     {
@@ -71,37 +89,13 @@ namespace OSCS.WinForms.Admin
             }
         }
 
-        protected void DataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
-
+            Login.LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
+            this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
         }
-
-        /*protected void GridView1_RowCreated(object sender, DataGridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataRowType.Header)
-            {
-                e.Row.Cells[0].Text = "Log ID";
-                e.Row.Cells[1].Text = "Log Date and Time";
-                e.Row.Cells[2].Text = "Log Message";
-                e.Row.Cells[3].Text = "Log Level";
-                e.Row.Cells[4].Text = "Exception";
-                e.Row.Cells[5].Text = "User ID";
-            }
-        }
-
-        protected void GridView1_RowDataBound(object sender, DataGridViewRowEventArgs e)
-        {
-            if (e.Row.DataRowType == DataControlRowType.DataRow)
-            {
-                DataGridCell cell = e.Row.GridCells[3];
-                string logLevel = (cell.Text);
-                if (logLevel == "ERROR" || logLevel == "FATAL" || logLevel == "WARN")
-                {
-                    e.Row.BackColor = System.Drawing.Color.Red;
-                    e.Row.ForeColor = System.Drawing.Color.White;
-
-                }
-            }
-        }*/
     }
 }

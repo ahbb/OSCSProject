@@ -76,7 +76,7 @@ namespace OSCS.WinForms.Login
                 MyConnection.Open();
 
                 timer = new Timer();
-                timer.Interval = 30000; // 120000; //time in milliseconds
+                timer.Interval = 30000; // 120000 (2 mins); //time in milliseconds
                 timer.Tick += timer_Tick;
                 timer.Start();
                 RefreshButton.Enabled = false;
@@ -87,6 +87,11 @@ namespace OSCS.WinForms.Login
                 //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
                 //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
                 //OTPReturn = "11111";
+                //If OTP doesn't send after a period of time, replace the 2 API details above with new ones from the list below
+                //Here is a list of unused WebAPI account details I prepared and created that still have 10 SMS credits each. 
+                //WebAPI ID: 82540002     WebAPI Password: realitymusic1 (Currently in use above)
+                //WebAPI ID: 82600002     WebAPI Password: realitymusic1
+                //WebAPI ID: 82590002     WebAPI Password: realitymusic1
                 Random random = new Random();
                 OTPReturn = random.Next(1, 1000).ToString();
                 Console.Out.WriteLine(OTPReturn);
@@ -222,7 +227,6 @@ namespace OSCS.WinForms.Login
                                     MySqlCommand cmd3 = new MySqlCommand(insertQuery, conn);
                                     cmd3.Parameters.AddWithValue("@ID", resetCode);
                                     cmd3.Parameters.AddWithValue("@userID", userID);
-                                    //cmd3.Parameters.AddWithValue("@resetRequestDateTime", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
                                     reader.Close();
                                     cmd3.ExecuteNonQuery();
 
@@ -311,9 +315,9 @@ namespace OSCS.WinForms.Login
             }
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void CancelLoginButton_Click(object sender, EventArgs e)
         {
-            LoginInfo.UserID = -0;
+            LoginInfo.UserID = 0;
             LoginInfo.UserName = "";
             this.Hide();
             Login login = new Login();
