@@ -194,5 +194,12 @@ namespace OSCS.WinForms.FileVirusChecker
         {
             throw new NotImplementedException();
         }
+
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login.Homepage homepage = new Login.Homepage();
+            homepage.ShowDialog();
+        }
     }
 }

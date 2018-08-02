@@ -339,5 +339,12 @@ namespace OSCS.WinForms.Registration
             Activation activation = new Activation();
             activation.ShowDialog();
         }
+
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
+        }
     }
 }

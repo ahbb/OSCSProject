@@ -209,5 +209,11 @@
   <ItemGroup>
     <None Include="Data\WifiRadarScanning.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Shield.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

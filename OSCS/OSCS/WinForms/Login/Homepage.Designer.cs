@@ -31,6 +31,7 @@
             this.TitleLabel = new System.Windows.Forms.Label();
             this.Header = new System.Windows.Forms.Panel();
             this.logoutBtn = new System.Windows.Forms.Button();
+            this.Logo = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.FileVirusScanner = new System.Windows.Forms.Button();
             this.FiddlerCapturing = new System.Windows.Forms.Button();
@@ -41,10 +42,9 @@
             // 
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.Location = new System.Drawing.Point(172, 116);
-            this.TitleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.TitleLabel.Location = new System.Drawing.Point(229, 143);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(0, 27);
+            this.TitleLabel.Size = new System.Drawing.Size(0, 32);
             this.TitleLabel.TabIndex = 1;
             // 
             // Header
@@ -54,10 +54,12 @@
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
             this.Header.Controls.Add(this.logoutBtn);
+            this.Header.Controls.Add(this.Logo);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
+            this.Header.Margin = new System.Windows.Forms.Padding(4);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(821, 73);
+            this.Header.Size = new System.Drawing.Size(1095, 90);
             this.Header.TabIndex = 18;
             // 
             // logoutBtn
@@ -69,13 +71,25 @@
             this.logoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.logoutBtn.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
-            this.logoutBtn.Location = new System.Drawing.Point(706, 17);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoutBtn.Location = new System.Drawing.Point(941, 21);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(94, 33);
+            this.logoutBtn.Size = new System.Drawing.Size(125, 41);
             this.logoutBtn.TabIndex = 10;
             this.logoutBtn.Text = "Log Out";
             this.logoutBtn.UseVisualStyleBackColor = true;
+            // 
+            // Logo
+            // 
+            this.Logo.FlatAppearance.BorderSize = 0;
+            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
+            this.Logo.Location = new System.Drawing.Point(499, 12);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(87, 70);
+            this.Logo.TabIndex = 21;
+            this.Logo.UseVisualStyleBackColor = true;
             // 
             // projectTitle
             // 
@@ -83,11 +97,12 @@
             this.projectTitle.AutoSize = true;
             this.projectTitle.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.projectTitle.Location = new System.Drawing.Point(12, 22);
-            this.projectTitle.MaximumSize = new System.Drawing.Size(250, 30);
-            this.projectTitle.MinimumSize = new System.Drawing.Size(250, 30);
+            this.projectTitle.Location = new System.Drawing.Point(16, 27);
+            this.projectTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.projectTitle.MaximumSize = new System.Drawing.Size(333, 37);
+            this.projectTitle.MinimumSize = new System.Drawing.Size(333, 37);
             this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(250, 30);
+            this.projectTitle.Size = new System.Drawing.Size(333, 37);
             this.projectTitle.TabIndex = 2;
             this.projectTitle.Text = "Online Chat Protection";
             // 
@@ -99,10 +114,10 @@
             this.FileVirusScanner.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FileVirusScanner.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FileVirusScanner.Image = global::OSCS.Properties.Resources.FileVirusUpload;
-            this.FileVirusScanner.Location = new System.Drawing.Point(434, 144);
-            this.FileVirusScanner.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FileVirusScanner.Location = new System.Drawing.Point(579, 177);
+            this.FileVirusScanner.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FileVirusScanner.Name = "FileVirusScanner";
-            this.FileVirusScanner.Size = new System.Drawing.Size(264, 264);
+            this.FileVirusScanner.Size = new System.Drawing.Size(352, 325);
             this.FileVirusScanner.TabIndex = 20;
             this.FileVirusScanner.Text = "File Virus Scanner";
             this.FileVirusScanner.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -117,10 +132,10 @@
             this.FiddlerCapturing.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FiddlerCapturing.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FiddlerCapturing.Image = global::OSCS.Properties.Resources.WifiRadarScanning;
-            this.FiddlerCapturing.Location = new System.Drawing.Point(99, 144);
+            this.FiddlerCapturing.Location = new System.Drawing.Point(132, 177);
             this.FiddlerCapturing.Margin = new System.Windows.Forms.Padding(1);
             this.FiddlerCapturing.Name = "FiddlerCapturing";
-            this.FiddlerCapturing.Size = new System.Drawing.Size(264, 264);
+            this.FiddlerCapturing.Size = new System.Drawing.Size(352, 325);
             this.FiddlerCapturing.TabIndex = 19;
             this.FiddlerCapturing.Text = "Fiddler Traffic Capturing";
             this.FiddlerCapturing.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -129,16 +144,16 @@
             // 
             // Homepage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(812, 531);
+            this.ClientSize = new System.Drawing.Size(1083, 654);
             this.Controls.Add(this.FileVirusScanner);
             this.Controls.Add(this.FiddlerCapturing);
             this.Controls.Add(this.Header);
             this.Controls.Add(this.TitleLabel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "Homepage";
             this.ShowInTaskbar = false;
@@ -159,5 +174,6 @@
         private System.Windows.Forms.Label projectTitle;
         private System.Windows.Forms.Button FiddlerCapturing;
         private System.Windows.Forms.Button FileVirusScanner;
+        private System.Windows.Forms.Button Logo;
     }
 }

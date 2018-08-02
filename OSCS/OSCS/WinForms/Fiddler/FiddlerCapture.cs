@@ -500,5 +500,12 @@ namespace OSCS.WinForms.Fiddler
             Login.Login login = new Login.Login();
             login.ShowDialog();
         }
+
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login.Homepage homepage = new Login.Homepage();
+            homepage.ShowDialog();
+        }
     }
 }

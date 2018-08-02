@@ -130,6 +130,13 @@ namespace OSCS.WinForms.Login
             registration.ShowDialog();
         }
 
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.ShowDialog();
+        }
+
         private void LoginButton_Click(object sender, EventArgs e)
         {
             Login login = new Login();

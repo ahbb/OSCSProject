@@ -51,6 +51,13 @@ namespace OSCS.WinForms.Registration
             login.ShowDialog();
         }
 
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
+        }
+
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if(txtActivation.Text != null)

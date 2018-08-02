@@ -41,6 +41,7 @@
             this.projectTitle = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.Logo = new System.Windows.Forms.Button();
             this.Header.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -160,6 +161,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Header.Controls.Add(this.Logo);
             this.Header.Controls.Add(this.logoutBtn);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
@@ -226,6 +228,19 @@
     "stall the certificate.\r\n";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // Logo
+            // 
+            this.Logo.FlatAppearance.BorderSize = 0;
+            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
+            this.Logo.Location = new System.Drawing.Point(491, 10);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(87, 70);
+            this.Logo.TabIndex = 22;
+            this.Logo.UseVisualStyleBackColor = true;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
+            // 
             // FiddlerCapture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -247,6 +262,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "FiddlerCapture";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FiddlerCapture";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FiddlerCapture_FormClosed);
             this.Load += new System.EventHandler(this.FiddlerCapture_Load);
@@ -271,5 +287,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button logoutBtn;
+        private System.Windows.Forms.Button Logo;
     }
 }

@@ -197,6 +197,13 @@ namespace OSCS.WinForms.Login
             return true;
         }
 
+        private void Logo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.ShowDialog();
+        }
+
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             this.Hide();

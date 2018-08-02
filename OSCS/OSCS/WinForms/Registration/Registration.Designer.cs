@@ -46,6 +46,7 @@
             this.lbEmail = new System.Windows.Forms.Label();
             this.lbContactNo = new System.Windows.Forms.Label();
             this.Header = new System.Windows.Forms.Panel();
+            this.Logo = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.lbConfirmPassword = new System.Windows.Forms.Label();
@@ -232,12 +233,26 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Header.AutoSize = true;
             this.Header.BackColor = System.Drawing.Color.MidnightBlue;
+            this.Header.Controls.Add(this.Logo);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Controls.Add(this.LoginButton);
             this.Header.Location = new System.Drawing.Point(0, 0);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(887, 73);
+            this.Header.Size = new System.Drawing.Size(887, 76);
             this.Header.TabIndex = 17;
+            // 
+            // Logo
+            // 
+            this.Logo.FlatAppearance.BorderSize = 0;
+            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
+            this.Logo.Location = new System.Drawing.Point(400, 3);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(87, 70);
+            this.Logo.TabIndex = 25;
+            this.Logo.UseVisualStyleBackColor = true;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // projectTitle
             // 
@@ -245,7 +260,7 @@
             this.projectTitle.AutoSize = true;
             this.projectTitle.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.projectTitle.Location = new System.Drawing.Point(12, 22);
+            this.projectTitle.Location = new System.Drawing.Point(12, 24);
             this.projectTitle.MaximumSize = new System.Drawing.Size(250, 30);
             this.projectTitle.MinimumSize = new System.Drawing.Size(250, 30);
             this.projectTitle.Name = "projectTitle";
@@ -262,7 +277,7 @@
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
-            this.LoginButton.Location = new System.Drawing.Point(758, 16);
+            this.LoginButton.Location = new System.Drawing.Point(758, 18);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(126, 41);
             this.LoginButton.TabIndex = 9;
@@ -357,5 +372,6 @@
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label lbConfirmPassword;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Logo;
     }
 }
