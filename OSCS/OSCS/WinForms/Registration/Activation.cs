@@ -14,7 +14,7 @@ namespace OSCS.WinForms.Registration
 {
     public partial class Activation : Form
     {
-        string connstring = "Data Source=localhost;Initial Catalog=oscs;Integrated Security=True; User ID=root;Password=root; SslMode=none";
+        string connstring = System.Configuration.ConfigurationManager.ConnectionStrings["oscs"].ToString();
         MySqlConnection conn;
         MySqlCommand cmd;
         MySqlDataReader reader;
@@ -69,16 +69,18 @@ namespace OSCS.WinForms.Registration
                     uid = Convert.ToInt32(dt.Rows[0][0]);
                     using (MySqlConnection con = new MySqlConnection(connstring))
                     {
-                        MySqlCommand cmd1 = new MySqlCommand("delete from activation where userID ='" + uid + "'", con);
+                        MySqlCommand cmd1 = new MySqlCommand("delete from activation where userID = @uid", con);
+                        cmd1.Parameters.AddWithValue("@uid", uid);
                         con.Open();
                         cmd1.ExecuteNonQuery();
 
-                        cmd1 = new MySqlCommand("update user set activated = 'true' where userID ='" + uid + "'", con);
+                        cmd1 = new MySqlCommand("update user set activated = 'true' where userID = @uid", con);
+                        cmd1.Parameters.AddWithValue("@uid", uid);
                         cmd1.ExecuteNonQuery();
 
                         //retrieve user details
-                        MySqlCommand cmd2 = new MySqlCommand("select username, email from user where userID ='" + uid + "'", con);
-
+                        MySqlCommand cmd2 = new MySqlCommand("select username, email from user where userID = @uid", con);
+                        cmd2.Parameters.AddWithValue("@uid", uid);
                         reader = cmd2.ExecuteReader();
 
                         while (reader.Read())

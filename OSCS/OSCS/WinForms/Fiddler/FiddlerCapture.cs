@@ -417,7 +417,7 @@ namespace OSCS.WinForms.Fiddler
                 //if 3 or more detects this link as malicious
                 if (counter >= 3)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Possibly malicious link detected!\nWebsite blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    DialogResult dialogResult = MessageBox.Show("Possibly malicious link detected!\nWebsite blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
 
                     sess.utilCreateResponseAndBypassServer();
                     sess.oResponse.headers.SetStatus(307, "Redirect");

@@ -18,7 +18,7 @@ namespace OSCS.WinForms.Registration
 {
     public partial class Registration : Form
     {
-        string connstring = "Data Source=localhost;Initial Catalog=oscs;Integrated Security=True; User ID=root;Password=root; SslMode=none";
+        string connstring = System.Configuration.ConfigurationManager.ConnectionStrings["oscs"].ToString();
         MySqlConnection conn;
         MySqlCommand cmd;
         MySqlDataReader reader;
