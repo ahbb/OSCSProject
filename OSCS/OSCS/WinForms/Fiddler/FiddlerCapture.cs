@@ -375,7 +375,16 @@ namespace OSCS.WinForms.Fiddler
 
         private void FiddlerCapture_Load(object sender, EventArgs e)
         {
-            UpdateButtonStatus();
+            //if (Login.LoginInfo.UserID == 0)
+            //{
+            //    this.Hide();
+            //    Login.Login login = new Login.Login();
+            //    login.ShowDialog();
+            //}
+            //else
+            //{
+                UpdateButtonStatus();
+            //}
         }
 
         private void FiddlerCapture_FormClosed(object sender, FormClosedEventArgs e)
@@ -473,7 +482,7 @@ namespace OSCS.WinForms.Fiddler
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            //Login.LoginInfo.userID = 0;
+            //Login.LoginInfo.UserID = 0;
             //this.Hide();
             //Login.Login login = new Login.Login();
             //login.ShowDialog();

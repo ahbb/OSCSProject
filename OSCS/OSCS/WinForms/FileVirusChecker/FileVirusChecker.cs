@@ -154,10 +154,20 @@ namespace OSCS.WinForms.FileVirusChecker
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            //Login.LoginInfo.userID = 0;
+            //Login.LoginInfo.UserID = 0;
             //this.Hide();
             //Login.Login login = new Login.Login();
             //login.ShowDialog();
+        }
+
+        private void FileVirusChecker_Load(object sender, EventArgs e)
+        {
+            //if (Login.LoginInfo.UserID == 0)
+            //{
+            //    this.Hide();
+            //    Login.Login login = new Login.Login();
+            //    login.ShowDialog();
+            //}
         }
     }
 }
