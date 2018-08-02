@@ -29,7 +29,8 @@ namespace OSCS.WinForms.FileVirusChecker
 
         private void chooseFile_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear(); //clear rows whenever user wants to pick a new file so no duplicate results after scanning
+
             scanFile.Enabled = true;
 
             DialogResult dialogResult = openFileDialog.ShowDialog();
@@ -43,7 +44,7 @@ namespace OSCS.WinForms.FileVirusChecker
 
             else
             {
-                ScanFile = null;
+                ScanFile = null; //so scanning cannot occur when there is no file in filechooser
                 fileName.Text = "";
             }
         }

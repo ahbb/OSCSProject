@@ -17,6 +17,7 @@ using VirusTotalNET;
 using VirusTotalNET.Objects;
 using VirusTotalNET.ResponseCodes;
 using VirusTotalNET.Results;
+using OSCS.WinForms.Login;
 
 //insert code to scan attachments and links in FiddlerApplication_BeforeRequest method to manipulate response when user clicks on a hyperlink or attachment
 //click yes to install the certificate when prompted after start is clicked - so ssl traffic can be decrypted and shown. Will be asked to delete the certificate after clicking stop button, click yes 
@@ -237,7 +238,7 @@ namespace OSCS.WinForms.Fiddler
                 bool virusDetected = RunFileScan(sess.fullUrl);
                 if (virusDetected == true)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Possibly malicious file detected!\nDownload blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    DialogResult dialogResult = MessageBox.Show("Possibly malicious file detected!\nDownload blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
 
                     //change to MessageBoxButtons.YesNo to display yes and no buttons. use if (dialogResult==DialogResult.Yes) for when user clicks yes, and if (dialogResult == DialogResult.No) for when user clicks no. 
                     //If checking for what user clicked, ensure that sess.utilCreateResponseandBypassServer(); is only in if (dialogResult==DialogResult.No) (user choose not to download/access) so return can be carried out in if (dialogResult == DialogResult.Yes)
@@ -268,7 +269,7 @@ namespace OSCS.WinForms.Fiddler
                         var scanResult = clamTask.Result;
                         if (scanResult.ToString().Contains("FOUND")) //virus found
                         {
-                           DialogResult dialogResult2 = MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                           DialogResult dialogResult2 = MessageBox.Show("Possibly malicious file detected! Virus Name: " + scanResult.InfectedFiles.First().VirusName + "\nDownload blocked!", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
 
                             sess.utilCreateResponseAndBypassServer();
                             sess.oResponse.headers.SetStatus(307, "Redirect");
@@ -286,12 +287,14 @@ namespace OSCS.WinForms.Fiddler
                             Debug.Print("Error!");
                         }
                     }
+
+                    //if nClam not running, download will not occur
                     catch (Exception e)
                     {
                         sess.utilCreateResponseAndBypassServer();
                         sess.oResponse.headers.SetStatus(307, "Redirect");
                         sess.oResponse["Cache-Control"] = "nocache";
-                        sess.utilSetResponseBody("<html><body>Sorry, the ClamWin Services are not running on your computer so we are not able to confirm whether the file you are trying to download is malicious or not.</body></html>");
+                        sess.utilSetResponseBody("<html><body>Sorry, the ClamWin Services may not running on your computer so we are not able to confirm whether the file you are trying to download is malicious or not.</body></html>");
                         Debug.Print(e.ToString()+"\nClamWin Services not running.");
                     }
 
@@ -335,20 +338,27 @@ namespace OSCS.WinForms.Fiddler
         //method calls getFileBytes method to get bytes from the url. Then AMSI will be used to scan the bytes. If got virus, hasVirus returns true
         private bool RunFileScan(string fileurl)
         {
-            bool hasVirus = true;
-            Stop();
-            byte[] filebytes = GetFileBytes(fileurl);
-            var scanner = new MalwareScanner();
-            var result = scanner.HasVirus(filebytes, fileurl);
-            Start();
-            string virusDetected = result.ToString();
-            if (virusDetected == "True") 
+            bool hasVirus = false; //if there is an error with user's anti-virus, hasVirus will return false.
+            try
             {
-                hasVirus = true;
+                Stop();
+                byte[] filebytes = GetFileBytes(fileurl);
+                var scanner = new MalwareScanner();
+                var result = scanner.HasVirus(filebytes, fileurl);
+                Start();
+                string virusDetected = result.ToString();
+                if (virusDetected.Contains("True"))
+                {
+                    hasVirus = true;
+                }
+                else
+                {
+                    hasVirus = false;
+                }
             }
-            else
+            catch (Exception e)
             {
-                hasVirus = false;
+                Debug.Print(e.ToString());
             }
             return hasVirus;
         }
@@ -459,6 +469,14 @@ namespace OSCS.WinForms.Fiddler
             }
             return counter;
             //Console.WriteLine();
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            //Login.LoginInfo.userID = 0;
+            //this.Hide();
+            //Login.Login login = new Login.Login();
+            //login.ShowDialog();
         }
     }
 }
