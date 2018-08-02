@@ -36,12 +36,36 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="BasicFormatsForCore, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore2.1.0.0\lib\net40\BasicFormatsForCore.dll</HintPath>
+    </Reference>
+    <Reference Include="BCMakeCert, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore2.1.0.0\lib\net40\BCMakeCert.dll</HintPath>
+    </Reference>
+    <Reference Include="CertMaker, Version=4.5.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore2.1.0.0\lib\net40\CertMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="FiddlerCore4, Version=4.6.2.0, Culture=neutral, PublicKeyToken=67cb91587178ac5a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FiddlerCore2.1.0.0\lib\net40\FiddlerCore4.dll</HintPath>
+    </Reference>
+    <Reference Include="MalwareScan.AMSI, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MalwareScan.AMSI.0.2.0\lib\net451\MalwareScan.AMSI.dll</HintPath>
+    </Reference>
+    <Reference Include="nClam, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\nClam.4.0.1\lib\net45\nClam.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Helpers.Crypto, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Web.Helpers.Crypto.3.2.3\lib\net40\System.Web.Helpers.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO" />
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +75,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VirusTotal.NET, Version=1.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirusTotal.NET.1.6.3\lib\net45\VirusTotal.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main\Program.cs" />
@@ -72,6 +99,18 @@
     </Compile>
     <Compile Include="WinForms\Login\Homepage.Designer.cs">
       <DependentUpon>Homepage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\Fiddler\FiddlerCapture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\Fiddler\FiddlerCapture.Designer.cs">
+      <DependentUpon>FiddlerCapture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForms\FileVirusChecker\FileVirusChecker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForms\FileVirusChecker\FileVirusChecker.Designer.cs">
+      <DependentUpon>FileVirusChecker.cs</DependentUpon>
     </Compile>
     <Compile Include="WinForms\Login\Login.cs">
       <SubType>Form</SubType>
@@ -123,6 +162,12 @@
     <EmbeddedResource Include="WinForms\Login\Homepage.resx">
       <DependentUpon>Homepage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\Fiddler\FiddlerCapture.resx">
+      <DependentUpon>FiddlerCapture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForms\FileVirusChecker\FileVirusChecker.resx">
+      <DependentUpon>FileVirusChecker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WinForms\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +199,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Folder Include="MySql\" />
     <Folder Include="WinForms\Fiddler\" />

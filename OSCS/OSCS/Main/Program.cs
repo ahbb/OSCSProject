@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OSCS.WinForms.Fiddler;
+using OSCS.WinForms.FileVirusChecker;
 
 namespace OSCS
 {
@@ -22,7 +24,7 @@ namespace OSCS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login()); //change to name of window you want to run
+            Application.Run(new FiddlerCapture()); //change to name of window you want to run
         }
     }
 }
