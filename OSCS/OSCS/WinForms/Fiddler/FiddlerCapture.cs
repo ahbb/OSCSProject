@@ -29,6 +29,9 @@ namespace OSCS.WinForms.Fiddler
         private const string Separator = "------------------------------------------------------------------";
         //private static string ScanUrl = "http://www.sanagustinturismo.co/Facebook/"; 1 true
         private static string ScanUrl = "";
+        static int userID;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public FiddlerCapture()
         {
@@ -239,6 +242,8 @@ namespace OSCS.WinForms.Fiddler
                 if (virusDetected == true)
                 {
                     DialogResult dialogResult = MessageBox.Show("Possibly malicious file detected!\nDownload blocked!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    log4net.GlobalContext.Properties["userID"] = userID;
+                    log.Warn("User downloaded an attachment from Discord where virus(es) were detected on it.");
 
                     //change to MessageBoxButtons.YesNo to display yes and no buttons. use if (dialogResult==DialogResult.Yes) for when user clicks yes, and if (dialogResult == DialogResult.No) for when user clicks no. 
                     //If checking for what user clicked, ensure that sess.utilCreateResponseandBypassServer(); is only in if (dialogResult==DialogResult.No) (user choose not to download/access) so return can be carried out in if (dialogResult == DialogResult.Yes)
@@ -275,7 +280,9 @@ namespace OSCS.WinForms.Fiddler
                             sess.oResponse.headers.SetStatus(307, "Redirect");
                                 sess.oResponse["Cache-Control"] = "nocache";
                                 sess.utilSetResponseBody("<html><body>Possibly malicious file detected. Download blocked.</body></html>");
-                            
+                            log4net.GlobalContext.Properties["userID"] = userID;
+                            log.Warn("User downloaded an attachment from Discord where virus(es) were detected on it.");
+
                         }
 
                         else if (scanResult.ToString().Contains("OK")) //no virus found
@@ -318,7 +325,6 @@ namespace OSCS.WinForms.Fiddler
                     sess.utilSetResponseBody("<html><body>Virus Total limit exceeded! Please try again later.</body></html>");
                 }
             }
-
         }
 
         //method uses WebClient.DownloadData to get bytes of file from the url
@@ -375,16 +381,18 @@ namespace OSCS.WinForms.Fiddler
 
         private void FiddlerCapture_Load(object sender, EventArgs e)
         {
-            //if (Login.LoginInfo.UserID == 0)
-            //{
-            //    this.Hide();
-            //    Login.Login login = new Login.Login();
-            //    login.ShowDialog();
-            //}
-            //else
-            //{
+            if (Login.LoginInfo.UserID == 0)
+            {
+                this.Hide();
+                Login.Login login = new Login.Login();
+                login.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                userID = Login.LoginInfo.UserID;
                 UpdateButtonStatus();
-            //}
+            }
         }
 
         private void FiddlerCapture_FormClosed(object sender, FormClosedEventArgs e)
@@ -423,6 +431,8 @@ namespace OSCS.WinForms.Fiddler
                     sess.oResponse.headers.SetStatus(307, "Redirect");
                     sess.oResponse["Cache-Control"] = "nocache";
                     sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
+                    log4net.GlobalContext.Properties["userID"] = userID;
+                    log.Warn("User clicked on a hyperlink that lead to a confirmed malicious website.");
                     return;
                 }
                 else if (counter == 1 | counter == 2)
@@ -435,6 +445,8 @@ namespace OSCS.WinForms.Fiddler
                         sess.oResponse.headers.SetStatus(307, "Redirect");
                         sess.oResponse["Cache-Control"] = "nocache";
                         sess.utilSetResponseBody("<html><body>Possibly malicious link detected. Access to website blocked.</body></html>");
+                        log4net.GlobalContext.Properties["userID"] = userID;
+                        log.Warn("User clicked on a hyperlink that lead to a possible malicious website.");
                         return;
                     }
                 }
@@ -482,10 +494,11 @@ namespace OSCS.WinForms.Fiddler
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            //Login.LoginInfo.UserID = 0;
-            //this.Hide();
-            //Login.Login login = new Login.Login();
-            //login.ShowDialog();
+            Login.LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
+            this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
         }
     }
 }

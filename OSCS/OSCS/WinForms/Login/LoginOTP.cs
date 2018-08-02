@@ -58,7 +58,7 @@ namespace OSCS.WinForms.Login
                     lastHPDigits = tDes.Decrypt2(reader["contactNo"].ToString()); //Decryption of user's phone number
                     Username = reader["username"].ToString();
                     email = tDes.Decrypt(reader["email"].ToString());
-                    HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4))); //For the old label in webpage
+                    HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4))); 
                 }
                 reader.Close();
             }
@@ -302,7 +302,7 @@ namespace OSCS.WinForms.Login
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            LoginInfo.UserID = -1;
+            LoginInfo.UserID = -0;
             LoginInfo.UserName = "";
             this.Hide();
             Login login = new Login();

@@ -152,6 +152,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="WinForms\Admin\UserLogs.resx">
       <DependentUpon>UserLogs.cs</DependentUpon>
@@ -199,10 +200,14 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Data\FileVirusUpload.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="MySql\" />
-    <Folder Include="WinForms\Fiddler\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\WifiRadarScanning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

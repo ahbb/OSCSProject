@@ -15,12 +15,16 @@ using VirusTotalNET.Results;
 using VirusTotalNET.Exceptions;
 using System.Diagnostics;
 using OSCS.WinForms.Login;
+using OSCS.WinForms.Fiddler;
 
 namespace OSCS.WinForms.FileVirusChecker
 {
     public partial class FileVirusChecker : Form
     {
         static byte[] ScanFile;
+        int userID;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public FileVirusChecker()
         {
@@ -74,18 +78,24 @@ namespace OSCS.WinForms.FileVirusChecker
                     //if there are 3 or more hits by anti-virus vendors  
                     if (counter > 3)
                     {
-                        result.Text = "Multiple AV Providers have detected virus(es) on this file! Do not open it and delete it immediately!";
+                        result.Text = "Multiple AV Vendors have detected virus(es) on this file! Do not open it and delete it immediately!";
                         result.ForeColor = System.Drawing.Color.Red;
+                        log4net.GlobalContext.Properties["userID"] = userID;
+                        log.Warn("User scanned a file where a multiple AV Vendors detected confirmed viruses on the file.");
                     }
-                    else if (counter == 1 || counter ==2 || counter == 3)
+                    else if (counter == 1 || counter == 2 || counter == 3)
                     {
-                        result.Text = "A few AV Providers have detected virus(es) on this file! Open the file only if really neccessary and proceed with caution!";
+                        result.Text = "A few AV Vendors have detected virus(es) on this file! Open the file only if really neccessary and proceed with caution!";
                         result.ForeColor = System.Drawing.Color.Red;
+                        log4net.GlobalContext.Properties["userID"] = userID;
+                        log.Warn("User scanned a file where a few AV Vendors detected possible viruses on the file.");
                     }
                     else
                     {
                         result.Text = "The file is safe. No viruses were detected during scan.";
                         result.ForeColor = System.Drawing.Color.Green;
+                        log4net.GlobalContext.Properties["userID"] = userID;
+                        log.Info("User scanned a file where no viruses were detected.");
                     }
 
                     //displaying results in grid view
@@ -158,20 +168,31 @@ namespace OSCS.WinForms.FileVirusChecker
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-            //Login.LoginInfo.UserID = 0;
-            //this.Hide();
-            //Login.Login login = new Login.Login();
-            //login.ShowDialog();
+            Login.LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
+            this.Hide();
+            Login.Login login = new Login.Login();
+            login.ShowDialog();
         }
 
         private void FileVirusChecker_Load(object sender, EventArgs e)
         {
-            //if (Login.LoginInfo.UserID == 0)
-            //{
-            //    this.Hide();
-            //    Login.Login login = new Login.Login();
-            //    login.ShowDialog();
-            //}
+            if (Login.LoginInfo.UserID == 0)
+            {
+                this.Hide();
+                Login.Login login = new Login.Login();
+                login.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                userID = Login.LoginInfo.UserID;
+            }
+        }
+
+        public static implicit operator FileVirusChecker(FiddlerCapture v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
