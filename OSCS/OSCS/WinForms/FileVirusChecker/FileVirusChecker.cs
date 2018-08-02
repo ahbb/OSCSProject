@@ -72,9 +72,14 @@ namespace OSCS.WinForms.FileVirusChecker
                     //counter = PrintScan(fileReport); 
 
                     //if there are 3 or more hits by anti-virus vendors  
-                    if (counter >= 3)
+                    if (counter > 3)
                     {
-                        result.Text = "Virus has been detected on this file! Do not open it and delete it immediately!";
+                        result.Text = "Multiple AV Providers have detected virus(es) on this file! Do not open it and delete it immediately!";
+                        result.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (counter == 1 || counter ==2 || counter == 3)
+                    {
+                        result.Text = "A few AV Providers have detected virus(es) on this file! Open the file only if really neccessary and proceed with caution!";
                         result.ForeColor = System.Drawing.Color.Red;
                     }
                     else
@@ -102,7 +107,6 @@ namespace OSCS.WinForms.FileVirusChecker
 
                         }
                     }
-
                 }
 
                 else
