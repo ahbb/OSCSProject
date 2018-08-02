@@ -58,5 +58,14 @@ namespace OSCS.WinForms.Login
             FileVirusChecker.FileVirusChecker fileviruschecker = new FileVirusChecker.FileVirusChecker();
             fileviruschecker.ShowDialog();
         }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
+            this.Hide();
+            Login login = new Login();
+            login.ShowDialog();
+        }
     }
 }

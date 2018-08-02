@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.Header = new System.Windows.Forms.Panel();
+            this.Logo = new System.Windows.Forms.Button();
             this.RegisterButton = new System.Windows.Forms.Button();
             this.projectTitle = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.resetPanel = new System.Windows.Forms.Panel();
             this.passwordPanel = new System.Windows.Forms.Panel();
             this.check = new System.Windows.Forms.Label();
-            this.Logo = new System.Windows.Forms.Button();
             this.Header.SuspendLayout();
             this.resetPanel.SuspendLayout();
             this.passwordPanel.SuspendLayout();
@@ -64,9 +64,24 @@
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Controls.Add(this.LoginButton);
             this.Header.Location = new System.Drawing.Point(0, 0);
+            this.Header.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(887, 77);
+            this.Header.Size = new System.Drawing.Size(665, 63);
             this.Header.TabIndex = 19;
+            // 
+            // Logo
+            // 
+            this.Logo.FlatAppearance.BorderSize = 0;
+            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
+            this.Logo.Location = new System.Drawing.Point(300, 3);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(65, 57);
+            this.Logo.TabIndex = 24;
+            this.Logo.UseVisualStyleBackColor = true;
+            this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // RegisterButton
             // 
@@ -77,9 +92,10 @@
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.White;
-            this.RegisterButton.Location = new System.Drawing.Point(626, 18);
+            this.RegisterButton.Location = new System.Drawing.Point(470, 15);
+            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(126, 41);
+            this.RegisterButton.Size = new System.Drawing.Size(94, 33);
             this.RegisterButton.TabIndex = 12;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
@@ -91,11 +107,12 @@
             this.projectTitle.AutoSize = true;
             this.projectTitle.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.projectTitle.Location = new System.Drawing.Point(12, 24);
-            this.projectTitle.MaximumSize = new System.Drawing.Size(250, 30);
-            this.projectTitle.MinimumSize = new System.Drawing.Size(250, 30);
+            this.projectTitle.Location = new System.Drawing.Point(9, 20);
+            this.projectTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.projectTitle.MaximumSize = new System.Drawing.Size(188, 24);
+            this.projectTitle.MinimumSize = new System.Drawing.Size(188, 24);
             this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(250, 30);
+            this.projectTitle.Size = new System.Drawing.Size(188, 24);
             this.projectTitle.TabIndex = 2;
             this.projectTitle.Text = "Online Chat Protection";
             // 
@@ -108,9 +125,10 @@
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
-            this.LoginButton.Location = new System.Drawing.Point(758, 18);
+            this.LoginButton.Location = new System.Drawing.Point(568, 15);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(126, 41);
+            this.LoginButton.Size = new System.Drawing.Size(94, 33);
             this.LoginButton.TabIndex = 9;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -121,9 +139,10 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(161, 86);
+            this.label6.Location = new System.Drawing.Point(121, 70);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(539, 32);
+            this.label6.Size = new System.Drawing.Size(425, 27);
             this.label6.TabIndex = 20;
             this.label6.Text = "Unlock Account and Reset Password";
             // 
@@ -131,9 +150,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Georgia", 12F);
-            this.label1.Location = new System.Drawing.Point(156, 9);
+            this.label1.Location = new System.Drawing.Point(117, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(514, 48);
+            this.label1.Size = new System.Drawing.Size(407, 36);
             this.label1.TabIndex = 21;
             this.label1.Text = "Please enter the reset code received in your email below.\r\nThereafter, set a new " +
     "strong password.";
@@ -142,9 +162,10 @@
             // resetCode
             // 
             this.resetCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetCode.Location = new System.Drawing.Point(289, 66);
+            this.resetCode.Location = new System.Drawing.Point(217, 54);
+            this.resetCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.resetCode.Name = "resetCode";
-            this.resetCode.Size = new System.Drawing.Size(241, 30);
+            this.resetCode.Size = new System.Drawing.Size(182, 26);
             this.resetCode.TabIndex = 22;
             // 
             // SubmitButton
@@ -154,9 +175,10 @@
             this.SubmitButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.SubmitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SubmitButton.Font = new System.Drawing.Font("Georgia", 12F);
-            this.SubmitButton.Location = new System.Drawing.Point(355, 170);
+            this.SubmitButton.Location = new System.Drawing.Point(266, 138);
+            this.SubmitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SubmitButton.Name = "SubmitButton";
-            this.SubmitButton.Size = new System.Drawing.Size(117, 51);
+            this.SubmitButton.Size = new System.Drawing.Size(88, 41);
             this.SubmitButton.TabIndex = 23;
             this.SubmitButton.Text = "Submit";
             this.SubmitButton.UseVisualStyleBackColor = true;
@@ -166,9 +188,10 @@
             // 
             this.newPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.newPassword.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newPassword.Location = new System.Drawing.Point(323, 76);
+            this.newPassword.Location = new System.Drawing.Point(242, 62);
+            this.newPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.newPassword.Name = "newPassword";
-            this.newPassword.Size = new System.Drawing.Size(176, 27);
+            this.newPassword.Size = new System.Drawing.Size(133, 23);
             this.newPassword.TabIndex = 26;
             this.newPassword.UseSystemPasswordChar = true;
             this.newPassword.TextChanged += new System.EventHandler(this.newPassword_TextChanged);
@@ -178,9 +201,10 @@
             this.passwordLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordLabel.Location = new System.Drawing.Point(81, 79);
+            this.passwordLabel.Location = new System.Drawing.Point(61, 64);
+            this.passwordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(226, 24);
+            this.passwordLabel.Size = new System.Drawing.Size(178, 18);
             this.passwordLabel.TabIndex = 27;
             this.passwordLabel.Text = "Confirm New Password:";
             // 
@@ -189,9 +213,10 @@
             this.usernameLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLabel.Location = new System.Drawing.Point(156, 21);
+            this.usernameLabel.Location = new System.Drawing.Point(117, 17);
+            this.usernameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(151, 24);
+            this.usernameLabel.Size = new System.Drawing.Size(121, 18);
             this.usernameLabel.TabIndex = 24;
             this.usernameLabel.Text = "New Password: ";
             // 
@@ -199,9 +224,10 @@
             // 
             this.password.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.password.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.Location = new System.Drawing.Point(323, 18);
+            this.password.Location = new System.Drawing.Point(242, 15);
+            this.password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.password.Name = "password";
-            this.password.Size = new System.Drawing.Size(176, 27);
+            this.password.Size = new System.Drawing.Size(133, 23);
             this.password.TabIndex = 25;
             this.password.UseSystemPasswordChar = true;
             this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
@@ -211,9 +237,10 @@
             this.resetLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.resetLabel.AutoSize = true;
             this.resetLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetLabel.Location = new System.Drawing.Point(543, 65);
+            this.resetLabel.Location = new System.Drawing.Point(407, 53);
+            this.resetLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.resetLabel.Name = "resetLabel";
-            this.resetLabel.Size = new System.Drawing.Size(0, 24);
+            this.resetLabel.Size = new System.Drawing.Size(0, 18);
             this.resetLabel.TabIndex = 30;
             // 
             // ConfirmButton
@@ -223,9 +250,10 @@
             this.ConfirmButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.ConfirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmButton.Font = new System.Drawing.Font("Georgia", 12F);
-            this.ConfirmButton.Location = new System.Drawing.Point(355, 119);
+            this.ConfirmButton.Location = new System.Drawing.Point(266, 97);
+            this.ConfirmButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ConfirmButton.Name = "ConfirmButton";
-            this.ConfirmButton.Size = new System.Drawing.Size(117, 51);
+            this.ConfirmButton.Size = new System.Drawing.Size(88, 41);
             this.ConfirmButton.TabIndex = 31;
             this.ConfirmButton.Text = "Confirm";
             this.ConfirmButton.UseVisualStyleBackColor = true;
@@ -235,18 +263,20 @@
             // 
             this.confirmPassword.Font = new System.Drawing.Font("Georgia", 8F);
             this.confirmPassword.ForeColor = System.Drawing.Color.Red;
-            this.confirmPassword.Location = new System.Drawing.Point(516, 8);
+            this.confirmPassword.Location = new System.Drawing.Point(387, 6);
+            this.confirmPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.confirmPassword.Name = "confirmPassword";
-            this.confirmPassword.Size = new System.Drawing.Size(322, 54);
+            this.confirmPassword.Size = new System.Drawing.Size(242, 44);
             this.confirmPassword.TabIndex = 32;
             // 
             // confirmNewPassword
             // 
             this.confirmNewPassword.Font = new System.Drawing.Font("Georgia", 8F);
             this.confirmNewPassword.ForeColor = System.Drawing.Color.Red;
-            this.confirmNewPassword.Location = new System.Drawing.Point(519, 62);
+            this.confirmNewPassword.Location = new System.Drawing.Point(389, 50);
+            this.confirmNewPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.confirmNewPassword.Name = "confirmNewPassword";
-            this.confirmNewPassword.Size = new System.Drawing.Size(319, 58);
+            this.confirmNewPassword.Size = new System.Drawing.Size(239, 47);
             this.confirmNewPassword.TabIndex = 33;
             // 
             // resetPanel
@@ -256,9 +286,10 @@
             this.resetPanel.Controls.Add(this.label1);
             this.resetPanel.Controls.Add(this.ConfirmButton);
             this.resetPanel.Controls.Add(this.resetCode);
-            this.resetPanel.Location = new System.Drawing.Point(17, 135);
+            this.resetPanel.Location = new System.Drawing.Point(13, 110);
+            this.resetPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.resetPanel.Name = "resetPanel";
-            this.resetPanel.Size = new System.Drawing.Size(843, 182);
+            this.resetPanel.Size = new System.Drawing.Size(632, 148);
             this.resetPanel.TabIndex = 34;
             // 
             // passwordPanel
@@ -272,9 +303,10 @@
             this.passwordPanel.Controls.Add(this.newPassword);
             this.passwordPanel.Controls.Add(this.usernameLabel);
             this.passwordPanel.Controls.Add(this.password);
-            this.passwordPanel.Location = new System.Drawing.Point(17, 323);
+            this.passwordPanel.Location = new System.Drawing.Point(13, 262);
+            this.passwordPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.passwordPanel.Name = "passwordPanel";
-            this.passwordPanel.Size = new System.Drawing.Size(843, 227);
+            this.passwordPanel.Size = new System.Drawing.Size(632, 184);
             this.passwordPanel.TabIndex = 35;
             this.passwordPanel.Visible = false;
             // 
@@ -284,34 +316,24 @@
             this.check.AutoSize = true;
             this.check.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.check.ForeColor = System.Drawing.Color.Red;
-            this.check.Location = new System.Drawing.Point(215, 130);
+            this.check.Location = new System.Drawing.Point(161, 106);
+            this.check.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.check.Name = "check";
-            this.check.Size = new System.Drawing.Size(0, 24);
+            this.check.Size = new System.Drawing.Size(0, 18);
             this.check.TabIndex = 34;
-            // 
-            // Logo
-            // 
-            this.Logo.FlatAppearance.BorderSize = 0;
-            this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Logo.Image = global::OSCS.Properties.Resources.Shield;
-            this.Logo.Location = new System.Drawing.Point(400, 4);
-            this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(87, 70);
-            this.Logo.TabIndex = 24;
-            this.Logo.UseVisualStyleBackColor = true;
-            this.Logo.Click += new System.EventHandler(this.Logo_Click);
             // 
             // UnlockAccount
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(882, 553);
+            this.ClientSize = new System.Drawing.Size(662, 449);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.Header);
             this.Controls.Add(this.passwordPanel);
             this.Controls.Add(this.resetPanel);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "UnlockAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

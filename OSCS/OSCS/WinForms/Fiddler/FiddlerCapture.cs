@@ -494,6 +494,8 @@ namespace OSCS.WinForms.Fiddler
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
+            Stop();
+            UninstallCertificate();
             Login.LoginInfo.UserID = 0;
             LoginInfo.UserName = "";
             this.Hide();
@@ -503,6 +505,8 @@ namespace OSCS.WinForms.Fiddler
 
         private void Logo_Click(object sender, EventArgs e)
         {
+            Stop();
+            UninstallCertificate();
             this.Hide();
             Login.Homepage homepage = new Login.Homepage();
             homepage.ShowDialog();
