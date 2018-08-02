@@ -40,6 +40,14 @@ namespace OSCS.WinForms.Login
             InitializeComponent();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //redirect to activation page
+            this.Hide();
+            Activation activation = new Activation();
+            activation.ShowDialog();
+        }
+
         private void UnlockAccountButton_Click(object sender, EventArgs e)
         {
             UnlockAccount unlockAccount = new UnlockAccount();
