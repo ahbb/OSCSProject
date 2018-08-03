@@ -53,7 +53,7 @@
             this.Header.Controls.Add(this.RegisterButton);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Header.Margin = new System.Windows.Forms.Padding(2);
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(665, 64);
             this.Header.TabIndex = 17;
@@ -65,7 +65,7 @@
             this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Logo.Image = global::OSCS.Properties.Resources.Shield;
             this.Logo.Location = new System.Drawing.Point(298, 5);
-            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(65, 57);
             this.Logo.TabIndex = 23;
@@ -82,7 +82,7 @@
             this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
             this.LoginButton.Location = new System.Drawing.Point(568, 15);
-            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(94, 33);
             this.LoginButton.TabIndex = 12;
@@ -100,7 +100,7 @@
             this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.White;
             this.RegisterButton.Location = new System.Drawing.Point(485, 15);
-            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(94, 33);
             this.RegisterButton.TabIndex = 11;
@@ -154,7 +154,7 @@
             this.email.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.email.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.email.Location = new System.Drawing.Point(228, 268);
-            this.email.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.email.Margin = new System.Windows.Forms.Padding(2);
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(190, 23);
             this.email.TabIndex = 20;
@@ -168,7 +168,7 @@
             this.ConfirmFPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmFPButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfirmFPButton.Location = new System.Drawing.Point(284, 318);
-            this.ConfirmFPButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ConfirmFPButton.Margin = new System.Windows.Forms.Padding(2);
             this.ConfirmFPButton.Name = "ConfirmFPButton";
             this.ConfirmFPButton.Size = new System.Drawing.Size(80, 41);
             this.ConfirmFPButton.TabIndex = 21;
@@ -201,8 +201,9 @@
             this.Controls.Add(this.FPLabel);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.Header);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ForgetPassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

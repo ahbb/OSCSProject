@@ -55,7 +55,7 @@
             this.tbCapture.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCapture.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.tbCapture.Location = new System.Drawing.Point(11, 180);
-            this.tbCapture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbCapture.Margin = new System.Windows.Forms.Padding(2);
             this.tbCapture.Name = "tbCapture";
             this.tbCapture.Size = new System.Drawing.Size(76, 38);
             this.tbCapture.TabIndex = 0;
@@ -72,7 +72,7 @@
             this.tbStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbStop.Location = new System.Drawing.Point(91, 180);
-            this.tbStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbStop.Margin = new System.Windows.Forms.Padding(2);
             this.tbStop.Name = "tbStop";
             this.tbStop.Size = new System.Drawing.Size(76, 38);
             this.tbStop.TabIndex = 1;
@@ -90,7 +90,7 @@
             this.tbClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbClear.Location = new System.Drawing.Point(713, 180);
-            this.tbClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbClear.Margin = new System.Windows.Forms.Padding(2);
             this.tbClear.Name = "tbClear";
             this.tbClear.Size = new System.Drawing.Size(76, 38);
             this.tbClear.TabIndex = 2;
@@ -108,7 +108,7 @@
             this.tbSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tbSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbSave.Location = new System.Drawing.Point(633, 180);
-            this.tbSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSave.Margin = new System.Windows.Forms.Padding(2);
             this.tbSave.Name = "tbSave";
             this.tbSave.Size = new System.Drawing.Size(76, 38);
             this.tbSave.TabIndex = 3;
@@ -123,7 +123,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCapture.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCapture.Location = new System.Drawing.Point(-3, 266);
-            this.txtCapture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCapture.Margin = new System.Windows.Forms.Padding(2);
             this.txtCapture.Multiline = true;
             this.txtCapture.Name = "txtCapture";
             this.txtCapture.ReadOnly = true;
@@ -174,7 +174,7 @@
             this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Logo.Image = global::OSCS.Properties.Resources.Shield;
             this.Logo.Location = new System.Drawing.Point(368, 8);
-            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(65, 57);
             this.Logo.TabIndex = 22;
@@ -191,7 +191,7 @@
             this.logoutBtn.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
             this.logoutBtn.Location = new System.Drawing.Point(695, 17);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(94, 33);
             this.logoutBtn.TabIndex = 11;
@@ -254,8 +254,9 @@
             this.Controls.Add(this.tbStop);
             this.Controls.Add(this.tbCapture);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FiddlerCapture";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

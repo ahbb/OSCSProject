@@ -296,10 +296,10 @@
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
-            this.LoginButton.Location = new System.Drawing.Point(598, 15);
+            this.LoginButton.Location = new System.Drawing.Point(635, 15);
             this.LoginButton.Margin = new System.Windows.Forms.Padding(2);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(94, 33);
+            this.LoginButton.Size = new System.Drawing.Size(75, 33);
             this.LoginButton.TabIndex = 9;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -361,6 +361,7 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbConfirmPassword);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;

@@ -176,6 +176,7 @@
             this.Controls.Add(this.txtActivation);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;

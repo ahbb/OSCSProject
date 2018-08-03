@@ -50,9 +50,10 @@
             this.TitleLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.Location = new System.Drawing.Point(356, 100);
+            this.TitleLabel.Location = new System.Drawing.Point(267, 81);
+            this.TitleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(166, 32);
+            this.TitleLabel.Size = new System.Drawing.Size(131, 27);
             this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Login OTP";
             // 
@@ -64,10 +65,10 @@
             this.LoginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginButton.Location = new System.Drawing.Point(513, 404);
-            this.LoginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LoginButton.Location = new System.Drawing.Point(385, 328);
+            this.LoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(105, 52);
+            this.LoginButton.Size = new System.Drawing.Size(79, 42);
             this.LoginButton.TabIndex = 15;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -77,10 +78,10 @@
             // 
             this.InputOTP.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.InputOTP.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.InputOTP.Location = new System.Drawing.Point(333, 351);
-            this.InputOTP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.InputOTP.Location = new System.Drawing.Point(250, 285);
+            this.InputOTP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.InputOTP.Name = "InputOTP";
-            this.InputOTP.Size = new System.Drawing.Size(189, 27);
+            this.InputOTP.Size = new System.Drawing.Size(143, 23);
             this.InputOTP.TabIndex = 14;
             // 
             // RefreshButton
@@ -90,10 +91,10 @@
             this.RefreshButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.RefreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RefreshButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RefreshButton.Location = new System.Drawing.Point(375, 404);
-            this.RefreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RefreshButton.Location = new System.Drawing.Point(281, 328);
+            this.RefreshButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(105, 52);
+            this.RefreshButton.Size = new System.Drawing.Size(79, 42);
             this.RefreshButton.TabIndex = 17;
             this.RefreshButton.Text = "Resend";
             this.RefreshButton.UseVisualStyleBackColor = true;
@@ -106,10 +107,10 @@
             this.CancelLoginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.CancelLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelLoginButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelLoginButton.Location = new System.Drawing.Point(237, 404);
-            this.CancelLoginButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CancelLoginButton.Location = new System.Drawing.Point(178, 328);
+            this.CancelLoginButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CancelLoginButton.Name = "CancelLoginButton";
-            this.CancelLoginButton.Size = new System.Drawing.Size(105, 52);
+            this.CancelLoginButton.Size = new System.Drawing.Size(79, 42);
             this.CancelLoginButton.TabIndex = 18;
             this.CancelLoginButton.Text = "Cancel";
             this.CancelLoginButton.UseVisualStyleBackColor = true;
@@ -126,9 +127,9 @@
             this.Header.Controls.Add(this.RegisterButton);
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Header.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Header.Name = "Header";
-            this.Header.Size = new System.Drawing.Size(887, 78);
+            this.Header.Size = new System.Drawing.Size(665, 63);
             this.Header.TabIndex = 19;
             // 
             // Logo
@@ -137,10 +138,10 @@
             this.Logo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Logo.Image = global::OSCS.Properties.Resources.Shield;
-            this.Logo.Location = new System.Drawing.Point(400, 4);
-            this.Logo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Logo.Location = new System.Drawing.Point(300, 3);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(87, 70);
+            this.Logo.Size = new System.Drawing.Size(65, 57);
             this.Logo.TabIndex = 24;
             this.Logo.UseVisualStyleBackColor = true;
             this.Logo.Click += new System.EventHandler(this.Logo_Click);
@@ -154,10 +155,10 @@
             this.UnlockAccountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.UnlockAccountButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UnlockAccountButton.ForeColor = System.Drawing.Color.White;
-            this.UnlockAccountButton.Location = new System.Drawing.Point(579, 18);
-            this.UnlockAccountButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UnlockAccountButton.Location = new System.Drawing.Point(434, 15);
+            this.UnlockAccountButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.UnlockAccountButton.Name = "UnlockAccountButton";
-            this.UnlockAccountButton.Size = new System.Drawing.Size(189, 41);
+            this.UnlockAccountButton.Size = new System.Drawing.Size(142, 33);
             this.UnlockAccountButton.TabIndex = 11;
             this.UnlockAccountButton.Text = "Unlock Account";
             this.UnlockAccountButton.UseVisualStyleBackColor = true;
@@ -172,10 +173,10 @@
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.White;
-            this.RegisterButton.Location = new System.Drawing.Point(757, 18);
-            this.RegisterButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RegisterButton.Location = new System.Drawing.Point(568, 15);
+            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(125, 41);
+            this.RegisterButton.Size = new System.Drawing.Size(94, 33);
             this.RegisterButton.TabIndex = 10;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
@@ -187,11 +188,12 @@
             this.projectTitle.AutoSize = true;
             this.projectTitle.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.projectTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.projectTitle.Location = new System.Drawing.Point(12, 25);
-            this.projectTitle.MaximumSize = new System.Drawing.Size(251, 30);
-            this.projectTitle.MinimumSize = new System.Drawing.Size(251, 30);
+            this.projectTitle.Location = new System.Drawing.Point(9, 20);
+            this.projectTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.projectTitle.MaximumSize = new System.Drawing.Size(188, 24);
+            this.projectTitle.MinimumSize = new System.Drawing.Size(188, 24);
             this.projectTitle.Name = "projectTitle";
-            this.projectTitle.Size = new System.Drawing.Size(251, 30);
+            this.projectTitle.Size = new System.Drawing.Size(188, 24);
             this.projectTitle.TabIndex = 2;
             this.projectTitle.Text = "Online Chat Protection";
             // 
@@ -200,9 +202,10 @@
             this.OTPLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.OTPLabel.AutoSize = true;
             this.OTPLabel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.OTPLabel.Location = new System.Drawing.Point(33, 153);
+            this.OTPLabel.Location = new System.Drawing.Point(25, 124);
+            this.OTPLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.OTPLabel.Name = "OTPLabel";
-            this.OTPLabel.Size = new System.Drawing.Size(753, 80);
+            this.OTPLabel.Size = new System.Drawing.Size(624, 68);
             this.OTPLabel.TabIndex = 13;
             this.OTPLabel.Text = resources.GetString("OTPLabel.Text");
             this.OTPLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -212,9 +215,10 @@
             this.result.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.result.AutoSize = true;
             this.result.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.result.Location = new System.Drawing.Point(43, 255);
+            this.result.Location = new System.Drawing.Point(32, 207);
+            this.result.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(0, 20);
+            this.result.Size = new System.Drawing.Size(0, 17);
             this.result.TabIndex = 16;
             // 
             // HPNum
@@ -222,18 +226,19 @@
             this.HPNum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.HPNum.AutoSize = true;
             this.HPNum.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HPNum.Location = new System.Drawing.Point(648, 153);
+            this.HPNum.Location = new System.Drawing.Point(486, 124);
+            this.HPNum.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.HPNum.Name = "HPNum";
-            this.HPNum.Size = new System.Drawing.Size(0, 20);
+            this.HPNum.Size = new System.Drawing.Size(0, 17);
             this.HPNum.TabIndex = 20;
             // 
             // LoginOTP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(883, 553);
+            this.ClientSize = new System.Drawing.Size(662, 449);
             this.Controls.Add(this.HPNum);
             this.Controls.Add(this.Header);
             this.Controls.Add(this.CancelLoginButton);
@@ -244,8 +249,9 @@
             this.Controls.Add(this.OTPLabel);
             this.Controls.Add(this.TitleLabel);
             this.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "LoginOTP";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

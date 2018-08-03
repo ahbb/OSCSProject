@@ -70,7 +70,7 @@
             this.ToLoginOTPButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ToLoginOTPButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToLoginOTPButton.Location = new System.Drawing.Point(223, 10);
-            this.ToLoginOTPButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ToLoginOTPButton.Margin = new System.Windows.Forms.Padding(2);
             this.ToLoginOTPButton.Name = "ToLoginOTPButton";
             this.ToLoginOTPButton.Size = new System.Drawing.Size(80, 39);
             this.ToLoginOTPButton.TabIndex = 1;
@@ -83,7 +83,7 @@
             this.username.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.username.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.username.Location = new System.Drawing.Point(302, 166);
-            this.username.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.username.Margin = new System.Windows.Forms.Padding(2);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(133, 23);
             this.username.TabIndex = 2;
@@ -93,7 +93,7 @@
             this.password.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.password.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.Location = new System.Drawing.Point(302, 213);
-            this.password.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.password.Margin = new System.Windows.Forms.Padding(2);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(133, 23);
             this.password.TabIndex = 3;
@@ -118,7 +118,7 @@
             this.ForgetButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ForgetButton.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForgetButton.Location = new System.Drawing.Point(12, 10);
-            this.ForgetButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ForgetButton.Margin = new System.Windows.Forms.Padding(2);
             this.ForgetButton.Name = "ForgetButton";
             this.ForgetButton.Size = new System.Drawing.Size(190, 39);
             this.ForgetButton.TabIndex = 8;
@@ -144,7 +144,7 @@
             this.LoginPanel.Controls.Add(this.ToLoginOTPButton);
             this.LoginPanel.Font = new System.Drawing.Font("Georgia", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginPanel.Location = new System.Drawing.Point(166, 306);
-            this.LoginPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LoginPanel.Margin = new System.Windows.Forms.Padding(2);
             this.LoginPanel.Name = "LoginPanel";
             this.LoginPanel.Size = new System.Drawing.Size(313, 57);
             this.LoginPanel.TabIndex = 12;
@@ -194,7 +194,7 @@
             this.Header.Controls.Add(this.projectTitle);
             this.Header.Controls.Add(this.RegisterButton);
             this.Header.Location = new System.Drawing.Point(0, 0);
-            this.Header.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Header.Margin = new System.Windows.Forms.Padding(2);
             this.Header.Name = "Header";
             this.Header.Size = new System.Drawing.Size(665, 63);
             this.Header.TabIndex = 16;
@@ -206,7 +206,7 @@
             this.Logo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Logo.Image = global::OSCS.Properties.Resources.Shield;
             this.Logo.Location = new System.Drawing.Point(300, 3);
-            this.Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Logo.Margin = new System.Windows.Forms.Padding(2);
             this.Logo.Name = "Logo";
             this.Logo.Size = new System.Drawing.Size(65, 57);
             this.Logo.TabIndex = 24;
@@ -222,7 +222,7 @@
             this.UnlockAccountButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UnlockAccountButton.ForeColor = System.Drawing.Color.White;
             this.UnlockAccountButton.Location = new System.Drawing.Point(434, 15);
-            this.UnlockAccountButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.UnlockAccountButton.Margin = new System.Windows.Forms.Padding(2);
             this.UnlockAccountButton.Name = "UnlockAccountButton";
             this.UnlockAccountButton.Size = new System.Drawing.Size(142, 33);
             this.UnlockAccountButton.TabIndex = 10;
@@ -255,7 +255,7 @@
             this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.White;
             this.RegisterButton.Location = new System.Drawing.Point(568, 15);
-            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RegisterButton.Margin = new System.Windows.Forms.Padding(2);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(94, 33);
             this.RegisterButton.TabIndex = 9;
@@ -274,7 +274,7 @@
             this.button1.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(484, 63);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(178, 54);
             this.button1.TabIndex = 19;
@@ -301,6 +301,7 @@
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.username);
             this.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Login";

@@ -93,10 +93,10 @@
             this.RegisterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegisterButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegisterButton.ForeColor = System.Drawing.Color.White;
-            this.RegisterButton.Location = new System.Drawing.Point(470, 15);
+            this.RegisterButton.Location = new System.Drawing.Point(510, 15);
             this.RegisterButton.Margin = new System.Windows.Forms.Padding(2);
             this.RegisterButton.Name = "RegisterButton";
-            this.RegisterButton.Size = new System.Drawing.Size(94, 33);
+            this.RegisterButton.Size = new System.Drawing.Size(96, 33);
             this.RegisterButton.TabIndex = 12;
             this.RegisterButton.Text = "Register";
             this.RegisterButton.UseVisualStyleBackColor = true;
@@ -126,10 +126,10 @@
             this.LoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginButton.ForeColor = System.Drawing.Color.White;
-            this.LoginButton.Location = new System.Drawing.Point(568, 15);
+            this.LoginButton.Location = new System.Drawing.Point(594, 15);
             this.LoginButton.Margin = new System.Windows.Forms.Padding(2);
             this.LoginButton.Name = "LoginButton";
-            this.LoginButton.Size = new System.Drawing.Size(94, 33);
+            this.LoginButton.Size = new System.Drawing.Size(68, 33);
             this.LoginButton.TabIndex = 9;
             this.LoginButton.Text = "Login";
             this.LoginButton.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Georgia", 16.2F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(121, 70);
+            this.label6.Location = new System.Drawing.Point(128, 81);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(425, 27);
@@ -151,7 +151,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Georgia", 12F);
-            this.label1.Location = new System.Drawing.Point(117, 7);
+            this.label1.Location = new System.Drawing.Point(142, 6);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(407, 36);
@@ -163,7 +163,7 @@
             // resetCode
             // 
             this.resetCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetCode.Location = new System.Drawing.Point(217, 54);
+            this.resetCode.Location = new System.Drawing.Point(242, 53);
             this.resetCode.Margin = new System.Windows.Forms.Padding(2);
             this.resetCode.Name = "resetCode";
             this.resetCode.Size = new System.Drawing.Size(182, 26);
@@ -238,7 +238,7 @@
             this.resetLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.resetLabel.AutoSize = true;
             this.resetLabel.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetLabel.Location = new System.Drawing.Point(407, 53);
+            this.resetLabel.Location = new System.Drawing.Point(428, 57);
             this.resetLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.resetLabel.Name = "resetLabel";
             this.resetLabel.Size = new System.Drawing.Size(0, 18);
@@ -251,7 +251,7 @@
             this.ConfirmButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.ConfirmButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ConfirmButton.Font = new System.Drawing.Font("Georgia", 12F);
-            this.ConfirmButton.Location = new System.Drawing.Point(266, 97);
+            this.ConfirmButton.Location = new System.Drawing.Point(291, 96);
             this.ConfirmButton.Margin = new System.Windows.Forms.Padding(2);
             this.ConfirmButton.Name = "ConfirmButton";
             this.ConfirmButton.Size = new System.Drawing.Size(88, 41);
@@ -334,6 +334,7 @@
             this.Controls.Add(this.Header);
             this.Controls.Add(this.passwordPanel);
             this.Controls.Add(this.resetPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;

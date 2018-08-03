@@ -112,7 +112,6 @@
             // 
             this.FileVirusScanner.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FileVirusScanner.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.FileVirusScanner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FileVirusScanner.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FileVirusScanner.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FileVirusScanner.Image = global::OSCS.Properties.Resources.FileVirusUpload;
@@ -130,7 +129,6 @@
             // 
             this.FiddlerCapturing.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FiddlerCapturing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.FiddlerCapturing.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FiddlerCapturing.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FiddlerCapturing.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FiddlerCapturing.Image = global::OSCS.Properties.Resources.WifiRadarScanning;
@@ -156,6 +154,7 @@
             this.Controls.Add(this.Header);
             this.Controls.Add(this.TitleLabel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
