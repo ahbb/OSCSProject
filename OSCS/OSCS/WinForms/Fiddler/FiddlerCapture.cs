@@ -236,9 +236,9 @@ namespace OSCS.WinForms.Fiddler
         //sess.oRequest.headers.toString() = the GET/POST paragraph 
         private void FiddlerApplication_BeforeRequest(Session sess)
         {
-            //once user clicks on an attachment in Discord, a HTTP request with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = no redirection from site to site (eg. clicking on links after google search)
+            //once user clicks on an attachment in Discord, a HTTP request starting with GET <sess.fullUrl> will be captured. sess.fullUrl will contain "attachment" and will have an extension. No referer = no redirection from site to site (eg. clicking on links after google search)
 
-            if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer:") && Path.HasExtension(sess.fullUrl) && !sess.oRequest.headers.ToString().ToUpper().Contains("POST"))
+            if (sess.oRequest.headers.ToString().ToUpper().StartsWith("GET") && sess.fullUrl.Contains("attachment") && !sess.oRequest.headers.ToString().Contains("Referer:") && Path.HasExtension(sess.fullUrl) && !sess.oRequest.headers.ToString().ToUpper().Contains("POST"))
             {
                 //using AMSI - if no virus detected, use nClam to scan
                 bool virusDetected = RunFileScan(sess.fullUrl);
@@ -312,7 +312,7 @@ namespace OSCS.WinForms.Fiddler
             }
             
             //when user clicks on a hyperlink
-           else if (sess.oRequest.headers.ToString().ToUpper().Contains("GET") && !sess.oRequest.headers.ToString().Contains("Referer:") && !sess.oRequest.headers.ToString().ToUpper().Contains("POST") && sess.oRequest.headers.ToString().Contains("Accept-Encoding:") && sess.oRequest.headers.ToString().Contains("Accept:") && sess.oRequest.headers.ToString().Contains("Accept-Language:")) 
+           else if (sess.oRequest.headers.ToString().ToUpper().StartsWith("GET") && !sess.oRequest.headers.ToString().Contains("Referer:") && !sess.oRequest.headers.ToString().ToUpper().Contains("POST") && sess.oRequest.headers.ToString().Contains("Accept-Encoding:") && sess.oRequest.headers.ToString().Contains("Accept:") && sess.oRequest.headers.ToString().Contains("Accept-Language:")) 
             {
                 try
                 {
