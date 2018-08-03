@@ -33,6 +33,8 @@ namespace OSCS.WinForms.Fiddler
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        Timer timer = new Timer();
+
         public FiddlerCapture()
         {
             InitializeComponent();
@@ -128,10 +130,9 @@ namespace OSCS.WinForms.Fiddler
             //CaptureConfiguration.ProcessId = procId;
             //CaptureConfiguration.CaptureDomain = txtCaptureDomain.Text;*/
 
-            Timer timer = new Timer();
-            timer.Interval = (20 * 1000); // 20 secs
-            timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+            timer.Interval = (40 * 1000); // 40 secs
+            timer.Tick += new EventHandler(timer_Tick);
 
             FiddlerApplication.BeforeRequest += FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete += FiddlerApplication_AfterSessionComplete;
@@ -140,6 +141,8 @@ namespace OSCS.WinForms.Fiddler
 
         void Stop()
         {
+            timer.Stop();
+
             FiddlerApplication.BeforeRequest -= FiddlerApplication_BeforeRequest;
             FiddlerApplication.AfterSessionComplete -= FiddlerApplication_AfterSessionComplete;
 
@@ -150,7 +153,7 @@ namespace OSCS.WinForms.Fiddler
         //refresh every 20 seconds
         private void timer_Tick(object sender, EventArgs e)
         {
-            //txtCapture.Text = "";
+            txtCapture.Text = ""; //clears traffic output window every 40 seconds
         }
 
         public static bool InstallCertificate()
