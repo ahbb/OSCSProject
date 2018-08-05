@@ -326,6 +326,8 @@ namespace OSCS.WinForms.Login
 
         private void UnlockAccountButton_Click(object sender, EventArgs e)
         {
+            LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
             UnlockAccount unlockAccount = new UnlockAccount();
             this.Hide();
             unlockAccount.ShowDialog();
@@ -333,6 +335,8 @@ namespace OSCS.WinForms.Login
 
         private void Logo_Click(object sender, EventArgs e)
         {
+            LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
             this.Hide();
             Login login = new Login();
             login.ShowDialog();
@@ -340,6 +344,8 @@ namespace OSCS.WinForms.Login
 
         private void RegisterButton_Click(object sender, EventArgs e)
         {
+            LoginInfo.UserID = 0;
+            LoginInfo.UserName = "";
             this.Hide();
             Registration.Registration registration = new Registration.Registration();
             registration.ShowDialog();
