@@ -501,6 +501,8 @@ namespace OSCS.WinForms.Fiddler
         {
             Stop();
             UninstallCertificate();
+            log4net.GlobalContext.Properties["userID"] = userID;
+            log.Info("User successfully logged out of the application.");
             Login.LoginInfo.UserID = 0;
             LoginInfo.UserName = "";
             this.Hide();

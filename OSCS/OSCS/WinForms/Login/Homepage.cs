@@ -19,6 +19,8 @@ namespace OSCS.WinForms.Login
         int userID;
         string username;
 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public Homepage()
         {
             InitializeComponent();
@@ -71,6 +73,8 @@ namespace OSCS.WinForms.Login
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
+            log4net.GlobalContext.Properties["userID"] = userID;
+            log.Info("User successfully logged out of the application.");
             LoginInfo.UserID = 0;
             LoginInfo.UserName = "";
             this.Hide();

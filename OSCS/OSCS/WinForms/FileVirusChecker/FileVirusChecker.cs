@@ -34,6 +34,7 @@ namespace OSCS.WinForms.FileVirusChecker
         private void chooseFile_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear(); //clear rows whenever user wants to pick a new file so no duplicate results after scanning
+            result.Text = "";
 
             scanFile.Enabled = true;
 
@@ -75,7 +76,7 @@ namespace OSCS.WinForms.FileVirusChecker
                     //ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
                     //counter = PrintScan(fileReport); 
 
-                    //if there are 3 or more hits by anti-virus vendors  
+                    //if there are more than 3 hits by anti-virus vendors  
                     if (counter > 3)
                     {
                         result.Text = "Multiple AV Vendors have detected virus(es) on this file! Do not open it and delete it immediately!";
@@ -114,7 +115,6 @@ namespace OSCS.WinForms.FileVirusChecker
                                 row.DefaultCellStyle.BackColor = Color.Green;
                                 row.DefaultCellStyle.ForeColor = Color.Yellow;
                             }
-
                         }
                     }
                 }
@@ -122,7 +122,7 @@ namespace OSCS.WinForms.FileVirusChecker
                 else
                 {
                     ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
-                    result.Text = "There are no reports retrieved for the file that you have just uploaded. We have sent the file to Virus Total for a scan.";
+                    result.Text = "There are no reports retrieved for the file that you have just chosen. We have sent the file to Virus Total for a scan.";
                 }
 
             }
@@ -168,6 +168,8 @@ namespace OSCS.WinForms.FileVirusChecker
 
         private void logoutBtn_Click(object sender, EventArgs e)
         {
+            log4net.GlobalContext.Properties["userID"] = userID;
+            log.Info("User successfully logged out of the application.");
             Login.LoginInfo.UserID = 0;
             LoginInfo.UserName = "";
             this.Hide();
