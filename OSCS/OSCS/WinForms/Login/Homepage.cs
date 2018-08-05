@@ -35,14 +35,24 @@ namespace OSCS.WinForms.Login
 
         private void Homepage_Load(object sender, EventArgs e)
         {
-            string cs = ConfigurationManager.ConnectionStrings["oscs"].ConnectionString;
-            MySqlConnection MyConnection = new MySqlConnection(cs);
-            MyConnection.Open();
+            if (LoginInfo.UserID == 0)
+            {
+                this.Hide();
+                Login login = new Login();
+                login.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                string cs = ConfigurationManager.ConnectionStrings["oscs"].ConnectionString;
+                MySqlConnection MyConnection = new MySqlConnection(cs);
+                MyConnection.Open();
 
-            userID = LoginInfo.UserID;
-            username = LoginInfo.UserName;
+                userID = LoginInfo.UserID;
+                username = LoginInfo.UserName;
 
-            TitleLabel.Text = "Welcome, " + username;
+                TitleLabel.Text = "Welcome, " + username;
+            }
         }
 
         private void FiddlerCapturing_Click(object sender, EventArgs e)
