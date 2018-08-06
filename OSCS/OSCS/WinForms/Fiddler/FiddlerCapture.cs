@@ -304,7 +304,7 @@ namespace OSCS.WinForms.Fiddler
                         sess.utilCreateResponseAndBypassServer();
                         sess.oResponse.headers.SetStatus(307, "Redirect");
                         sess.oResponse["Cache-Control"] = "nocache";
-                        sess.utilSetResponseBody("<html><body>Sorry, the ClamWin Services may not running on your computer so we are not able to confirm whether the file you are trying to download is malicious or not.</body></html>");
+                        sess.utilSetResponseBody("<html><body>Sorry, your own anti-malware product or the ClamWin Services may not running on your computer so we are not able to confirm whether the file you are trying to download is malicious or not.</body></html>");
                         Debug.Print(e.ToString()+"\nClamWin Services not running.");
                         Stop();
                         Start();
