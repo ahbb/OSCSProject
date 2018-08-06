@@ -22,6 +22,7 @@ namespace OSCS.WinForms.FileVirusChecker
     public partial class FileVirusChecker : Form
     {
         static byte[] ScanFile;
+        static long fileSize;
         int userID;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -43,6 +44,7 @@ namespace OSCS.WinForms.FileVirusChecker
             if(dialogResult == DialogResult.OK)
             {
                 fileName.Text = openFileDialog.FileName;
+                fileSize = new System.IO.FileInfo(openFileDialog.FileName).Length;
                 ScanFile = File.ReadAllBytes(openFileDialog.FileName);
                 //ScanFile = Encoding.ASCII.GetBytes(@"X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*");
             }
@@ -56,79 +58,87 @@ namespace OSCS.WinForms.FileVirusChecker
 
         private async Task FileCheck()
         {
-            if (ScanFile != null && ScanFile.Length > 0)
+            if (fileSize <= 256000000) //VirusTotal can only scan files and applications of up to 256MB
             {
-                //only can scan 4 per minute (public)
-                VirusTotal virusTotal = new VirusTotal("aaac0a1ce9f703c53077458ea6b54b0be48c7daae133ca4e7d37e08cf59be4e3");
-
-                //Use HTTPS instead of HTTP
-                virusTotal.UseTLS = true;
-
-                FileReport fileReport = await virusTotal.GetFileReportAsync(ScanFile);
-
-                bool hasFileBeenScannedBefore = fileReport.ResponseCode == FileReportResponseCode.Present;
-
-                if (hasFileBeenScannedBefore == true) //file report present, so report can be retrieved
-
+                if (ScanFile != null && ScanFile.Length > 0)
                 {
-                    int counter = fileReport.Positives; //Number of anti-virus vendors that had detected this file to be malicious
+                    //only can scan 4 per minute (public)
+                    VirusTotal virusTotal = new VirusTotal("aaac0a1ce9f703c53077458ea6b54b0be48c7daae133ca4e7d37e08cf59be4e3");
 
-                    //ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
-                    //counter = PrintScan(fileReport); 
+                    //Use HTTPS instead of HTTP
+                    virusTotal.UseTLS = true;
 
-                    //if there are more than 3 hits by anti-virus vendors  
-                    if (counter > 3)
-                    {
-                        result.Text = "Multiple AV Vendors have detected virus(es) on this file! Do not open it and delete it immediately!";
-                        result.ForeColor = System.Drawing.Color.Red;
-                        log4net.GlobalContext.Properties["userID"] = userID;
-                        log.Warn("User scanned a file where a multiple AV Vendors detected confirmed viruses on the file.");
-                    }
-                    else if (counter == 1 || counter == 2 || counter == 3)
-                    {
-                        result.Text = "A few AV Vendors have detected virus(es) on this file! Open the file only if really neccessary and proceed with caution!";
-                        result.ForeColor = System.Drawing.Color.Red;
-                        log4net.GlobalContext.Properties["userID"] = userID;
-                        log.Warn("User scanned a file where a few AV Vendors detected possible viruses on the file.");
-                    }
-                    else
-                    {
-                        result.Text = "The file is safe. No viruses were detected during scan.";
-                        result.ForeColor = System.Drawing.Color.Green;
-                        log4net.GlobalContext.Properties["userID"] = userID;
-                        log.Info("User scanned a file where no viruses were detected.");
-                    }
+                    FileReport fileReport = await virusTotal.GetFileReportAsync(ScanFile);
 
-                    //displaying results in grid view
-                    foreach (KeyValuePair<string, ScanEngine> scan in fileReport.Scans)
+                    bool hasFileBeenScannedBefore = fileReport.ResponseCode == FileReportResponseCode.Present;
+
+                    if (hasFileBeenScannedBefore == true) //file report present, so report can be retrieved
+
                     {
-                        dataGridView1.Rows.Add(scan.Key, scan.Value.Detected);
-                        foreach (DataGridViewRow row in dataGridView1.Rows)
+                        int counter = fileReport.Positives; //Number of anti-virus vendors that had detected this file to be malicious
+
+                        //ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
+                        //counter = PrintScan(fileReport); 
+
+                        //if there are more than 3 hits by anti-virus vendors  
+                        if (counter > 3)
                         {
-                            if (Convert.ToString(row.Cells[1].Value) == "True")
+                            result.Text = "Multiple AV Vendors have detected virus(es) on this file! Do not open it and delete it immediately!";
+                            result.ForeColor = System.Drawing.Color.Red;
+                            log4net.GlobalContext.Properties["userID"] = userID;
+                            log.Warn("User scanned a file where a multiple AV Vendors detected confirmed viruses on the file.");
+                        }
+                        else if (counter == 1 || counter == 2 || counter == 3)
+                        {
+                            result.Text = "A few AV Vendors have detected virus(es) on this file! Open the file only if really neccessary and proceed with caution!";
+                            result.ForeColor = System.Drawing.Color.Red;
+                            log4net.GlobalContext.Properties["userID"] = userID;
+                            log.Warn("User scanned a file where a few AV Vendors detected possible viruses on the file.");
+                        }
+                        else
+                        {
+                            result.Text = "The file is safe. No viruses were detected during scan.";
+                            result.ForeColor = System.Drawing.Color.Green;
+                            log4net.GlobalContext.Properties["userID"] = userID;
+                            log.Info("User scanned a file where no viruses were detected.");
+                        }
+
+                        //displaying results in grid view
+                        foreach (KeyValuePair<string, ScanEngine> scan in fileReport.Scans)
+                        {
+                            dataGridView1.Rows.Add(scan.Key, scan.Value.Detected);
+                            foreach (DataGridViewRow row in dataGridView1.Rows)
                             {
-                                row.DefaultCellStyle.BackColor = Color.Red;
-                                row.DefaultCellStyle.ForeColor = Color.White;
-                            }
-                            else
-                            {
-                                row.DefaultCellStyle.BackColor = Color.Green;
-                                row.DefaultCellStyle.ForeColor = Color.Yellow;
+                                if (Convert.ToString(row.Cells[1].Value) == "True")
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.Red;
+                                    row.DefaultCellStyle.ForeColor = Color.White;
+                                }
+                                else
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.Green;
+                                    row.DefaultCellStyle.ForeColor = Color.Yellow;
+                                }
                             }
                         }
                     }
-                }
 
+                    else
+                    {
+                        ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
+                        result.Text = "There are no reports retrieved for the file that you have just chosen. We have sent the file to Virus Total for a scan.";
+                    }
+
+                }
                 else
                 {
-                    ScanResult fileResult = await virusTotal.ScanFileAsync(ScanFile, "EICAR.txt");
-                    result.Text = "There are no reports retrieved for the file that you have just chosen. We have sent the file to Virus Total for a scan.";
+                    result.Text = "Please choose a file before starting the virus scan!";
+                    result.ForeColor = System.Drawing.Color.Red;
                 }
-
             }
             else
             {
-                result.Text = "Please choose a file before starting the virus scan!";
+                result.Text = "You have chosen to scan a file that has a size that exceeds the VirusTotal scan limit of 256 megabytes!";
                 result.ForeColor = System.Drawing.Color.Red;
             }
         }

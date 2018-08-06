@@ -21,6 +21,7 @@ namespace OSCS.WinForms.Login
     public partial class LoginOTP : Form
     {
         int userID;
+        string hpnumber;
         static string OTPReturn;
         private static double timeElapsed;
         static Stopwatch sw;
@@ -64,11 +65,10 @@ namespace OSCS.WinForms.Login
 
                     while (reader.HasRows && reader.Read())
                     {
-                        string lastHPDigits;
-                        lastHPDigits = tDes.Decrypt2(reader["contactNo"].ToString()); //Decryption of user's phone number
+                        hpnumber = tDes.Decrypt2(reader["contactNo"].ToString()); //Decryption of user's phone number
                         Username = reader["username"].ToString();
                         email = tDes.Decrypt(reader["email"].ToString());
-                        HPNum.Text = lastHPDigits.Substring((Math.Max(0, lastHPDigits.Length - 4)));
+                        HPNum.Text = hpnumber.Substring((Math.Max(0, hpnumber.Length - 4)));
                     }
                     reader.Close();
                 }
@@ -76,7 +76,7 @@ namespace OSCS.WinForms.Login
                 MyConnection.Open();
 
                 timer = new Timer();
-                timer.Interval = 30000; // 120000 (2 mins); //time in milliseconds
+                timer.Interval = 60000; // wait 1 minute to be able to request a resend of OTP (time in milliseconds)
                 timer.Tick += timer_Tick;
                 timer.Start();
                 RefreshButton.Enabled = false;
@@ -84,15 +84,16 @@ namespace OSCS.WinForms.Login
                 sw = new Stopwatch();
                 sw.Start();
 
-                //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
+                //string response = OTPStr("82600002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for Log-In in Application Online Chat Protection is *OTP*");
                 //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
-                //OTPReturn = "11111";
+
                 //If OTP doesn't send after a period of time, replace the 2 API details above with new ones from the list below
                 //Here is a list of unused WebAPI account details I prepared and created that still have 10 SMS credits each. 
-                //WebAPI ID: 82540002     WebAPI Password: realitymusic1 (Currently in use above)
-                //WebAPI ID: 82600002     WebAPI Password: realitymusic1
+                //WebAPI ID: 82540002     WebAPI Password: realitymusic1 (Possibly 1-4 credits/uses left)
+                //WebAPI ID: 82600002     WebAPI Password: realitymusic1 (Currently in use above)
                 //WebAPI ID: 82590002     WebAPI Password: realitymusic1
-                Random random = new Random();
+
+                Random random = new Random(); //(For testing purposes to prevent wastage of SMS credits as they are very limited)
                 OTPReturn = random.Next(1, 1000).ToString();
                 Console.Out.WriteLine(OTPReturn);
             }
@@ -108,7 +109,7 @@ namespace OSCS.WinForms.Login
         {
             result.Text = "";
             timer = new Timer();
-            timer.Interval = 30000; // 120000; //time in milliseconds
+            timer.Interval = 60000; 
             timer.Tick += timer_Tick;
             timer.Start();
             RefreshButton.Enabled = false;
@@ -116,9 +117,9 @@ namespace OSCS.WinForms.Login
             sw = new Stopwatch();
             sw.Start();
 
-            //string response = OTPStr("82540002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for application OCP is *OTP*");
+            //string response = OTPStr("82600002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for Log-In in Application Online Chat Protection is *OTP*");
             //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
-            //OTPReturn = "11111";
+
             Random random = new Random();
             OTPReturn = random.Next(1, 1000).ToString();
             Console.Out.WriteLine(OTPReturn);
