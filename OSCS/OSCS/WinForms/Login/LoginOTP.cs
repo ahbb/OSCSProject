@@ -84,18 +84,18 @@ namespace OSCS.WinForms.Login
                 sw = new Stopwatch();
                 sw.Start();
 
-                //string response = OTPStr("82600002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for Log-In in Application Online Chat Protection is *OTP*");
-                //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
+                string response = OTPStr("82600002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for Log-In in Application Online Chat Protection is *OTP*");
+                OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
 
-                //If OTP doesn't send after a period of time, replace the 2 API details above with new ones from the list below
+                //If OTP doesn't send after a period of time, replace the 2 API details (First 2 variables) above with new ones from the list below
                 //Here is a list of unused WebAPI account details I prepared and created that still have 10 SMS credits each. 
                 //WebAPI ID: 82540002     WebAPI Password: realitymusic1 (Possibly 1-4 credits/uses left)
                 //WebAPI ID: 82600002     WebAPI Password: realitymusic1 (Currently in use above)
                 //WebAPI ID: 82590002     WebAPI Password: realitymusic1
 
-                Random random = new Random(); //(For testing purposes to prevent wastage of SMS credits as they are very limited)
-                OTPReturn = random.Next(1, 1000).ToString();
-                Console.Out.WriteLine(OTPReturn);
+                //Random random = new Random(); //(For testing purposes to prevent wastage of SMS credits as they are very limited)
+                //OTPReturn = random.Next(1, 1000).ToString();
+                //Console.Out.WriteLine(OTPReturn);
             }
         }
 
@@ -117,12 +117,12 @@ namespace OSCS.WinForms.Login
             sw = new Stopwatch();
             sw.Start();
 
-            //string response = OTPStr("82600002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for Log-In in Application Online Chat Protection is *OTP*");
-            //OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
+            string response = OTPStr("82600002", "realitymusic1", "65" + hpnumber, "Your One-Time-Password for Log-In in Application Online Chat Protection is *OTP*");
+            OTPReturn = response.Substring(Math.Max(0, response.Length - 5));
 
-            Random random = new Random();
-            OTPReturn = random.Next(1, 1000).ToString();
-            Console.Out.WriteLine(OTPReturn);
+            //Random random = new Random();
+            //OTPReturn = random.Next(1, 1000).ToString();
+            //Console.Out.WriteLine(OTPReturn);
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
